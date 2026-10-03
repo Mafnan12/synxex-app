@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Wallet</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="wallet">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-6 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <div class="flex flex-col md:flex-row gap-6">
+        
+        <!-- Left Column: Balance & Tokens -->
+        <div class="flex-1 space-y-6">
+          <div class="glass card-lift rounded-2xl p-6 md:p-8" style="border: 1px solid var(--border-subtle);">
+            <div class="text-sm font-medium mb-2" style="color: var(--text-secondary);">Total Wallet Balance</div>
+            <div class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--text-primary);">$142,504.20</div>
+            <div class="flex gap-4">
+              <button class="btn btn-lava px-6 py-2 flex-1 md:flex-none">Send</button>
+              <button class="btn btn-ghost px-6 py-2 flex-1 md:flex-none" style="border: 1px solid var(--border-subtle);">Receive</button>
+              <button class="btn btn-ghost px-6 py-2 flex-1 md:flex-none" style="border: 1px solid var(--border-subtle);">Swap</button>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Holdings</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- BTC -->
+              <div class="glass card-lift p-4 rounded-xl flex flex-col" style="border: 1px solid var(--border-subtle);">
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-500 flex items-center justify-center font-bold">₿</div>
+                    <span class="font-bold" style="color: var(--text-primary);">BTC</span>
+                  </div>
+                  <span class="text-sm text-green-500">+2.4%</span>
+                </div>
+                <div class="text-xl font-bold" style="color: var(--text-primary);">1.45 BTC</div>
+                <div class="text-sm mt-1" style="color: var(--text-secondary);">$93,134.22</div>
+              </div>
+              <!-- ETH -->
+              <div class="glass card-lift p-4 rounded-xl flex flex-col" style="border: 1px solid var(--border-subtle);">
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center font-bold">Ξ</div>
+                    <span class="font-bold" style="color: var(--text-primary);">ETH</span>
+                  </div>
+                  <span class="text-sm text-red-500">-1.2%</span>
+                </div>
+                <div class="text-xl font-bold" style="color: var(--text-primary);">12.5 ETH</div>
+                <div class="text-sm mt-1" style="color: var(--text-secondary);">$42,751.25</div>
+              </div>
+              <!-- SOL -->
+              <div class="glass card-lift p-4 rounded-xl flex flex-col" style="border: 1px solid var(--border-subtle);">
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center font-bold">S</div>
+                    <span class="font-bold" style="color: var(--text-primary);">SOL</span>
+                  </div>
+                  <span class="text-sm text-green-500">+5.6%</span>
+                </div>
+                <div class="text-xl font-bold" style="color: var(--text-primary);">32.0 SOL</div>
+                <div class="text-sm mt-1" style="color: var(--text-secondary);">$4,665.60</div>
+              </div>
+              <!-- USDT -->
+              <div class="glass card-lift p-4 rounded-xl flex flex-col" style="border: 1px solid var(--border-subtle);">
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-500 flex items-center justify-center font-bold">T</div>
+                    <span class="font-bold" style="color: var(--text-primary);">USDT</span>
+                  </div>
+                  <span class="text-sm text-gray-400">0.0%</span>
+                </div>
+                <div class="text-xl font-bold" style="color: var(--text-primary);">1,250.00 USDT</div>
+                <div class="text-sm mt-1" style="color: var(--text-secondary);">$1,250.00</div>
+              </div>
+              <!-- USDC -->
+              <div class="glass card-lift p-4 rounded-xl flex flex-col" style="border: 1px solid var(--border-subtle);">
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-blue-600/20 text-blue-500 flex items-center justify-center font-bold">C</div>
+                    <span class="font-bold" style="color: var(--text-primary);">USDC</span>
+                  </div>
+                  <span class="text-sm text-gray-400">0.0%</span>
+                </div>
+                <div class="text-xl font-bold" style="color: var(--text-primary);">400.00 USDC</div>
+                <div class="text-sm mt-1" style="color: var(--text-secondary);">$400.00</div>
+              </div>
+              <!-- MATIC -->
+              <div class="glass card-lift p-4 rounded-xl flex flex-col" style="border: 1px solid var(--border-subtle);">
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-500 flex items-center justify-center font-bold">M</div>
+                    <span class="font-bold" style="color: var(--text-primary);">MATIC</span>
+                  </div>
+                  <span class="text-sm text-green-500">+1.1%</span>
+                </div>
+                <div class="text-xl font-bold" style="color: var(--text-primary);">500.0 MATIC</div>
+                <div class="text-sm mt-1" style="color: var(--text-secondary);">$303.13</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Networks & Transactions -->
+        <div class="w-full md:w-80 space-y-6">
+          <div class="glass rounded-xl p-5" style="border: 1px solid var(--border-subtle);">
+            <h3 class="font-bold mb-4" style="color: var(--text-primary);">Networks</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-medium border bg-blue-500/10 border-blue-500/30 text-blue-400">Ethereum</span>
+              <span class="px-3 py-1 rounded-full text-xs font-medium border bg-purple-500/10 border-purple-500/30 text-purple-400">Polygon</span>
+              <span class="px-3 py-1 rounded-full text-xs font-medium border bg-green-500/10 border-green-500/30 text-green-400">Solana</span>
+              <span class="px-3 py-1 rounded-full text-xs font-medium border bg-yellow-500/10 border-yellow-500/30 text-yellow-400">BSC</span>
+            </div>
+          </div>
+
+          <div class="glass rounded-xl p-5" style="border: 1px solid var(--border-subtle);">
+            <h3 class="font-bold mb-4" style="color: var(--text-primary);">Recent Activity</h3>
+            <div class="space-y-4">
+              <!-- Item 1 -->
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">↓</div>
+                  <div>
+                    <div class="text-sm font-medium" style="color: var(--text-primary);">Received USDT</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Today, 14:32</div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm font-bold text-green-500">+500.00</div>
+                </div>
+              </div>
+              <!-- Item 2 -->
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center text-red-500">↑</div>
+                  <div>
+                    <div class="text-sm font-medium" style="color: var(--text-primary);">Sent ETH</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Yesterday, 09:15</div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm font-bold" style="color: var(--text-primary);">-0.5 ETH</div>
+                </div>
+              </div>
+              <!-- Item 3 -->
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-500">⇄</div>
+                  <div>
+                    <div class="text-sm font-medium" style="color: var(--text-primary);">Swap ETH to USDC</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Oct 20, 11:20</div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm font-bold" style="color: var(--text-primary);">+200 USDC</div>
+                </div>
+              </div>
+              <!-- Item 4 -->
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">↓</div>
+                  <div>
+                    <div class="text-sm font-medium" style="color: var(--text-primary);">Received SOL</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Oct 18, 16:45</div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm font-bold text-green-500">+12.0 SOL</div>
+                </div>
+              </div>
+              <!-- Item 5 -->
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center text-red-500">↑</div>
+                  <div>
+                    <div class="text-sm font-medium" style="color: var(--text-primary);">Sent BTC</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Oct 15, 08:30</div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm font-bold" style="color: var(--text-primary);">-0.1 BTC</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+  <!-- Command Palette Modal -->
+  <div class="modal-overlay" id="commandPalette" hidden>
+    <div class="modal-content command-palette p-0">
+      <div class="p-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <input class="input w-full" placeholder="Search anything... markets, agents, transactions" type="text" autofocus />
+      </div>
+      <div class="p-3 text-center">
+        <p class="text-xs" style="color: var(--text-faint);">Start typing to search</p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

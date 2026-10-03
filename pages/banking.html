@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Banking & Cards</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="banking">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-6 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <h1 class="text-3xl font-bold tracking-tight" style="color: var(--text-primary);">Banking & Cards</h1>
+        <button class="btn btn-ghost px-4 py-2" style="border: 1px solid var(--border-subtle);">Add Funds</button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left: Fiat Accounts -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- USD -->
+            <div class="glass card-lift p-5 rounded-xl" style="border: 1px solid var(--border-subtle);">
+              <div class="text-sm font-medium mb-1" style="color: var(--text-secondary);">USD Account</div>
+              <div class="text-2xl font-bold" style="color: var(--text-primary);">$24,500.00</div>
+              <div class="text-xs mt-2" style="color: var(--text-secondary);">Account ending in 4921</div>
+            </div>
+            <!-- EUR -->
+            <div class="glass card-lift p-5 rounded-xl" style="border: 1px solid var(--border-subtle);">
+              <div class="text-sm font-medium mb-1" style="color: var(--text-secondary);">EUR Account</div>
+              <div class="text-2xl font-bold" style="color: var(--text-primary);">€12,340.50</div>
+              <div class="text-xs mt-2" style="color: var(--text-secondary);">Account ending in 8112</div>
+            </div>
+            <!-- GBP -->
+            <div class="glass card-lift p-5 rounded-xl" style="border: 1px solid var(--border-subtle);">
+              <div class="text-sm font-medium mb-1" style="color: var(--text-secondary);">GBP Account</div>
+              <div class="text-2xl font-bold" style="color: var(--text-primary);">£5,200.00</div>
+              <div class="text-xs mt-2" style="color: var(--text-secondary);">Account ending in 0023</div>
+            </div>
+          </div>
+
+          <div class="glass rounded-xl p-5" style="border: 1px solid var(--border-subtle);">
+            <h3 class="font-bold mb-4" style="color: var(--text-primary);">Recent Card Transactions</h3>
+            <div class="space-y-4">
+              <!-- Tx 1 -->
+              <div class="flex justify-between items-center py-2" style="border-bottom: 1px solid var(--border-subtle);">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">☕</div>
+                  <div>
+                    <div class="font-medium text-sm" style="color: var(--text-primary);">Starbucks</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Today, 08:45 AM</div>
+                  </div>
+                </div>
+                <div class="font-medium text-sm" style="color: var(--text-primary);">-$4.50</div>
+              </div>
+              <!-- Tx 2 -->
+              <div class="flex justify-between items-center py-2" style="border-bottom: 1px solid var(--border-subtle);">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">🛒</div>
+                  <div>
+                    <div class="font-medium text-sm" style="color: var(--text-primary);">Whole Foods Market</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Yesterday, 17:30</div>
+                  </div>
+                </div>
+                <div class="font-medium text-sm" style="color: var(--text-primary);">-$142.10</div>
+              </div>
+              <!-- Tx 3 -->
+              <div class="flex justify-between items-center py-2" style="border-bottom: 1px solid var(--border-subtle);">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">✈️</div>
+                  <div>
+                    <div class="font-medium text-sm" style="color: var(--text-primary);">Delta Airlines</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Oct 20, 14:15</div>
+                  </div>
+                </div>
+                <div class="font-medium text-sm" style="color: var(--text-primary);">-$450.00</div>
+              </div>
+              <!-- Tx 4 -->
+              <div class="flex justify-between items-center py-2" style="border-bottom: 1px solid var(--border-subtle);">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">🎬</div>
+                  <div>
+                    <div class="font-medium text-sm" style="color: var(--text-primary);">Netflix</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Oct 18, 09:00</div>
+                  </div>
+                </div>
+                <div class="font-medium text-sm" style="color: var(--text-primary);">-$15.99</div>
+              </div>
+              <!-- Tx 5 -->
+              <div class="flex justify-between items-center py-2">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">⛽</div>
+                  <div>
+                    <div class="font-medium text-sm" style="color: var(--text-primary);">Shell Station</div>
+                    <div class="text-xs" style="color: var(--text-secondary);">Oct 15, 11:20</div>
+                  </div>
+                </div>
+                <div class="font-medium text-sm" style="color: var(--text-primary);">-$45.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Card Display -->
+        <div class="space-y-6">
+          <!-- The Virtual Card -->
+          <div class="card-foil rounded-2xl p-6 text-white relative overflow-hidden shadow-2xl h-56 flex flex-col justify-between" style="background: linear-gradient(135deg, #7A1D2B 0%, #4A0E17 100%);">
+            <div class="absolute top-0 left-0 w-full h-full bg-black/10 mix-blend-overlay"></div>
+            <div class="relative z-10 flex justify-between items-start">
+              <div class="font-bold text-xl tracking-widest">SynxEx</div>
+              <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.5)"/><circle cx="22" cy="10" r="10" fill="rgba(255,255,255,0.5)"/></svg>
+            </div>
+            <div class="relative z-10 space-y-4">
+              <div class="text-2xl font-mono tracking-widest">**** **** **** 4921</div>
+              <div class="flex justify-between text-sm uppercase tracking-wider font-medium">
+                <span>Jane Doe</span>
+                <span>12/28</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-lava w-full py-3 rounded-xl font-medium">Order Physical Card</button>
+
+          <div class="glass rounded-xl p-5" style="border: 1px solid var(--border-subtle);">
+            <h3 class="font-bold mb-4" style="color: var(--text-primary);">Direct Debits</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm p-3 rounded-lg bg-black/10 dark:bg-white/5">
+                <span style="color: var(--text-primary);">Gym Membership</span>
+                <span class="font-medium" style="color: var(--text-primary);">$50.00 / mo</span>
+              </div>
+              <div class="flex justify-between text-sm p-3 rounded-lg bg-black/10 dark:bg-white/5">
+                <span style="color: var(--text-primary);">Apartment Rent</span>
+                <span class="font-medium" style="color: var(--text-primary);">$1,200.00 / mo</span>
+              </div>
+            </div>
+            <button class="btn btn-ghost w-full mt-4 text-sm" style="border: 1px solid var(--border-subtle);">Manage Standing Orders</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+  <!-- Command Palette Modal -->
+  <div class="modal-overlay" id="commandPalette" hidden>
+    <div class="modal-content command-palette p-0">
+      <div class="p-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <input class="input w-full" placeholder="Search anything... markets, agents, transactions" type="text" autofocus />
+      </div>
+      <div class="p-3 text-center">
+        <p class="text-xs" style="color: var(--text-faint);">Start typing to search</p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

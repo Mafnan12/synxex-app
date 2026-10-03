@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Remittance</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="remittance">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-6 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <h1 class="text-3xl font-bold tracking-tight mb-6" style="color: var(--text-primary);">Remittance</h1>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Transfer Form -->
+        <div class="glass card-lift rounded-xl p-6 md:p-8" style="border: 1px solid var(--border-subtle);">
+          <h2 class="text-xl font-bold mb-6" style="color: var(--text-primary);">Send Money Internationally</h2>
+          
+          <div class="space-y-4">
+            <!-- You Send -->
+            <div>
+              <label class="input-label block text-sm font-medium mb-1" style="color: var(--text-secondary);">You send</label>
+              <div class="flex gap-2">
+                <input type="number" class="input flex-1 text-lg font-bold" value="1000.00" />
+                <select class="input w-24 bg-transparent">
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <div class="flex justify-center -my-2 relative z-10">
+              <div class="w-8 h-8 rounded-full flex items-center justify-center bg-black/20 dark:bg-white/10" style="border: 1px solid var(--border-subtle);">
+                <span class="text-sm">↓</span>
+              </div>
+            </div>
+
+            <!-- Recipient Gets -->
+            <div>
+              <label class="input-label block text-sm font-medium mb-1" style="color: var(--text-secondary);">Recipient gets</label>
+              <div class="flex gap-2">
+                <input type="number" class="input flex-1 text-lg font-bold" value="83450.00" readonly />
+                <select class="input w-24 bg-transparent">
+                  <option value="INR">INR</option>
+                  <option value="PHP">PHP</option>
+                  <option value="PKR">PKR</option>
+                  <option value="MXN">MXN</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Recipient Details -->
+            <div class="pt-2">
+              <label class="input-label block text-sm font-medium mb-1" style="color: var(--text-secondary);">Recipient Name</label>
+              <input type="text" class="input w-full" placeholder="Full name as on bank account" />
+            </div>
+
+            <!-- Exchange Rate & Fees -->
+            <div class="p-4 rounded-lg bg-black/5 dark:bg-white/5 space-y-2 mt-4 text-sm" style="border: 1px solid var(--border-subtle);">
+              <div class="flex justify-between">
+                <span style="color: var(--text-secondary);">Exchange Rate</span>
+                <span class="font-medium" style="color: var(--text-primary);">1 USD = 83.45 INR</span>
+              </div>
+              <div class="flex justify-between">
+                <span style="color: var(--text-secondary);">Transfer Fee</span>
+                <span class="font-medium" style="color: var(--text-primary);">$2.00</span>
+              </div>
+              <div class="flex justify-between pt-2 border-t border-black/10 dark:border-white/10">
+                <span class="font-bold" style="color: var(--text-primary);">Total to pay</span>
+                <span class="font-bold" style="color: var(--text-primary);">$1,002.00</span>
+              </div>
+            </div>
+
+            <button class="btn btn-lava w-full py-3 mt-4 text-lg font-medium">Review & Send</button>
+
+          </div>
+        </div>
+
+        <!-- Recent Transfers & Corridors -->
+        <div class="space-y-6">
+          
+          <!-- Corridors -->
+          <div class="glass rounded-xl p-6" style="border: 1px solid var(--border-subtle);">
+            <h3 class="font-bold mb-4" style="color: var(--text-primary);">Supported Corridors (Zero FX Markup)</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded border text-sm" style="background: var(--bg-card); border-color: var(--border-subtle); color: var(--text-primary);">🇺🇸 US</span>
+              <span class="px-3 py-1 rounded border text-sm" style="background: var(--bg-card); border-color: var(--border-subtle); color: var(--text-primary);">🇬🇧 UK</span>
+              <span class="px-3 py-1 rounded border text-sm" style="background: var(--bg-card); border-color: var(--border-subtle); color: var(--text-primary);">🇪🇺 EU</span>
+              <span class="px-3 py-1 rounded border text-sm" style="background: var(--bg-card); border-color: var(--border-subtle); color: var(--text-primary);">🇵🇰 PK</span>
+              <span class="px-3 py-1 rounded border text-sm" style="background: var(--bg-card); border-color: var(--border-subtle); color: var(--text-primary);">🇮🇳 IN</span>
+              <span class="px-3 py-1 rounded border text-sm" style="background: var(--bg-card); border-color: var(--border-subtle); color: var(--text-primary);">🇵🇭 PH</span>
+            </div>
+          </div>
+
+          <!-- Recent Transfers -->
+          <div class="glass rounded-xl p-6" style="border: 1px solid var(--border-subtle);">
+            <h3 class="font-bold mb-4" style="color: var(--text-primary);">Recent Transfers</h3>
+            <div class="space-y-4">
+              <!-- Item 1 -->
+              <div class="flex justify-between items-center py-2" style="border-bottom: 1px solid var(--border-subtle);">
+                <div>
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">Rajesh Kumar</div>
+                  <div class="text-xs" style="color: var(--text-secondary);">Sent to IN • Delivered</div>
+                </div>
+                <div class="text-right">
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">-$500.00</div>
+                  <div class="text-xs text-green-500">₹41,725.00</div>
+                </div>
+              </div>
+              <!-- Item 2 -->
+              <div class="flex justify-between items-center py-2" style="border-bottom: 1px solid var(--border-subtle);">
+                <div>
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">Maria Santos</div>
+                  <div class="text-xs" style="color: var(--text-secondary);">Sent to PH • Delivered</div>
+                </div>
+                <div class="text-right">
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">-$200.00</div>
+                  <div class="text-xs text-green-500">₱11,400.00</div>
+                </div>
+              </div>
+              <!-- Item 3 -->
+              <div class="flex justify-between items-center py-2" style="border-bottom: 1px solid var(--border-subtle);">
+                <div>
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">Ahmed Khan</div>
+                  <div class="text-xs" style="color: var(--text-secondary);">Sent to PK • Delivered</div>
+                </div>
+                <div class="text-right">
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">-$1,000.00</div>
+                  <div class="text-xs text-green-500">Rs278,000.00</div>
+                </div>
+              </div>
+              <!-- Item 4 -->
+              <div class="flex justify-between items-center py-2" style="border-bottom: 1px solid var(--border-subtle);">
+                <div>
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">John Smith</div>
+                  <div class="text-xs" style="color: var(--text-secondary);">Sent to UK • Delivered</div>
+                </div>
+                <div class="text-right">
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">-$350.00</div>
+                  <div class="text-xs text-green-500">£275.00</div>
+                </div>
+              </div>
+              <!-- Item 5 -->
+              <div class="flex justify-between items-center py-2">
+                <div>
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">Elena Rossi</div>
+                  <div class="text-xs" style="color: var(--text-secondary);">Sent to EU • Delivered</div>
+                </div>
+                <div class="text-right">
+                  <div class="font-medium text-sm" style="color: var(--text-primary);">-$150.00</div>
+                  <div class="text-xs text-green-500">€138.00</div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-ghost w-full mt-4 text-sm py-2" style="border: 1px solid var(--border-subtle);">View All Activity</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+  <!-- Command Palette Modal -->
+  <div class="modal-overlay" id="commandPalette" hidden>
+    <div class="modal-content command-palette p-0">
+      <div class="p-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <input class="input w-full" placeholder="Search anything... markets, agents, transactions" type="text" autofocus />
+      </div>
+      <div class="p-3 text-center">
+        <p class="text-xs" style="color: var(--text-faint);">Start typing to search</p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

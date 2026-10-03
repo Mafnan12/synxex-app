@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Settings</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="settings">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-6 max-w-[1000px] w-full mx-auto relative z-10 fade-in">
+      
+      <h1 class="text-3xl font-bold tracking-tight mb-6" style="color: var(--text-primary);">Settings</h1>
+
+      <!-- Profile Section -->
+      <section class="glass card-lift rounded-xl p-6" style="border: 1px solid var(--border-subtle);">
+        <h2 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Profile</h2>
+        <div class="flex flex-col sm:flex-row gap-6 items-start">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-lava to-burgundy flex items-center justify-center text-white text-2xl font-bold border border-white/15 shadow-lg shadow-lava/10">A</div>
+          <div class="flex-1 space-y-4 w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="input-label block text-sm font-medium mb-1" style="color: var(--text-secondary);">Full Name</label>
+                <input type="text" class="input w-full" value="Afnan" />
+              </div>
+              <div>
+                <label class="input-label block text-sm font-medium mb-1" style="color: var(--text-secondary);">Email</label>
+                <input type="email" class="input w-full" value="afnan@synxex.com" />
+              </div>
+              <div>
+                <label class="input-label block text-sm font-medium mb-1" style="color: var(--text-secondary);">Phone</label>
+                <input type="tel" class="input w-full" value="+1 (555) 019-8421" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Security Section -->
+      <section class="glass card-lift rounded-xl p-6" style="border: 1px solid var(--border-subtle);">
+        <h2 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Security</h2>
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-medium text-sm" style="color: var(--text-primary);">Two-Factor Authentication (2FA)</h3>
+              <p class="text-xs" style="color: var(--text-secondary);">Protect your account with an extra layer of security.</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#FF5524]"></div>
+            </label>
+          </div>
+          
+          <div class="border-t pt-4" style="border-color: var(--border-subtle);">
+            <button class="btn btn-ghost px-4 py-2 text-sm" style="border: 1px solid var(--border-subtle);">Change Password</button>
+          </div>
+
+          <div class="border-t pt-4" style="border-color: var(--border-subtle);">
+            <h3 class="font-medium text-sm mb-2" style="color: var(--text-primary);">Login History</h3>
+            <div class="text-xs space-y-2" style="color: var(--text-secondary);">
+              <div class="flex justify-between">
+                <span>Windows PC • Chrome • New York, USA</span>
+                <span>Today, 10:23 AM</span>
+              </div>
+              <div class="flex justify-between">
+                <span>iPhone 13 • App • New York, USA</span>
+                <span>Yesterday, 08:15 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notifications Section -->
+      <section class="glass card-lift rounded-xl p-6" style="border: 1px solid var(--border-subtle);">
+        <h2 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Notifications</h2>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium" style="color: var(--text-primary);">Email Notifications</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#FF5524]"></div>
+            </label>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium" style="color: var(--text-primary);">Push Notifications</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#FF5524]"></div>
+            </label>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium" style="color: var(--text-primary);">SMS Alerts</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer">
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#FF5524]"></div>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Appearance Section -->
+      <section class="glass card-lift rounded-xl p-6" style="border: 1px solid var(--border-subtle);">
+        <h2 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Appearance</h2>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="theme" value="system" class="accent-[#FF5524]" />
+            <span class="text-sm" style="color: var(--text-primary);">System</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="theme" value="light" class="accent-[#FF5524]" />
+            <span class="text-sm" style="color: var(--text-primary);">Light</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="theme" value="dark" checked class="accent-[#FF5524]" />
+            <span class="text-sm" style="color: var(--text-primary);">Dark</span>
+          </label>
+        </div>
+      </section>
+
+      <div class="flex justify-end pt-4">
+        <button class="btn btn-lava px-8 py-3 text-lg font-medium shadow-lg hover:shadow-[#FF5524]/20">Save Changes</button>
+      </div>
+
+    </main>
+  </div>
+  <!-- Command Palette Modal -->
+  <div class="modal-overlay" id="commandPalette" hidden>
+    <div class="modal-content command-palette p-0">
+      <div class="p-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <input class="input w-full" placeholder="Search anything... markets, agents, transactions" type="text" autofocus />
+      </div>
+      <div class="p-3 text-center">
+        <p class="text-xs" style="color: var(--text-faint);">Start typing to search</p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

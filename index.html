@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Dashboard</title>
+  <meta name="description" content="SynxEx — The Borderless Financial Operating System. Manage crypto, forex, stocks, banking, and AI trading agents from one unified dashboard."/>
+  <meta property="og:title" content="SynxEx — Borderless Financial OS"/>
+  <meta property="og:description" content="Manage your complete financial ecosystem. Crypto trading, AI agents, multi-currency banking, and global remittance."/>
+  <meta property="og:type" content="website"/>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="dashboard">
+
+<!-- Mobile Sidebar Overlay -->
+<div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar (injected by JS) -->
+<aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+
+<!-- Main Content -->
+<div class="flex-1 flex flex-col min-w-0 relative">
+  <!-- Header (injected by JS) -->
+  <header id="header"></header>
+
+  <!-- Dashboard Workspace -->
+  <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10">
+
+    <!-- ─── ROW 1: Greeting + Quick Actions (Above the Fold) ─── -->
+    <section class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 fade-in">
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-editorial" style="color: var(--text-primary);">Good morning, Afnan</h1>
+        <p class="text-[13px] mt-0.5" style="color: var(--text-muted);">Your complete financial ecosystem at a glance.</p>
+      </div>
+      <div class="flex items-center gap-2.5 flex-wrap qa-row">
+        <button class="deposit-glow btn btn-lava text-[13px] group" onclick="document.getElementById('depositModal').hidden=false; document.body.style.overflow='hidden';">
+          <svg class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"/></svg>
+          Deposit
+        </button>
+        <button class="qa-ghost flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] font-medium theme-transition btn-press" style="background: var(--bg-card); border: 1px solid var(--border-card); color: var(--text-secondary);" onclick="document.getElementById('withdrawModal').hidden=false; document.body.style.overflow='hidden';">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" style="color: var(--text-muted);" viewBox="0 0 24 24"><path d="M5 10l7-7m0 0l7 7m-7-7v18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          Withdraw
+        </button>
+        <button class="qa-ghost flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] font-medium theme-transition btn-press" style="background: var(--bg-card); border: 1px solid var(--border-card); color: var(--text-secondary);" onclick="document.getElementById('transferModal').hidden=false; document.body.style.overflow='hidden';">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" style="color: var(--text-muted);" viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          Transfer
+        </button>
+        <button class="qa-ghost flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] font-medium theme-transition btn-press" style="background: var(--bg-card); border: 1px solid var(--border-card); color: var(--text-secondary);" onclick="document.getElementById('tradeModal').hidden=false; document.body.style.overflow='hidden';">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" style="color: var(--text-muted);" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          Trade
+        </button>
+      </div>
+    </section>
+
+    <!-- ─── ROW 2: Portfolio + Allocation ─── -->
+    <section class="grid grid-cols-1 xl:grid-cols-3 gap-5 fade-in">
+      <!-- Portfolio Chart Hero Card -->
+      <article class="xl:col-span-2 rounded-2xl glass-hero border-gradient card-lift p-5 relative overflow-hidden glow-lava theme-transition">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <span class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Total portfolio value</span>
+            <div class="flex items-baseline gap-3 mt-1 flex-wrap">
+              <span class="heading-xxl text-4xl sm:text-[42px] num-tabular" style="color: var(--text-primary);">$124,580<span class="text-2xl sm:text-3xl font-bold" style="color: var(--text-faint);">.42</span></span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-500 px-2 py-0.5 rounded-md num-tabular" style="background: var(--emerald-bg); border: 1px solid var(--emerald-border);">
+                ↑ +$3,440.38 (+2.84%) <span style="color: var(--text-faint);" class="font-normal">today</span>
+              </span>
+            </div>
+          </div>
+          <div class="tab-group" data-tab-group="chartRange">
+            <button class="tab-item active" data-tab="1d">1D</button>
+            <button class="tab-item" data-tab="1w">1W</button>
+            <button class="tab-item" data-tab="1m">1M</button>
+            <button class="tab-item" data-tab="3m">3M</button>
+            <button class="tab-item" data-tab="1y">1Y</button>
+            <button class="tab-item" style="padding: 4px 6px;" title="Fullscreen">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <div class="relative w-full h-44 sm:h-48 mt-3">
+          <svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 800 200">
+            <defs>
+              <linearGradient id="cF" x1="0%" x2="0%" y1="0%" y2="100%"><stop offset="0%" stop-color="#FF5524" stop-opacity="0.24"/><stop offset="40%" stop-color="#FF5524" stop-opacity="0.07"/><stop offset="100%" stop-color="#FF5524" stop-opacity="0.0"/></linearGradient>
+              <linearGradient id="cS" x1="0%" x2="100%"><stop offset="0%" stop-color="#FF3815"/><stop offset="50%" stop-color="#FF5524"/><stop offset="100%" stop-color="#FF7A42"/></linearGradient>
+            </defs>
+            <line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="40" y2="40"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="85" y2="85"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="130" y2="130"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="175" y2="175"/>
+            <text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="43">140K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="88">120K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="133">100K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="178">80K</text>
+            <path d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65 L780,195 L10,195Z" fill="url(#cF)"/>
+            <path d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65" fill="none" stroke="url(#cS)" stroke-linecap="round" stroke-width="2.4"/>
+            <circle class="animate-ping opacity-60" cx="780" cy="65" fill="#FF5524" r="4"/><circle cx="780" cy="65" fill="var(--text-inverse)" r="4" stroke="#FF5524" stroke-width="2.5"/>
+          </svg>
+          <div class="absolute right-3 top-6 backdrop-blur-sm text-[11px] px-2.5 py-1 rounded-lg shadow-xl font-mono theme-transition" style="background: var(--bg-card); border: 1px solid var(--lava-border); color: var(--text-primary);">$124.6k</div>
+        </div>
+        <div class="flex justify-between text-[10px] font-mono pt-2 px-1" style="color: var(--text-faint); border-top: 1px solid var(--border-subtle);"><span>12 AM</span><span>4 AM</span><span>8 AM</span><span>12 PM</span><span>4 PM</span><span>8 PM</span></div>
+        <!-- Breakdown -->
+        <div class="grid grid-cols-3 gap-3 pt-3.5 mt-3.5" style="border-top: 1px solid var(--border-subtle);">
+          <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-lava shadow-[0_0_6px_rgba(255,85,36,0.5)]"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Available</p><p class="text-sm font-bold num-tabular" style="color: var(--text-primary);">$42,000.00</p></div></div>
+          <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full bg-burgundy-wine"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Invested</p><p class="text-sm font-bold num-tabular" style="color: var(--text-primary);">$80,000.00</p></div></div>
+          <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full" style="background: var(--text-faint);"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Pending</p><p class="text-sm font-bold num-tabular" style="color: var(--text-primary);">$2,580.42</p></div></div>
+        </div>
+      </article>
+
+      <!-- Allocation -->
+      <div class="rounded-2xl glass card-lift p-5 flex flex-col justify-between theme-transition fade-in">
+        <div>
+          <div class="flex items-center justify-between mb-4"><span class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Portfolio allocation</span><a class="text-[11px] font-medium text-lava link-hover" href="/pages/wallet.html">View portfolio →</a></div>
+          <div class="flex items-center gap-5">
+            <div class="relative w-[120px] h-[120px] shrink-0 donut-glow">
+              <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 100 100"><circle cx="50" cy="50" fill="none" r="38" stroke="var(--donut-track)" stroke-width="11"/><circle cx="50" cy="50" fill="none" r="38" stroke="#FF5524" stroke-dasharray="95.5 238.76" stroke-dashoffset="0" stroke-linecap="round" stroke-width="11"/><circle cx="50" cy="50" fill="none" r="38" stroke="#8C1D38" stroke-dasharray="71.6 238.76" stroke-dashoffset="-98" stroke-width="11"/><circle cx="50" cy="50" fill="none" r="38" stroke="#4C101F" stroke-dasharray="35.8 238.76" stroke-dashoffset="-172" stroke-width="11"/><circle cx="50" cy="50" fill="none" r="38" stroke="#9CA3AF" stroke-dasharray="32 238.76" stroke-dashoffset="-209" stroke-width="11"/></svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center"><span class="text-[8px] uppercase font-bold tracking-wider" style="color: var(--text-faint);">Total</span><span class="text-[13px] font-extrabold num-tabular tracking-tight" style="color: var(--text-primary);">$124.6k</span></div>
+            </div>
+            <div class="flex-1 space-y-2.5 text-xs">
+              <div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-lava"></span><span style="color: var(--text-secondary);">Crypto</span></div><div class="text-right"><span class="font-semibold num-tabular" style="color: var(--text-primary);">40%</span><span class="text-[10px] ml-1.5 num-tabular" style="color: var(--text-faint);">$49.8k</span></div></div>
+              <div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#8C1D38]"></span><span style="color: var(--text-secondary);">Stocks</span></div><div class="text-right"><span class="font-semibold num-tabular" style="color: var(--text-primary);">30%</span><span class="text-[10px] ml-1.5 num-tabular" style="color: var(--text-faint);">$37.4k</span></div></div>
+              <div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#4C101F]"></span><span style="color: var(--text-secondary);">Forex</span></div><div class="text-right"><span class="font-semibold num-tabular" style="color: var(--text-primary);">15%</span><span class="text-[10px] ml-1.5 num-tabular" style="color: var(--text-faint);">$18.7k</span></div></div>
+              <div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#9CA3AF]"></span><span style="color: var(--text-secondary);">Cash</span></div><div class="text-right"><span class="font-semibold num-tabular" style="color: var(--text-primary);">15%</span><span class="text-[10px] ml-1.5 num-tabular" style="color: var(--text-faint);">$18.7k</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 pt-4 grid grid-cols-2 gap-3" style="border-top: 1px solid var(--border-subtle);"><div class="inner-card rounded-xl p-3 text-center"><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">24h Volume</p><p class="text-sm font-bold num-tabular mt-0.5" style="color: var(--text-primary);">$8,420</p></div><div class="inner-card rounded-xl p-3 text-center"><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Active Agents</p><p class="text-sm font-bold num-tabular mt-0.5" style="color: var(--text-primary);">3 / 5</p></div></div>
+      </div>
+    </section>
+
+    <!-- ─── ROW 3: Market · Agents · Wallet/Banking ─── -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <!-- Market Overview -->
+      <article class="rounded-2xl glass card-lift p-5 flex flex-col theme-transition fade-in">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-[13px] font-semibold tracking-editorial" style="color: var(--text-primary);">Market overview</h2>
+          <div class="tab-group" data-tab-group="marketContent">
+            <button class="tab-item active" data-tab="all">All</button>
+            <button class="tab-item" data-tab="crypto">Crypto</button>
+            <button class="tab-item" data-tab="forex">Forex</button>
+            <button class="tab-item" data-tab="stocks">Stocks</button>
+          </div>
+        </div>
+        <div class="flex-1" id="marketContent">
+          <div class="py-2.5 flex items-center justify-between group rounded-lg px-1.5 cursor-pointer ledger-row" data-category="crypto" style="border-bottom: 1px solid var(--border-subtle);"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-amber-500/[0.08] border border-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-[11px]">₿</div><div><div class="text-xs font-semibold" style="color: var(--text-primary);">BTC / USDT</div><div class="text-[10px]" style="color: var(--text-faint);">Bitcoin</div></div></div><div class="text-right"><div class="text-xs font-semibold num-tabular" style="color: var(--text-primary);">$104,250</div><div class="text-[10px] font-semibold text-emerald-500 num-tabular">+2.41%</div></div><div class="w-14 h-5 hidden sm:block spark-glow"><svg class="w-full h-full" viewBox="0 0 60 20"><path d="M0,15 Q15,18 25,10 T50,5 T60,2" fill="none" stroke="#10B981" stroke-linecap="round" stroke-width="1.6"/></svg></div><svg class="w-3.5 h-3.5 transition" fill="none" stroke="currentColor" style="color: var(--text-faint);" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div>
+          <div class="py-2.5 flex items-center justify-between group rounded-lg px-1.5 cursor-pointer ledger-row" data-category="crypto" style="border-bottom: 1px solid var(--border-subtle);"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-indigo-500/[0.08] border border-indigo-500/15 text-indigo-400 flex items-center justify-center font-bold text-[11px]">Ξ</div><div><div class="text-xs font-semibold" style="color: var(--text-primary);">ETH / USDT</div><div class="text-[10px]" style="color: var(--text-faint);">Ethereum</div></div></div><div class="text-right"><div class="text-xs font-semibold num-tabular" style="color: var(--text-primary);">$3,840.12</div><div class="text-[10px] font-semibold text-emerald-500 num-tabular">+1.72%</div></div><div class="w-14 h-5 hidden sm:block spark-glow"><svg class="w-full h-full" viewBox="0 0 60 20"><path d="M0,17 Q15,12 30,14 T45,8 T60,3" fill="none" stroke="#10B981" stroke-linecap="round" stroke-width="1.6"/></svg></div><svg class="w-3.5 h-3.5 transition" fill="none" stroke="currentColor" style="color: var(--text-faint);" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div>
+          <div class="py-2.5 flex items-center justify-between group rounded-lg px-1.5 cursor-pointer ledger-row" data-category="forex" style="border-bottom: 1px solid var(--border-subtle);"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-blue-500/[0.08] border border-blue-500/15 text-blue-400 flex items-center justify-center font-bold text-[11px]">€</div><div><div class="text-xs font-semibold" style="color: var(--text-primary);">EUR / USD</div><div class="text-[10px]" style="color: var(--text-faint);">Euro / US Dollar</div></div></div><div class="text-right"><div class="text-xs font-semibold num-tabular" style="color: var(--text-primary);">1.1710</div><div class="text-[10px] font-semibold text-rose-500 num-tabular">-0.12%</div></div><div class="w-14 h-5 hidden sm:block spark-glow-red"><svg class="w-full h-full" viewBox="0 0 60 20"><path d="M0,4 Q20,6 30,12 T50,14 T60,18" fill="none" stroke="#F43F5E" stroke-linecap="round" stroke-width="1.6"/></svg></div><svg class="w-3.5 h-3.5 transition" fill="none" stroke="currentColor" style="color: var(--text-faint);" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div>
+          <div class="py-2.5 flex items-center justify-between group rounded-lg px-1.5 cursor-pointer ledger-row" data-category="stocks" style="border-bottom: 1px solid var(--border-subtle);"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-gray-400/[0.08] border border-gray-400/15 flex items-center justify-center font-bold text-[11px]" style="color: var(--text-muted);"></div><div><div class="text-xs font-semibold" style="color: var(--text-primary);">AAPL</div><div class="text-[10px]" style="color: var(--text-faint);">Apple Inc.</div></div></div><div class="text-right"><div class="text-xs font-semibold num-tabular" style="color: var(--text-primary);">$245.30</div><div class="text-[10px] font-semibold text-emerald-500 num-tabular">+0.84%</div></div><div class="w-14 h-5 hidden sm:block spark-glow"><svg class="w-full h-full" viewBox="0 0 60 20"><path d="M0,16 Q20,15 35,10 T50,8 T60,4" fill="none" stroke="#10B981" stroke-linecap="round" stroke-width="1.6"/></svg></div><svg class="w-3.5 h-3.5 transition" fill="none" stroke="currentColor" style="color: var(--text-faint);" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div>
+          <div class="py-2.5 flex items-center justify-between group rounded-lg px-1.5 cursor-pointer ledger-row" data-category="crypto"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-yellow-500/[0.08] border border-yellow-500/15 text-yellow-500 flex items-center justify-center font-bold text-[11px]">Au</div><div><div class="text-xs font-semibold" style="color: var(--text-primary);">XAU / USD</div><div class="text-[10px]" style="color: var(--text-faint);">Gold Ounce</div></div></div><div class="text-right"><div class="text-xs font-semibold num-tabular" style="color: var(--text-primary);">$3,742.10</div><div class="text-[10px] font-semibold text-emerald-500 num-tabular">+0.61%</div></div><div class="w-14 h-5 hidden sm:block spark-glow"><svg class="w-full h-full" viewBox="0 0 60 20"><path d="M0,18 Q15,14 30,12 T50,8 T60,6" fill="none" stroke="#10B981" stroke-linecap="round" stroke-width="1.6"/></svg></div><svg class="w-3.5 h-3.5 transition" fill="none" stroke="currentColor" style="color: var(--text-faint);" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div>
+        </div>
+      </article>
+
+      <!-- AI Agents -->
+      <article class="rounded-2xl glass card-lift p-5 flex flex-col theme-transition fade-in">
+        <div class="flex items-center justify-between mb-4"><div class="flex items-center gap-2"><h2 class="text-[13px] font-semibold tracking-editorial" style="color: var(--text-primary);">AI trading agents</h2><span class="w-2 h-2 rounded-full bg-lava shadow-[0_0_6px_rgba(255,85,36,0.5)]"></span></div><a class="text-[11px] font-medium text-lava link-hover" href="/pages/agents.html">Explore all agents →</a></div>
+        <div class="space-y-3 flex-1">
+          <div class="agent-card p-3.5 rounded-xl theme-transition" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-lava/[0.08] border border-lava/15 flex items-center justify-center text-lava"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div><div><h3 class="text-xs font-bold" style="color: var(--text-primary);">Alpha Trader</h3><p class="text-[10px]" style="color: var(--text-faint);">Momentum · Crypto majors</p></div></div><div class="text-right"><span class="text-sm font-bold text-emerald-500 num-tabular">+12.4%</span><span class="block text-[9px] uppercase font-semibold" style="color: var(--text-faint);">30D ROI</span></div></div><div class="flex items-center justify-between mt-3 pt-2.5 text-[10px]" style="border-top: 1px solid var(--border-subtle);"><span class="inline-flex items-center gap-1.5" style="color: var(--text-muted);"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Medium risk</span><span class="text-emerald-500 px-2 py-0.5 rounded-md font-medium" style="background: var(--emerald-bg); border: 1px solid var(--emerald-border);">✓ Validated</span></div></div>
+          <div class="agent-card p-3.5 rounded-xl theme-transition" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-burgundy/20 border border-burgundy/30 flex items-center justify-center text-pink-400"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div><div><h3 class="text-xs font-bold" style="color: var(--text-primary);">MacroFlow</h3><p class="text-[10px]" style="color: var(--text-faint);">Macro trend · FX &amp; Gold</p></div></div><div class="text-right"><span class="text-sm font-bold text-emerald-500 num-tabular">+8.7%</span><span class="block text-[9px] uppercase font-semibold" style="color: var(--text-faint);">30D ROI</span></div></div><div class="flex items-center justify-between mt-3 pt-2.5 text-[10px]" style="border-top: 1px solid var(--border-subtle);"><span class="inline-flex items-center gap-1.5" style="color: var(--text-muted);"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Low risk</span><span class="text-emerald-500 px-2 py-0.5 rounded-md font-medium" style="background: var(--emerald-bg); border: 1px solid var(--emerald-border);">✓ Validated</span></div></div>
+          <div class="agent-card p-3.5 rounded-xl theme-transition" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-blue-500/[0.08] border border-blue-500/15 flex items-center justify-center text-blue-400"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div><div><h3 class="text-xs font-bold" style="color: var(--text-primary);">QuantEdge</h3><p class="text-[10px]" style="color: var(--text-faint);">Stat-arb · US equities</p></div></div><div class="text-right"><span class="text-sm font-bold text-emerald-500 num-tabular">+6.2%</span><span class="block text-[9px] uppercase font-semibold" style="color: var(--text-faint);">30D ROI</span></div></div><div class="flex items-center justify-between mt-3 pt-2.5 text-[10px]" style="border-top: 1px solid var(--border-subtle);"><span class="inline-flex items-center gap-1.5" style="color: var(--text-muted);"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> High risk</span><span class="text-emerald-500 px-2 py-0.5 rounded-md font-medium" style="background: var(--emerald-bg); border: 1px solid var(--emerald-border);">✓ Validated</span></div></div>
+        </div>
+      </article>
+
+      <!-- Wallet & Banking -->
+      <article class="space-y-5 fade-in">
+        <div class="rounded-2xl glass card-lift p-4 theme-transition">
+          <div class="flex items-center justify-between mb-2"><div class="flex items-center gap-2"><svg class="w-4 h-4 text-lava" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg><h3 class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-secondary);">Web3 Wallet</h3></div><a class="text-[11px] font-medium text-lava link-hover" href="/pages/wallet.html">View wallet →</a></div>
+          <div class="flex items-baseline justify-between mb-3"><span class="text-xl font-extrabold num-tabular tracking-tight" style="color: var(--text-primary);">$24,820.20</span><span class="text-[10px]" style="color: var(--text-faint);">8 networks · Self-custody</span></div>
+          <div class="grid grid-cols-3 gap-2 pt-2.5" style="border-top: 1px solid var(--border-subtle);"><div class="inner-card p-2 rounded-lg text-center"><p class="text-[9px] font-medium" style="color: var(--text-faint);">Bitcoin</p><p class="text-[11px] font-bold num-tabular" style="color: var(--text-primary);">0.1189 BTC</p><p class="text-[9px] num-tabular" style="color: var(--text-faint);">$12,400</p></div><div class="inner-card p-2 rounded-lg text-center"><p class="text-[9px] font-medium" style="color: var(--text-faint);">Ethereum</p><p class="text-[11px] font-bold num-tabular" style="color: var(--text-primary);">1.875 ETH</p><p class="text-[9px] num-tabular" style="color: var(--text-faint);">$7,200</p></div><div class="inner-card p-2 rounded-lg text-center"><p class="text-[9px] font-medium" style="color: var(--text-faint);">Tether</p><p class="text-[11px] font-bold num-tabular" style="color: var(--text-primary);">5,220 USDT</p><p class="text-[9px] num-tabular" style="color: var(--text-faint);">$5,220</p></div></div>
+        </div>
+        <div class="rounded-2xl glass card-lift p-4 theme-transition">
+          <div class="flex items-center justify-between mb-3"><div class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg><h3 class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-secondary);">Banking &amp; Cards</h3></div><a class="text-[11px] font-medium text-lava link-hover" href="/pages/banking.html">Manage →</a></div>
+          <div class="flex gap-4 items-center"><div class="space-y-1.5 shrink-0"><span class="text-xl font-extrabold num-tabular tracking-tight" style="color: var(--text-primary);">$12,450.00</span><p class="text-[10px]" style="color: var(--text-faint);">Multi-currency accounts</p><div class="space-y-1 pt-1 text-[10px] num-tabular"><div class="flex justify-between gap-4" style="color: var(--text-faint);"><span>USD</span><span class="font-medium" style="color: var(--text-primary);">$8,850.00</span></div><div class="flex justify-between gap-4" style="color: var(--text-faint);"><span>EUR</span><span class="font-medium" style="color: var(--text-primary);">€2,100.00</span></div><div class="flex justify-between gap-4" style="color: var(--text-faint);"><span>GBP</span><span class="font-medium" style="color: var(--text-primary);">£850.00</span></div></div></div><div class="flex-1 card-foil rounded-xl p-3 border border-white/10 text-white flex flex-col justify-between h-28 transition-transform duration-300 hover:scale-[1.03]"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5"><span class="text-[11px] font-black tracking-wider uppercase">SynxEx</span><span class="text-[8px] px-1 bg-white/15 rounded font-mono tracking-wider">DEBIT</span></div><svg class="w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></div><div class="flex items-center justify-between text-xs font-mono tracking-widest text-white/70 mt-2"><span>•••• 4821</span><span class="text-[10px]">09/29</span></div></div></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ─── ROW 4: Recent Activity ─── -->
+    <section class="rounded-2xl glass card-lift p-5 theme-transition fade-in">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div class="flex items-center gap-4"><h2 class="text-[13px] font-semibold tracking-editorial" style="color: var(--text-primary);">Recent activity</h2>
+          <div class="tab-group" data-tab-group="activityContent">
+            <button class="tab-item active" data-tab="all">All</button>
+            <button class="tab-item" data-tab="crypto">Crypto</button>
+            <button class="tab-item" data-tab="banking">Banking</button>
+            <button class="tab-item" data-tab="card">Cards</button>
+            <button class="tab-item" data-tab="remittance">Remittance</button>
+          </div>
+        </div>
+        <a class="text-[11px] font-medium text-lava link-hover" href="#">View all activity →</a>
+      </div>
+      <div class="overflow-x-auto" id="activityContent">
+        <table class="w-full text-left text-xs" style="color: var(--text-secondary);">
+          <thead><tr class="text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-faint);"><th class="pb-3 font-medium">Date</th><th class="pb-3 font-medium">Activity</th><th class="pb-3 font-medium">Product</th><th class="pb-3 font-medium">Status</th><th class="pb-3 font-medium text-right">Amount</th><th class="pb-3 font-medium text-right">Action</th></tr></thead>
+          <tbody>
+            <tr class="ledger-row" data-category="crypto" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Today 09:42</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-amber-500/[0.08] border border-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-[11px]">₿</div><div><span class="font-semibold" style="color: var(--text-primary);">BTC purchase</span><span class="block text-[10px]" style="color: var(--text-faint);">0.01918 BTC @ $104,250</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Crypto</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-bold text-emerald-500 num-tabular">+$2,000.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="crypto" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Today 08:15</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-emerald-500/[0.08] border border-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold text-[11px]">₮</div><div><span class="font-semibold" style="color: var(--text-primary);">USDT deposit</span><span class="block text-[10px]" style="color: var(--text-faint);">Ethereum network · 2/12 confirmations</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Crypto</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-amber-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>Pending</span></td><td class="py-3 text-right font-bold text-emerald-500 num-tabular">+$2,580.42</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="card" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Yesterday 18:03</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-burgundy/30 border border-burgundy/40 text-pink-400 flex items-center justify-center text-[11px]">💳</div><div><span class="font-semibold" style="color: var(--text-primary);">Card payment</span><span class="block text-[10px]" style="color: var(--text-faint);">Luma Coffee Co. · •••• 4821</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Card</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$120.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="banking" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Yesterday 11:20</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-blue-500/[0.08] border border-blue-500/15 text-blue-400 flex items-center justify-center text-[11px]">🏛️</div><div><span class="font-semibold" style="color: var(--text-primary);">Bank transfer</span><span class="block text-[10px]" style="color: var(--text-faint);">To Ayesha K. · SEPA Instant</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Banking</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$500.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="remittance"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Sep 23 10:05</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-purple-500/[0.08] border border-purple-500/15 text-purple-400 flex items-center justify-center text-[11px]">🌐</div><div><span class="font-semibold" style="color: var(--text-primary);">Remittance to PKR</span><span class="block text-[10px]" style="color: var(--text-faint);">Lahore · arrives in minutes</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Remittance</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$300.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- Command Palette -->
+<div class="modal-overlay" id="commandPalette" hidden>
+  <div class="modal-content command-palette p-0">
+    <div class="p-4 flex items-center gap-3" style="border-bottom: 1px solid var(--border-subtle);">
+      <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" style="color: var(--text-faint);" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+      <input class="flex-1 bg-transparent border-none outline-none text-sm" placeholder="Search markets, agents, transactions..." type="text" autofocus style="color: var(--text-primary);"/>
+      <kbd class="text-[10px] font-medium px-1.5 py-0.5 rounded" style="color: var(--text-faint); background: var(--bg-pill); border: 1px solid var(--border-subtle);">ESC</kbd>
+    </div>
+    <div class="p-3">
+      <p class="text-[10px] uppercase font-semibold tracking-wider mb-2" style="color: var(--text-faint);">Quick Actions</p>
+      <div class="space-y-0.5">
+        <div class="dropdown-item rounded-lg"><svg class="w-4 h-4 text-lava" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg><span>Deposit funds</span></div>
+        <div class="dropdown-item rounded-lg"><svg class="w-4 h-4" fill="none" stroke="currentColor" style="color: var(--text-muted);" viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg><span>Transfer money</span></div>
+        <div class="dropdown-item rounded-lg"><svg class="w-4 h-4" fill="none" stroke="currentColor" style="color: var(--text-muted);" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg><span>Trade assets</span></div>
+      </div>
+      <p class="text-[10px] uppercase font-semibold tracking-wider mb-2 mt-4" style="color: var(--text-faint);">Pages</p>
+      <div class="space-y-0.5">
+        <a href="/pages/markets.html" class="dropdown-item rounded-lg" style="text-decoration: none;"><span>Markets</span></a>
+        <a href="/pages/agents.html" class="dropdown-item rounded-lg" style="text-decoration: none;"><span>AI Agents</span></a>
+        <a href="/pages/wallet.html" class="dropdown-item rounded-lg" style="text-decoration: none;"><span>Wallet</span></a>
+        <a href="/pages/settings.html" class="dropdown-item rounded-lg" style="text-decoration: none;"><span>Settings</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Deposit Modal -->
+<div class="modal-overlay" id="depositModal" hidden>
+  <div class="modal-content p-6">
+    <div class="flex items-center justify-between mb-5"><h2 class="text-lg font-bold" style="color: var(--text-primary);">Deposit Funds</h2><button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button></div>
+    <form onsubmit="event.preventDefault(); this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">
+      <label class="input-label">Method</label>
+      <select class="input mb-4"><option>Bank Transfer (SEPA)</option><option>Credit/Debit Card</option><option>Crypto Wallet</option></select>
+      <label class="input-label">Currency</label>
+      <select class="input mb-4"><option>USD — US Dollar</option><option>EUR — Euro</option><option>GBP — British Pound</option><option>BTC — Bitcoin</option></select>
+      <label class="input-label">Amount</label>
+      <input class="input mb-5" placeholder="0.00" type="text" required/>
+      <button class="btn btn-lava w-full" type="submit">Deposit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Withdraw Modal -->
+<div class="modal-overlay" id="withdrawModal" hidden>
+  <div class="modal-content p-6">
+    <div class="flex items-center justify-between mb-5"><h2 class="text-lg font-bold" style="color: var(--text-primary);">Withdraw Funds</h2><button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button></div>
+    <form onsubmit="event.preventDefault(); this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">
+      <label class="input-label">Destination</label>
+      <select class="input mb-4"><option>Bank Account (****4821)</option><option>External Crypto Wallet</option></select>
+      <label class="input-label">Currency</label>
+      <select class="input mb-4"><option>USD — US Dollar</option><option>EUR — Euro</option><option>BTC — Bitcoin</option><option>ETH — Ethereum</option></select>
+      <label class="input-label">Amount</label>
+      <input class="input mb-2" placeholder="0.00" type="text" required/>
+      <p class="text-[11px] mb-5" style="color: var(--text-faint);">Available: $42,000.00</p>
+      <button class="btn btn-lava w-full" type="submit">Withdraw</button>
+    </form>
+  </div>
+</div>
+
+<!-- Transfer Modal -->
+<div class="modal-overlay" id="transferModal" hidden>
+  <div class="modal-content p-6">
+    <div class="flex items-center justify-between mb-5"><h2 class="text-lg font-bold" style="color: var(--text-primary);">Transfer Funds</h2><button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button></div>
+    <form onsubmit="event.preventDefault(); this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">
+      <label class="input-label">Recipient</label>
+      <input class="input mb-4" placeholder="Name or email" type="text" required/>
+      <label class="input-label">Transfer Method</label>
+      <select class="input mb-4"><option>SEPA Instant</option><option>SWIFT</option><option>Internal Transfer</option></select>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div><label class="input-label">Currency</label><select class="input"><option>USD</option><option>EUR</option><option>GBP</option></select></div>
+        <div><label class="input-label">Amount</label><input class="input" placeholder="0.00" type="text" required/></div>
+      </div>
+      <label class="input-label">Reference</label>
+      <input class="input mb-5" placeholder="Optional note" type="text"/>
+      <button class="btn btn-lava w-full" type="submit">Send Transfer</button>
+    </form>
+  </div>
+</div>
+
+<!-- Trade Modal -->
+<div class="modal-overlay" id="tradeModal" hidden>
+  <div class="modal-content p-6">
+    <div class="flex items-center justify-between mb-5"><h2 class="text-lg font-bold" style="color: var(--text-primary);">Trade Assets</h2><button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button></div>
+    <form onsubmit="event.preventDefault(); this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">
+      <div class="tab-group mb-5 w-full" style="display: flex;">
+        <button type="button" class="tab-item active flex-1" style="text-align: center;">Buy</button>
+        <button type="button" class="tab-item flex-1" style="text-align: center;">Sell</button>
+      </div>
+      <label class="input-label">Asset</label>
+      <select class="input mb-4"><option>BTC — Bitcoin ($104,250)</option><option>ETH — Ethereum ($3,840)</option><option>SOL — Solana ($142)</option><option>XAU — Gold ($3,742)</option></select>
+      <label class="input-label">Amount (USD)</label>
+      <input class="input mb-2" placeholder="0.00" type="text" required/>
+      <p class="text-[11px] mb-5" style="color: var(--text-faint);">≈ 0.00000 BTC · Fee: $0.00</p>
+      <button class="btn btn-lava w-full" type="submit">Place Order</button>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

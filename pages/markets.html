@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Markets</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="markets">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <h1 class="text-3xl font-bold tracking-tight" style="color: var(--text-primary);">Markets</h1>
+        <div class="relative w-full sm:w-64">
+          <input type="text" class="input w-full" placeholder="Search markets..." />
+        </div>
+      </div>
+      
+      <div class="tab-group flex space-x-2" data-tab-group="markets">
+        <button class="tab-item px-4 py-2 rounded-lg bg-black/10 dark:bg-white/10 font-medium" data-tab="all" style="color: var(--text-primary);">All</button>
+        <button class="tab-item px-4 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-medium" data-tab="crypto" style="color: var(--text-secondary);">Crypto</button>
+        <button class="tab-item px-4 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-medium" data-tab="forex" style="color: var(--text-secondary);">Forex</button>
+        <button class="tab-item px-4 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-medium" data-tab="stocks" style="color: var(--text-secondary);">Stocks</button>
+        <button class="tab-item px-4 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-medium" data-tab="commodities" style="color: var(--text-secondary);">Commodities</button>
+      </div>
+
+      <div class="glass card-lift theme-transition overflow-hidden rounded-xl" style="border: 1px solid var(--border-subtle);">
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left text-sm whitespace-nowrap">
+            <thead style="background: var(--bg-hover); border-bottom: 1px solid var(--border-subtle);">
+              <tr>
+                <th class="px-4 py-3 font-medium" style="color: var(--text-secondary);">Asset</th>
+                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">Price</th>
+                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">24h Change</th>
+                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">7d Change</th>
+                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">Market Cap</th>
+                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">Volume</th>
+                <th class="px-4 py-3 font-medium text-center" style="color: var(--text-secondary);">Trend</th>
+                <th class="px-4 py-3 font-medium text-center" style="color: var(--text-secondary);">Action</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--text-primary);">
+              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-orange-500/20 text-orange-500 font-bold">₿</div>
+                    <div>
+                      <div class="font-medium">Bitcoin</div>
+                      <div class="text-xs" style="color: var(--text-secondary);">BTC</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-right font-medium">$64,230.50</td>
+                <td class="px-4 py-4 text-right text-green-500">+2.4%</td>
+                <td class="px-4 py-4 text-right text-green-500">+8.1%</td>
+                <td class="px-4 py-4 text-right">$1.2T</td>
+                <td class="px-4 py-4 text-right">$32B</td>
+                <td class="px-4 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 15 Q 10 10 20 12 T 40 5 T 60 2"></path></svg>
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <button class="btn btn-ghost text-xs py-1 px-3">Trade</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-blue-500/20 text-blue-500 font-bold">Ξ</div>
+                    <div>
+                      <div class="font-medium">Ethereum</div>
+                      <div class="text-xs" style="color: var(--text-secondary);">ETH</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-right font-medium">$3,420.10</td>
+                <td class="px-4 py-4 text-right text-red-500">-1.2%</td>
+                <td class="px-4 py-4 text-right text-green-500">+4.5%</td>
+                <td class="px-4 py-4 text-right">$410B</td>
+                <td class="px-4 py-4 text-right">$15B</td>
+                <td class="px-4 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-red-500 fill-none" stroke-width="1.5"><path d="M0 5 Q 10 8 20 5 T 40 10 T 60 15"></path></svg>
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <button class="btn btn-ghost text-xs py-1 px-3">Trade</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-purple-500/20 text-purple-500 font-bold">S</div>
+                    <div>
+                      <div class="font-medium">Solana</div>
+                      <div class="text-xs" style="color: var(--text-secondary);">SOL</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-right font-medium">$145.80</td>
+                <td class="px-4 py-4 text-right text-green-500">+5.6%</td>
+                <td class="px-4 py-4 text-right text-green-500">+12.3%</td>
+                <td class="px-4 py-4 text-right">$65B</td>
+                <td class="px-4 py-4 text-right">$4B</td>
+                <td class="px-4 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 18 Q 15 15 30 10 T 50 5 T 60 1"></path></svg>
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <button class="btn btn-ghost text-xs py-1 px-3">Trade</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-500/20 text-gray-400 font-bold">X</div>
+                    <div>
+                      <div class="font-medium">XRP</div>
+                      <div class="text-xs" style="color: var(--text-secondary);">XRP</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-right font-medium">$0.58</td>
+                <td class="px-4 py-4 text-right text-green-500">+0.4%</td>
+                <td class="px-4 py-4 text-right text-red-500">-2.1%</td>
+                <td class="px-4 py-4 text-right">$32B</td>
+                <td class="px-4 py-4 text-right">$1.2B</td>
+                <td class="px-4 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-gray-400 fill-none" stroke-width="1.5"><path d="M0 10 Q 15 15 30 10 T 50 12 T 60 10"></path></svg>
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <button class="btn btn-ghost text-xs py-1 px-3">Trade</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-blue-600/20 text-blue-500 font-bold">€</div>
+                    <div>
+                      <div class="font-medium">EUR/USD</div>
+                      <div class="text-xs" style="color: var(--text-secondary);">Forex</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-right font-medium">1.0854</td>
+                <td class="px-4 py-4 text-right text-red-500">-0.1%</td>
+                <td class="px-4 py-4 text-right text-green-500">+0.3%</td>
+                <td class="px-4 py-4 text-right">-</td>
+                <td class="px-4 py-4 text-right">-</td>
+                <td class="px-4 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 12 Q 20 8 30 10 T 60 6"></path></svg>
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <button class="btn btn-ghost text-xs py-1 px-3">Trade</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-blue-400/20 text-blue-400 font-bold">£</div>
+                    <div>
+                      <div class="font-medium">GBP/USD</div>
+                      <div class="text-xs" style="color: var(--text-secondary);">Forex</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-right font-medium">1.2670</td>
+                <td class="px-4 py-4 text-right text-green-500">+0.2%</td>
+                <td class="px-4 py-4 text-right text-green-500">+0.5%</td>
+                <td class="px-4 py-4 text-right">-</td>
+                <td class="px-4 py-4 text-right">-</td>
+                <td class="px-4 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 15 Q 15 10 30 8 T 60 5"></path></svg>
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <button class="btn btn-ghost text-xs py-1 px-3">Trade</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-400/20 text-gray-300 font-bold">A</div>
+                    <div>
+                      <div class="font-medium">Apple Inc.</div>
+                      <div class="text-xs" style="color: var(--text-secondary);">AAPL</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-right font-medium">$192.25</td>
+                <td class="px-4 py-4 text-right text-green-500">+1.5%</td>
+                <td class="px-4 py-4 text-right text-green-500">+3.2%</td>
+                <td class="px-4 py-4 text-right">$2.9T</td>
+                <td class="px-4 py-4 text-right">$58M</td>
+                <td class="px-4 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 15 Q 10 10 20 12 T 40 5 T 60 2"></path></svg>
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <button class="btn btn-ghost text-xs py-1 px-3">Trade</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <td class="px-4 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-yellow-500/20 text-yellow-500 font-bold">Au</div>
+                    <div>
+                      <div class="font-medium">Gold</div>
+                      <div class="text-xs" style="color: var(--text-secondary);">XAU/USD</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-right font-medium">$2,345.80</td>
+                <td class="px-4 py-4 text-right text-red-500">-0.5%</td>
+                <td class="px-4 py-4 text-right text-green-500">+1.2%</td>
+                <td class="px-4 py-4 text-right">-</td>
+                <td class="px-4 py-4 text-right">-</td>
+                <td class="px-4 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 8 Q 15 12 30 10 T 60 5"></path></svg>
+                </td>
+                <td class="px-4 py-4 text-center">
+                  <button class="btn btn-ghost text-xs py-1 px-3">Trade</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+  <!-- Command Palette Modal -->
+  <div class="modal-overlay" id="commandPalette" hidden>
+    <div class="modal-content command-palette p-0">
+      <div class="p-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <input class="input w-full" placeholder="Search anything... markets, agents, transactions" type="text" autofocus />
+      </div>
+      <div class="p-3 text-center">
+        <p class="text-xs" style="color: var(--text-faint);">Start typing to search</p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
