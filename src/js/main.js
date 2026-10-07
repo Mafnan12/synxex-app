@@ -11,6 +11,7 @@ import { initTabs } from './tabs.js';
 import { initScrollAnimations } from './scroll.js';
 import { initSidebar } from './components/sidebar.js';
 import { initHeader } from './components/header.js';
+import { initDashboard } from './dashboard.js';
 
 // Initialize theme first (prevents flash)
 initTheme();
@@ -26,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initDropdowns();
   initModals();
   initTabs();
+
+  // Initialize page-specific logic
+  if (activePage === 'dashboard') {
+    initDashboard();
+  }
 
   // Scroll animations (delayed to let layout settle)
   requestAnimationFrame(() => {

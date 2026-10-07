@@ -68,7 +68,7 @@ export function initHeader() {
           <div class="dropdown" id="notifDropdown" hidden>
             <div class="p-4 flex items-center justify-between" style="border-bottom: 1px solid var(--border-subtle);">
               <span class="text-sm font-semibold" style="color: var(--text-primary);">Notifications</span>
-              <button class="text-[11px] font-medium text-lava hover:underline btn-press">Mark all read</button>
+              <button class="text-[11px] font-medium text-lava hover:underline btn-press" id="markAllReadBtn">Mark all read</button>
             </div>
             <div class="max-h-[320px] overflow-y-auto">
               <div class="dropdown-item" style="border-bottom: 1px solid var(--border-subtle);">

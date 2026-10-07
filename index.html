@@ -60,8 +60,8 @@
           <div>
             <span class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Total portfolio value</span>
             <div class="flex items-baseline gap-3 mt-1 flex-wrap">
-              <span class="heading-xxl text-4xl sm:text-[42px] num-tabular" style="color: var(--text-primary);">$124,580<span class="text-2xl sm:text-3xl font-bold" style="color: var(--text-faint);">.42</span></span>
-              <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-500 px-2 py-0.5 rounded-md num-tabular" style="background: var(--emerald-bg); border: 1px solid var(--emerald-border);">
+              <span class="heading-xxl text-4xl sm:text-[42px] num-tabular" id="portfolioTotalValue" style="color: var(--text-primary);">$124,580<span class="text-2xl sm:text-3xl font-bold" style="color: var(--text-faint);">.42</span></span>
+              <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-500 px-2 py-0.5 rounded-md num-tabular" id="portfolioChangeBadge" style="background: var(--emerald-bg); border: 1px solid var(--emerald-border);">
                 ↑ +$3,440.38 (+2.84%) <span style="color: var(--text-faint);" class="font-normal">today</span>
               </span>
             </div>
@@ -86,18 +86,18 @@
             </defs>
             <line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="40" y2="40"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="85" y2="85"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="130" y2="130"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="175" y2="175"/>
             <text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="43">140K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="88">120K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="133">100K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="178">80K</text>
-            <path d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65 L780,195 L10,195Z" fill="url(#cF)"/>
-            <path d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65" fill="none" stroke="url(#cS)" stroke-linecap="round" stroke-width="2.4"/>
-            <circle class="animate-ping opacity-60" cx="780" cy="65" fill="#FF5524" r="4"/><circle cx="780" cy="65" fill="var(--text-inverse)" r="4" stroke="#FF5524" stroke-width="2.5"/>
+            <path id="chartFillPath" d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65 L780,195 L10,195Z" fill="url(#cF)"/>
+            <path id="chartLinePath" d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65" fill="none" stroke="url(#cS)" stroke-linecap="round" stroke-width="2.4"/>
+            <circle id="chartPingCircle" class="animate-ping opacity-60" cx="780" cy="65" fill="#FF5524" r="4"/><circle id="chartDotCircle" cx="780" cy="65" fill="var(--text-inverse)" r="4" stroke="#FF5524" stroke-width="2.5"/>
           </svg>
-          <div class="absolute right-3 top-6 backdrop-blur-sm text-[11px] px-2.5 py-1 rounded-lg shadow-xl font-mono theme-transition" style="background: var(--bg-card); border: 1px solid var(--lava-border); color: var(--text-primary);">$124.6k</div>
+          <div id="chartValueBadge" class="absolute right-3 top-6 backdrop-blur-sm text-[11px] px-2.5 py-1 rounded-lg shadow-xl font-mono theme-transition" style="background: var(--bg-card); border: 1px solid var(--lava-border); color: var(--text-primary);">$124.6k</div>
         </div>
-        <div class="flex justify-between text-[10px] font-mono pt-2 px-1" style="color: var(--text-faint); border-top: 1px solid var(--border-subtle);"><span>12 AM</span><span>4 AM</span><span>8 AM</span><span>12 PM</span><span>4 PM</span><span>8 PM</span></div>
+        <div id="chartTimeLabels" class="flex justify-between text-[10px] font-mono pt-2 px-1" style="color: var(--text-faint); border-top: 1px solid var(--border-subtle);"><span>12 AM</span><span>4 AM</span><span>8 AM</span><span>12 PM</span><span>4 PM</span><span>8 PM</span></div>
         <!-- Breakdown -->
         <div class="grid grid-cols-3 gap-3 pt-3.5 mt-3.5" style="border-top: 1px solid var(--border-subtle);">
-          <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-lava shadow-[0_0_6px_rgba(255,85,36,0.5)]"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Available</p><p class="text-sm font-bold num-tabular" style="color: var(--text-primary);">$42,000.00</p></div></div>
-          <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full bg-burgundy-wine"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Invested</p><p class="text-sm font-bold num-tabular" style="color: var(--text-primary);">$80,000.00</p></div></div>
-          <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full" style="background: var(--text-faint);"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Pending</p><p class="text-sm font-bold num-tabular" style="color: var(--text-primary);">$2,580.42</p></div></div>
+          <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-lava shadow-[0_0_6px_rgba(255,85,36,0.5)]"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Available</p><p class="text-sm font-bold num-tabular" id="availableBalanceVal" style="color: var(--text-primary);">$42,000.00</p></div></div>
+          <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full bg-burgundy-wine"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Invested</p><p class="text-sm font-bold num-tabular" id="investedBalanceVal" style="color: var(--text-primary);">$80,000.00</p></div></div>
+          <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full" style="background: var(--text-faint);"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Pending</p><p class="text-sm font-bold num-tabular" id="pendingBalanceVal" style="color: var(--text-primary);">$2,580.42</p></div></div>
         </div>
       </article>
 
@@ -186,11 +186,11 @@
         <table class="w-full text-left text-xs" style="color: var(--text-secondary);">
           <thead><tr class="text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-faint);"><th class="pb-3 font-medium">Date</th><th class="pb-3 font-medium">Activity</th><th class="pb-3 font-medium">Product</th><th class="pb-3 font-medium">Status</th><th class="pb-3 font-medium text-right">Amount</th><th class="pb-3 font-medium text-right">Action</th></tr></thead>
           <tbody>
-            <tr class="ledger-row" data-category="crypto" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Today 09:42</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-amber-500/[0.08] border border-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-[11px]">₿</div><div><span class="font-semibold" style="color: var(--text-primary);">BTC purchase</span><span class="block text-[10px]" style="color: var(--text-faint);">0.01918 BTC @ $104,250</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Crypto</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-bold text-emerald-500 num-tabular">+$2,000.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
-            <tr class="ledger-row" data-category="crypto" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Today 08:15</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-emerald-500/[0.08] border border-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold text-[11px]">₮</div><div><span class="font-semibold" style="color: var(--text-primary);">USDT deposit</span><span class="block text-[10px]" style="color: var(--text-faint);">Ethereum network · 2/12 confirmations</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Crypto</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-amber-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>Pending</span></td><td class="py-3 text-right font-bold text-emerald-500 num-tabular">+$2,580.42</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
-            <tr class="ledger-row" data-category="card" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Yesterday 18:03</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-burgundy/30 border border-burgundy/40 text-pink-400 flex items-center justify-center text-[11px]">💳</div><div><span class="font-semibold" style="color: var(--text-primary);">Card payment</span><span class="block text-[10px]" style="color: var(--text-faint);">Luma Coffee Co. · •••• 4821</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Card</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$120.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
-            <tr class="ledger-row" data-category="banking" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Yesterday 11:20</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-blue-500/[0.08] border border-blue-500/15 text-blue-400 flex items-center justify-center text-[11px]">🏛️</div><div><span class="font-semibold" style="color: var(--text-primary);">Bank transfer</span><span class="block text-[10px]" style="color: var(--text-faint);">To Ayesha K. · SEPA Instant</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Banking</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$500.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
-            <tr class="ledger-row" data-category="remittance"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Sep 23 10:05</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-purple-500/[0.08] border border-purple-500/15 text-purple-400 flex items-center justify-center text-[11px]">🌐</div><div><span class="font-semibold" style="color: var(--text-primary);">Remittance to PKR</span><span class="block text-[10px]" style="color: var(--text-faint);">Lahore · arrives in minutes</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Remittance</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$300.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="crypto" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Today 09:42</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-amber-500/[0.08] border border-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-[11px]">₿</div><div><span class="font-semibold" style="color: var(--text-primary);">BTC purchase</span><span class="block text-[10px]" style="color: var(--text-faint);">0.01918 BTC @ $104,250</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Crypto</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-bold text-emerald-500 num-tabular">+$2,000.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press tx-details-btn" title="View receipt" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="crypto" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Today 08:15</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-emerald-500/[0.08] border border-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold text-[11px]">₮</div><div><span class="font-semibold" style="color: var(--text-primary);">USDT deposit</span><span class="block text-[10px]" style="color: var(--text-faint);">Ethereum network · 2/12 confirmations</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Crypto</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-amber-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>Pending</span></td><td class="py-3 text-right font-bold text-emerald-500 num-tabular">+$2,580.42</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press tx-details-btn" title="View receipt" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="card" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Yesterday 18:03</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-burgundy/30 border border-burgundy/40 text-pink-400 flex items-center justify-center text-[11px]">💳</div><div><span class="font-semibold" style="color: var(--text-primary);">Card payment</span><span class="block text-[10px]" style="color: var(--text-faint);">Luma Coffee Co. · •••• 4821</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Card</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$120.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press tx-details-btn" title="View receipt" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="banking" style="border-bottom: 1px solid var(--border-subtle);"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Yesterday 11:20</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-blue-500/[0.08] border border-blue-500/15 text-blue-400 flex items-center justify-center text-[11px]">🏛️</div><div><span class="font-semibold" style="color: var(--text-primary);">Bank transfer</span><span class="block text-[10px]" style="color: var(--text-faint);">To Ayesha K. · SEPA Instant</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Banking</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$500.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press tx-details-btn" title="View receipt" style="color: var(--text-faint);">•••</button></td></tr>
+            <tr class="ledger-row" data-category="remittance"><td class="py-3 font-mono text-[11px]" style="color: var(--text-faint);">Sep 23 10:05</td><td class="py-3"><div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-purple-500/[0.08] border border-purple-500/15 text-purple-400 flex items-center justify-center text-[11px]">🌐</div><div><span class="font-semibold" style="color: var(--text-primary);">Remittance to PKR</span><span class="block text-[10px]" style="color: var(--text-faint);">Lahore · arrives in minutes</span></div></div></td><td class="py-3"><span class="product-badge px-2 py-0.5 rounded-md text-[10px] font-medium">Remittance</span></td><td class="py-3"><span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Completed</span></td><td class="py-3 text-right font-semibold num-tabular" style="color: var(--text-primary);">-$300.00</td><td class="py-3 text-right"><button class="p-1 rounded transition text-xs btn-press tx-details-btn" title="View receipt" style="color: var(--text-faint);">•••</button></td></tr>
           </tbody>
         </table>
       </div>
@@ -230,15 +230,21 @@
 <!-- Deposit Modal -->
 <div class="modal-overlay" id="depositModal" hidden>
   <div class="modal-content p-6">
-    <div class="flex items-center justify-between mb-5"><h2 class="text-lg font-bold" style="color: var(--text-primary);">Deposit Funds</h2><button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button></div>
-    <form onsubmit="event.preventDefault(); this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">
-      <label class="input-label">Method</label>
-      <select class="input mb-4"><option>Bank Transfer (SEPA)</option><option>Credit/Debit Card</option><option>Crypto Wallet</option></select>
+    <div class="flex items-center justify-between mb-5">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-lava/[0.1] text-lava flex items-center justify-center font-bold">↓</div>
+        <h2 class="text-lg font-bold" style="color: var(--text-primary);">Deposit Funds</h2>
+      </div>
+      <button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button>
+    </div>
+    <form id="depositForm">
+      <label class="input-label">Deposit Method</label>
+      <select class="input mb-4" name="method"><option>Bank Transfer (SEPA Instant)</option><option>Debit / Credit Card</option><option>External Crypto Wallet</option></select>
       <label class="input-label">Currency</label>
-      <select class="input mb-4"><option>USD — US Dollar</option><option>EUR — Euro</option><option>GBP — British Pound</option><option>BTC — Bitcoin</option></select>
-      <label class="input-label">Amount</label>
-      <input class="input mb-5" placeholder="0.00" type="text" required/>
-      <button class="btn btn-lava w-full" type="submit">Deposit</button>
+      <select class="input mb-4" name="currency"><option>USD — US Dollar</option><option>EUR — Euro</option><option>GBP — British Pound</option><option>USDT — Tether</option></select>
+      <label class="input-label">Amount (USD)</label>
+      <input class="input mb-5" name="amount" type="number" step="any" min="1" placeholder="e.g. 500.00" required/>
+      <button class="btn btn-lava w-full" type="submit">Confirm &amp; Deposit</button>
     </form>
   </div>
 </div>
@@ -246,16 +252,22 @@
 <!-- Withdraw Modal -->
 <div class="modal-overlay" id="withdrawModal" hidden>
   <div class="modal-content p-6">
-    <div class="flex items-center justify-between mb-5"><h2 class="text-lg font-bold" style="color: var(--text-primary);">Withdraw Funds</h2><button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button></div>
-    <form onsubmit="event.preventDefault(); this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">
-      <label class="input-label">Destination</label>
-      <select class="input mb-4"><option>Bank Account (****4821)</option><option>External Crypto Wallet</option></select>
+    <div class="flex items-center justify-between mb-5">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-lava/[0.1] text-lava flex items-center justify-center font-bold">↑</div>
+        <h2 class="text-lg font-bold" style="color: var(--text-primary);">Withdraw Funds</h2>
+      </div>
+      <button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button>
+    </div>
+    <form id="withdrawForm">
+      <label class="input-label">Destination Account</label>
+      <select class="input mb-4" name="destination"><option>Bank Account (****4821)</option><option>External Crypto Address</option></select>
       <label class="input-label">Currency</label>
-      <select class="input mb-4"><option>USD — US Dollar</option><option>EUR — Euro</option><option>BTC — Bitcoin</option><option>ETH — Ethereum</option></select>
-      <label class="input-label">Amount</label>
-      <input class="input mb-2" placeholder="0.00" type="text" required/>
-      <p class="text-[11px] mb-5" style="color: var(--text-faint);">Available: $42,000.00</p>
-      <button class="btn btn-lava w-full" type="submit">Withdraw</button>
+      <select class="input mb-4" name="currency"><option>USD — US Dollar</option><option>EUR — Euro</option><option>BTC — Bitcoin</option><option>ETH — Ethereum</option></select>
+      <label class="input-label">Withdrawal Amount (USD)</label>
+      <input class="input mb-2" name="amount" type="number" step="any" min="1" placeholder="e.g. 250.00" required/>
+      <p class="text-[11px] mb-5 font-mono" id="withdrawAvailHint" style="color: var(--text-faint);">Available: $42,000.00</p>
+      <button class="btn btn-lava w-full" type="submit">Confirm Withdrawal</button>
     </form>
   </div>
 </div>
@@ -263,19 +275,25 @@
 <!-- Transfer Modal -->
 <div class="modal-overlay" id="transferModal" hidden>
   <div class="modal-content p-6">
-    <div class="flex items-center justify-between mb-5"><h2 class="text-lg font-bold" style="color: var(--text-primary);">Transfer Funds</h2><button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button></div>
-    <form onsubmit="event.preventDefault(); this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">
-      <label class="input-label">Recipient</label>
-      <input class="input mb-4" placeholder="Name or email" type="text" required/>
-      <label class="input-label">Transfer Method</label>
-      <select class="input mb-4"><option>SEPA Instant</option><option>SWIFT</option><option>Internal Transfer</option></select>
+    <div class="flex items-center justify-between mb-5">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-blue-500/[0.1] text-blue-400 flex items-center justify-center font-bold">↗</div>
+        <h2 class="text-lg font-bold" style="color: var(--text-primary);">Transfer Funds</h2>
+      </div>
+      <button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button>
+    </div>
+    <form id="transferForm">
+      <label class="input-label">Recipient Name or Email</label>
+      <input class="input mb-4" name="recipient" placeholder="e.g. Sarah Jenkins or sarah@domain.com" type="text" required/>
+      <label class="input-label">Transfer Network</label>
+      <select class="input mb-4" name="network"><option>SEPA Instant (Europe &amp; UK)</option><option>SWIFT Global Wire</option><option>Internal SynxEx Transfer</option></select>
       <div class="grid grid-cols-2 gap-3 mb-4">
         <div><label class="input-label">Currency</label><select class="input"><option>USD</option><option>EUR</option><option>GBP</option></select></div>
-        <div><label class="input-label">Amount</label><input class="input" placeholder="0.00" type="text" required/></div>
+        <div><label class="input-label">Amount</label><input class="input" name="amount" type="number" step="any" min="1" placeholder="0.00" required/></div>
       </div>
-      <label class="input-label">Reference</label>
-      <input class="input mb-5" placeholder="Optional note" type="text"/>
-      <button class="btn btn-lava w-full" type="submit">Send Transfer</button>
+      <label class="input-label">Payment Reference</label>
+      <input class="input mb-5" placeholder="Invoice # or Note (optional)" type="text"/>
+      <button class="btn btn-lava w-full" type="submit">Execute Transfer</button>
     </form>
   </div>
 </div>
@@ -283,19 +301,62 @@
 <!-- Trade Modal -->
 <div class="modal-overlay" id="tradeModal" hidden>
   <div class="modal-content p-6">
-    <div class="flex items-center justify-between mb-5"><h2 class="text-lg font-bold" style="color: var(--text-primary);">Trade Assets</h2><button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button></div>
-    <form onsubmit="event.preventDefault(); this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">
-      <div class="tab-group mb-5 w-full" style="display: flex;">
-        <button type="button" class="tab-item active flex-1" style="text-align: center;">Buy</button>
-        <button type="button" class="tab-item flex-1" style="text-align: center;">Sell</button>
+    <div class="flex items-center justify-between mb-5">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-amber-500/[0.1] text-amber-500 flex items-center justify-center font-bold">⇄</div>
+        <h2 class="text-lg font-bold" style="color: var(--text-primary);">Trade Assets</h2>
       </div>
-      <label class="input-label">Asset</label>
-      <select class="input mb-4"><option>BTC — Bitcoin ($104,250)</option><option>ETH — Ethereum ($3,840)</option><option>SOL — Solana ($142)</option><option>XAU — Gold ($3,742)</option></select>
-      <label class="input-label">Amount (USD)</label>
-      <input class="input mb-2" placeholder="0.00" type="text" required/>
-      <p class="text-[11px] mb-5" style="color: var(--text-faint);">≈ 0.00000 BTC · Fee: $0.00</p>
+      <button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button>
+    </div>
+    <form id="tradeForm">
+      <div class="tab-group mb-5 w-full flex">
+        <button type="button" class="tab-item active flex-1 text-center">Buy</button>
+        <button type="button" class="tab-item flex-1 text-center">Sell</button>
+      </div>
+      <label class="input-label">Select Asset</label>
+      <select class="input mb-4" name="asset">
+        <option value="BTC">BTC — Bitcoin ($104,250)</option>
+        <option value="ETH">ETH — Ethereum ($3,840)</option>
+        <option value="SOL">SOL — Solana ($142)</option>
+        <option value="XAU">XAU — Gold Ounce ($3,742)</option>
+        <option value="EUR">EUR — Euro (1.1710)</option>
+        <option value="AAPL">AAPL — Apple Inc. ($245.30)</option>
+      </select>
+      <label class="input-label">Order Amount (USD)</label>
+      <input class="input mb-2" name="amount" type="number" step="any" min="1" placeholder="e.g. 1000.00" required/>
+      <p class="text-[11px] mb-5 font-mono" style="color: var(--text-faint);">Zero-commission • Instant execution</p>
       <button class="btn btn-lava w-full" type="submit">Place Order</button>
     </form>
+  </div>
+</div>
+
+<!-- Transaction Receipt Modal -->
+<div class="modal-overlay" id="receiptModal" hidden>
+  <div class="modal-content p-6">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold text-sm">✓</div>
+        <h2 class="text-base font-bold" id="receiptTitle" style="color: var(--text-primary);">Transaction Details</h2>
+      </div>
+      <button class="p-1.5 rounded-lg btn-press" style="color: var(--text-muted);" onclick="this.closest('.modal-overlay').hidden=true; document.body.style.overflow='';">✕</button>
+    </div>
+    <div class="text-center py-4 my-2 rounded-xl" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+      <p class="text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-faint);">Settled Amount</p>
+      <p class="text-2xl font-bold mt-0.5 num-tabular" id="receiptAmount" style="color: var(--text-primary);">$0.00</p>
+      <span class="inline-flex items-center gap-1.5 text-emerald-500 font-medium text-[11px] mt-1">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Finalized on Ledger
+      </span>
+    </div>
+    <div class="space-y-2.5 text-xs py-3" style="border-bottom: 1px solid var(--border-subtle);">
+      <div class="flex justify-between"><span style="color: var(--text-muted);">Timestamp</span><span class="font-medium" id="receiptDate" style="color: var(--text-primary);">Today</span></div>
+      <div class="flex justify-between"><span style="color: var(--text-muted);">Product Category</span><span class="font-medium" id="receiptProduct" style="color: var(--text-primary);">Crypto</span></div>
+      <div class="flex justify-between"><span style="color: var(--text-muted);">Network Fee</span><span class="font-medium" style="color: var(--text-primary);">$0.00 (Zero-Fee Tier)</span></div>
+      <div class="flex justify-between"><span style="color: var(--text-muted);">Confirmations</span><span class="font-medium text-emerald-500">12 / 12 (Validated)</span></div>
+    </div>
+    <div class="pt-3">
+      <p class="text-[10px] uppercase font-semibold tracking-wider mb-1" style="color: var(--text-faint);">Transaction Hash</p>
+      <p class="text-[11px] font-mono break-all p-2 rounded-lg select-all" id="receiptHash" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle); color: var(--text-secondary);">0x4f8a...c31b</p>
+    </div>
   </div>
 </div>
 
