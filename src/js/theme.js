@@ -24,9 +24,18 @@ export function initTheme() {
 }
 
 export function toggleTheme() {
-  document.documentElement.classList.toggle('dark');
-  const isDark = document.documentElement.classList.contains('dark');
+  const root = document.documentElement;
+  root.classList.add('theme-changing');
+  root.classList.toggle('dark');
+  const isDark = root.classList.contains('dark');
   localStorage.setItem(STORAGE_KEY, isDark ? 'dark' : 'light');
+
+  // Immediately remove theme-changing on next animation frames so hover states work
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      root.classList.remove('theme-changing');
+    });
+  });
 }
 
 export function isDarkMode() {
