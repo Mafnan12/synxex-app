@@ -57,8 +57,9 @@ test.describe('SynxEx Dashboard & UI/UX Validation', () => {
     
     // Click 1W
     const btn1W = page.locator('button[data-tab="1w"]');
+    await expect(btn1W).toBeVisible();
     await btn1W.click();
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(300);
     await expect(chartSvg).toBeVisible();
     await expect(btn1W).toHaveClass(/active/);
     

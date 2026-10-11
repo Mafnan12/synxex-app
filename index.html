@@ -24,7 +24,7 @@
   <header id="header"></header>
 
   <!-- Dashboard Workspace -->
-  <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 ambient-glow-wrapper">
+  <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10">
 
     <!-- ─── ROW 1: Greeting + Quick Actions (Above the Fold) ─── -->
     <section class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 fade-in">
@@ -55,7 +55,7 @@
     <!-- ─── ROW 2: Portfolio + Allocation ─── -->
     <section class="grid grid-cols-1 xl:grid-cols-3 gap-5 fade-in">
       <!-- Portfolio Chart Hero Card -->
-      <article class="xl:col-span-2 rounded-2xl glass-hero border-gradient card-lift p-5 relative overflow-hidden glow-lava theme-transition">
+      <article class="xl:col-span-2 rounded-2xl glass-hero border-gradient card-lift p-5 relative overflow-hidden theme-transition">
         <div class="flex flex-wrap items-start justify-between gap-4">
           <div>
             <span class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Total portfolio value</span>
@@ -96,26 +96,26 @@
         <div class="relative w-full h-44 sm:h-48 mt-3" id="portfolioChartContainer">
           <svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 800 200" id="portfolioSvg">
             <defs>
-              <linearGradient id="cF" x1="0%" x2="0%" y1="0%" y2="100%"><stop offset="0%" stop-color="#FF5524" stop-opacity="0.24"/><stop offset="40%" stop-color="#FF5524" stop-opacity="0.07"/><stop offset="100%" stop-color="#FF5524" stop-opacity="0.0"/></linearGradient>
-              <linearGradient id="cS" x1="0%" x2="100%"><stop offset="0%" stop-color="#FF3815"/><stop offset="50%" stop-color="#FF5524"/><stop offset="100%" stop-color="#FF7A42"/></linearGradient>
+              <linearGradient id="cF" x1="0%" x2="0%" y1="0%" y2="100%"><stop offset="0%" stop-color="#FF5524" stop-opacity="0.08"/><stop offset="60%" stop-color="#FF5524" stop-opacity="0.01"/><stop offset="100%" stop-color="#FF5524" stop-opacity="0.0"/></linearGradient>
+              <linearGradient id="cS" x1="0%" x2="100%"><stop offset="0%" stop-color="#FF6B3D"/><stop offset="50%" stop-color="#FF5524"/><stop offset="100%" stop-color="#FF7A42"/></linearGradient>
             </defs>
             <line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="40" y2="40"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="85" y2="85"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="130" y2="130"/><line stroke="var(--chart-grid)" stroke-dasharray="3 4" x1="0" x2="800" y1="175" y2="175"/>
             <text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="43">140K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="88">120K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="133">100K</text><text fill="var(--chart-label)" font-family="Inter,sans-serif" font-size="9" text-anchor="end" x="795" y="178">80K</text>
             <path id="chartFillPath" d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65 L780,195 L10,195Z" fill="url(#cF)"/>
-            <path id="chartLinePath" d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65" fill="none" stroke="url(#cS)" stroke-linecap="round" stroke-width="2.4"/>
+            <path id="chartLinePath" d="M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65" fill="none" stroke="url(#cS)" stroke-linecap="round" stroke-width="1.8"/>
             <!-- Interactive Bar Chart Group (toggled when Bar is active) -->
             <g id="chartBarsGroup" opacity="0" class="transition-opacity duration-200 pointer-events-none"></g>
             <!-- Interactive Cursor Line & Indicator -->
             <line id="chartCursorLine" x1="0" y1="0" x2="0" y2="195" stroke="#FF5524" stroke-width="1.2" stroke-dasharray="3 3" opacity="0" class="transition-opacity duration-150"/>
             <circle id="chartHoverCircle" cx="0" cy="0" r="5" fill="#FF5524" stroke="#FFFFFF" stroke-width="2" opacity="0" class="transition-opacity duration-150 shadow-lg"/>
             <!-- Default Endpoints -->
-            <circle id="chartPingCircle" class="animate-ping opacity-60" cx="780" cy="65" fill="#FF5524" r="4"/><circle id="chartDotCircle" cx="780" cy="65" fill="var(--text-inverse)" r="4" stroke="#FF5524" stroke-width="2.5"/>
+            <circle id="chartPingCircle" class="animate-ping opacity-60" cx="780" cy="65" fill="#FF5524" r="4"/><circle id="chartDotCircle" cx="780" cy="65" fill="var(--text-inverse)" r="4" stroke="#FF5524" stroke-width="2"/>
             <!-- Invisible Mouse Tracking Rect -->
             <rect id="chartHitArea" x="0" y="0" width="800" height="200" fill="transparent" class="cursor-crosshair"/>
           </svg>
-          <div id="chartValueBadge" class="absolute right-3 top-6 backdrop-blur-sm text-[11px] px-2.5 py-1 rounded-lg shadow-xl font-mono theme-transition" style="background: var(--bg-card); border: 1px solid var(--lava-border); color: var(--text-primary);">$124.6k</div>
+          <div id="chartValueBadge" class="absolute right-3 top-6 backdrop-blur-sm text-[11px] px-2.5 py-1 rounded-lg shadow-sm font-mono theme-transition" style="background: var(--bg-card); border: 1px solid var(--border-card); color: var(--text-primary);">$124.6k</div>
           <!-- Interactive Floating Tooltip -->
-          <div id="chartInteractiveTooltip" class="absolute pointer-events-none opacity-0 transition-opacity duration-150 z-20 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-2xl border flex flex-col gap-0.5 text-xs font-mono" style="background: var(--bg-modal); border-color: var(--lava-border); color: var(--text-primary); transform: translate(-50%, -120%);">
+          <div id="chartInteractiveTooltip" class="absolute pointer-events-none opacity-0 transition-opacity duration-150 z-20 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-xl border flex flex-col gap-0.5 text-xs font-mono" style="background: var(--bg-modal); border-color: var(--border-card); color: var(--text-primary); transform: translate(-50%, -120%);">
             <span class="text-[10px] font-semibold text-lava" id="chartTooltipTime">12:00 PM</span>
             <span class="font-bold text-sm" id="chartTooltipValue">$124,580.42</span>
           </div>
@@ -123,8 +123,8 @@
         <div id="chartTimeLabels" class="flex justify-between text-[10px] font-mono pt-2 px-1" style="color: var(--text-faint); border-top: 1px solid var(--border-subtle);"><span>12 AM</span><span>4 AM</span><span>8 AM</span><span>12 PM</span><span>4 PM</span><span>8 PM</span></div>
         <!-- Breakdown -->
         <div class="grid grid-cols-3 gap-3 pt-3.5 mt-3.5" style="border-top: 1px solid var(--border-subtle);">
-          <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-lava shadow-[0_0_6px_rgba(255,85,36,0.5)]"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Available</p><p class="text-sm font-bold num-tabular" id="availableBalanceVal" style="color: var(--text-primary);">$42,000.00</p></div></div>
-          <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full bg-burgundy-wine"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Invested</p><p class="text-sm font-bold num-tabular" id="investedBalanceVal" style="color: var(--text-primary);">$80,000.00</p></div></div>
+          <div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-lava"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Available</p><p class="text-sm font-bold num-tabular" id="availableBalanceVal" style="color: var(--text-primary);">$42,000.00</p></div></div>
+          <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full bg-blue-500"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Invested</p><p class="text-sm font-bold num-tabular" id="investedBalanceVal" style="color: var(--text-primary);">$80,000.00</p></div></div>
           <div class="flex items-center gap-2.5 pl-3" style="border-left: 1px solid var(--border-subtle);"><span class="w-2 h-2 rounded-full" style="background: var(--text-faint);"></span><div><p class="text-[10px] uppercase font-semibold tracking-wider" style="color: var(--text-faint);">Pending</p><p class="text-sm font-bold num-tabular" id="pendingBalanceVal" style="color: var(--text-primary);">$2,580.42</p></div></div>
         </div>
       </article>
@@ -134,12 +134,12 @@
         <div>
           <div class="flex items-center justify-between mb-4"><span class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Portfolio allocation</span><a class="text-[11px] font-medium text-lava link-hover transition-colors" href="/pages/wallet.html">View portfolio →</a></div>
           <div class="flex items-center gap-5">
-            <div class="relative w-[130px] h-[130px] shrink-0 donut-glow">
+            <div class="relative w-[130px] h-[130px] shrink-0">
               <svg class="w-full h-full -rotate-90 transform cursor-pointer" viewBox="0 0 100 100" id="donutSvg">
                 <circle cx="50" cy="50" fill="none" r="38" stroke="var(--donut-track)" stroke-width="12"/>
                 <circle id="donutSegmentCrypto" data-category="crypto" cx="50" cy="50" fill="none" r="38" stroke="#FF5524" stroke-dasharray="95.5 238.76" stroke-dashoffset="0" stroke-linecap="round" stroke-width="12" class="donut-segment transition-all duration-200 hover:stroke-[14]"/>
-                <circle id="donutSegmentStocks" data-category="stocks" cx="50" cy="50" fill="none" r="38" stroke="#8C1D38" stroke-dasharray="71.6 238.76" stroke-dashoffset="-98" stroke-width="12" class="donut-segment transition-all duration-200 hover:stroke-[14]"/>
-                <circle id="donutSegmentForex" data-category="forex" cx="50" cy="50" fill="none" r="38" stroke="#4C101F" stroke-dasharray="35.8 238.76" stroke-dashoffset="-172" stroke-width="12" class="donut-segment transition-all duration-200 hover:stroke-[14]"/>
+                <circle id="donutSegmentStocks" data-category="stocks" cx="50" cy="50" fill="none" r="38" stroke="#3B82F6" stroke-dasharray="71.6 238.76" stroke-dashoffset="-98" stroke-width="12" class="donut-segment transition-all duration-200 hover:stroke-[14]"/>
+                <circle id="donutSegmentForex" data-category="forex" cx="50" cy="50" fill="none" r="38" stroke="#8B5CF6" stroke-dasharray="35.8 238.76" stroke-dashoffset="-172" stroke-width="12" class="donut-segment transition-all duration-200 hover:stroke-[14]"/>
                 <circle id="donutSegmentCash" data-category="cash" cx="50" cy="50" fill="none" r="38" stroke="#94A3B8" stroke-dasharray="32 238.76" stroke-dashoffset="-209" stroke-width="12" class="donut-segment transition-all duration-200 hover:stroke-[14]"/>
               </svg>
               <!-- Center label / interactive tooltip -->
@@ -163,7 +163,7 @@
               </div>
               <div class="flex items-center justify-between p-1.5 rounded-lg transition-colors cursor-pointer legend-item" data-category="stocks" id="legendStocks">
                 <div class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-[#8C1D38]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
                   <span class="font-medium" style="color: var(--text-secondary);">Stocks</span>
                 </div>
                 <div class="text-right">
@@ -173,7 +173,7 @@
               </div>
               <div class="flex items-center justify-between p-1.5 rounded-lg transition-colors cursor-pointer legend-item" data-category="forex" id="legendForex">
                 <div class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-[#4C101F]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
                   <span class="font-medium" style="color: var(--text-secondary);">Forex</span>
                 </div>
                 <div class="text-right">

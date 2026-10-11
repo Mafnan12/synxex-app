@@ -123,13 +123,13 @@ function initAdminDashboard() {
       chartSvg.innerHTML = `
         <defs>
           <linearGradient id="adminLineGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FF5524" stop-opacity="0.3"/>
+            <stop offset="0%" stop-color="#FF5524" stop-opacity="0.08"/>
             <stop offset="100%" stop-color="#FF5524" stop-opacity="0.0"/>
           </linearGradient>
           <linearGradient id="adminStrokeGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#70162B"/>
+            <stop offset="0%" stop-color="#FF6B3D"/>
             <stop offset="50%" stop-color="#FF5524"/>
-            <stop offset="100%" stop-color="#FF8A65"/>
+            <stop offset="100%" stop-color="#FFA07A"/>
           </linearGradient>
         </defs>
         <!-- Grid lines -->
@@ -138,11 +138,11 @@ function initAdminDashboard() {
         <line x1="${padX}" y1="${height - padY}" x2="${width - padX}" y2="${height - padY}" stroke="var(--border-subtle)"/>
         <!-- Area fill -->
         <path d="${areaD}" fill="url(#adminLineGrad)" />
-        <!-- Stroke -->
-        <path d="${pathD}" fill="none" stroke="url(#adminStrokeGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <!-- Stroke (light & thin) -->
+        <path d="${pathD}" fill="none" stroke="url(#adminStrokeGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
         <!-- Dot markers -->
         ${coords.map(pt => `
-          <circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="4" fill="#FF5524" stroke="#080A12" stroke-width="2" class="cursor-pointer transition-transform hover:scale-150" />
+          <circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="3.5" fill="#FF5524" stroke="var(--bg-card)" stroke-width="1.5" class="cursor-pointer transition-transform hover:scale-150" />
         `).join('')}
       `;
     } else {
