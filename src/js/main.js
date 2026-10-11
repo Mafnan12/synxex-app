@@ -12,6 +12,7 @@ import { initScrollAnimations } from './scroll.js';
 import { initSidebar } from './components/sidebar.js';
 import { initHeader } from './components/header.js';
 import { initDashboard } from './dashboard.js';
+import { initRemittance } from './remittance.js';
 
 // Initialize theme first (prevents flash)
 initTheme();
@@ -31,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize page-specific logic
   if (activePage === 'dashboard') {
     initDashboard();
+  } else if (activePage === 'remittance') {
+    initRemittance();
   }
 
   // Scroll animations (delayed to let layout settle)

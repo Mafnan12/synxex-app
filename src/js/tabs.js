@@ -7,6 +7,8 @@ export function initTabs() {
   document.querySelectorAll('[data-tab-group]').forEach((group) => {
     const tabs = group.querySelectorAll('[data-tab]');
     const targetId = group.dataset.tabGroup;
+    // Don't treat chartRange as a visibility filtering group
+    if (targetId === 'chartRange') return;
     const contentContainer = document.getElementById(targetId);
 
     tabs.forEach((tab) => {

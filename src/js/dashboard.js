@@ -19,6 +19,7 @@ const state = {
   investedBalance: 80000.00,
   pendingBalance: 2580.42,
   activeRange: '1d',
+  activeChartType: 'line',
 };
 
 // Chart data sets for each range
@@ -28,55 +29,90 @@ const chartRanges = {
     changeText: '↑ +$3,440.38 (+2.84%)',
     changePeriod: 'today',
     isPositive: true,
-    points: '10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65',
-    area: '10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65 L780,195 L10,195Z',
+    points: 'M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65',
+    area: 'M10,170 C70,170 90,162 140,152 C190,142 220,147 270,132 C320,117 350,135 400,122 C460,107 500,127 560,115 C620,103 640,78 710,65 C730,62 760,68 780,65 L780,195 L10,195Z',
     labels: ['12 AM', '4 AM', '8 AM', '12 PM', '4 PM', '8 PM'],
     currentBadge: '$124.6k',
-    endpoint: { cx: 780, cy: 65 }
+    endpoint: { cx: 780, cy: 65 },
+    hoverPoints: [
+      { x: 10, y: 170, time: '12:00 AM', val: '$121,140.04' },
+      { x: 140, y: 152, time: '04:00 AM', val: '$121,890.10' },
+      { x: 270, y: 132, time: '08:00 AM', val: '$122,750.50' },
+      { x: 400, y: 122, time: '12:00 PM', val: '$123,410.20' },
+      { x: 560, y: 115, time: '04:00 PM', val: '$123,890.80' },
+      { x: 710, y: 65, time: '08:00 PM', val: '$124,420.00' },
+      { x: 780, y: 65, time: 'Now', val: '$124,580.42' },
+    ]
   },
   '1w': {
     total: '$121,140.04',
     changeText: '↑ +$7,840.12 (+6.91%)',
     changePeriod: 'this week',
     isPositive: true,
-    points: '10,155 C80,150 120,165 200,140 C280,115 320,130 420,95 C520,60 620,80 720,50 C745,45 765,48 780,42',
-    area: '10,155 C80,150 120,165 200,140 C280,115 320,130 420,95 C520,60 620,80 720,50 C745,45 765,48 780,42 L780,195 L10,195Z',
+    points: 'M10,155 C80,150 120,165 200,140 C280,115 320,130 420,95 C520,60 620,80 720,50 C745,45 765,48 780,42',
+    area: 'M10,155 C80,150 120,165 200,140 C280,115 320,130 420,95 C520,60 620,80 720,50 C745,45 765,48 780,42 L780,195 L10,195Z',
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     currentBadge: '$121.1k',
-    endpoint: { cx: 780, cy: 42 }
+    endpoint: { cx: 780, cy: 42 },
+    hoverPoints: [
+      { x: 10, y: 155, time: 'Monday', val: '$113,300.00' },
+      { x: 120, y: 165, time: 'Tuesday', val: '$112,500.20' },
+      { x: 200, y: 140, time: 'Wednesday', val: '$115,400.00' },
+      { x: 320, y: 130, time: 'Thursday', val: '$116,800.50' },
+      { x: 420, y: 95, time: 'Friday', val: '$119,200.00' },
+      { x: 620, y: 80, time: 'Saturday', val: '$120,100.80' },
+      { x: 780, y: 42, time: 'Sunday', val: '$121,140.04' },
+    ]
   },
   '1m': {
     total: '$114,200.50',
     changeText: '↑ +$13,820.30 (+12.52%)',
     changePeriod: 'this month',
     isPositive: true,
-    points: '10,175 C100,170 180,150 260,140 C340,130 420,105 500,90 C580,75 660,65 720,55 C750,50 765,42 780,38',
-    area: '10,175 C100,170 180,150 260,140 C340,130 420,105 500,90 C580,75 660,65 720,55 C750,50 765,42 780,38 L780,195 L10,195Z',
+    points: 'M10,175 C100,170 180,150 260,140 C340,130 420,105 500,90 C580,75 660,65 720,55 C750,50 765,42 780,38',
+    area: 'M10,175 C100,170 180,150 260,140 C340,130 420,105 500,90 C580,75 660,65 720,55 C750,50 765,42 780,38 L780,195 L10,195Z',
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
     currentBadge: '$114.2k',
-    endpoint: { cx: 780, cy: 38 }
+    endpoint: { cx: 780, cy: 38 },
+    hoverPoints: [
+      { x: 10, y: 175, time: 'Week 1', val: '$100,380.00' },
+      { x: 260, y: 140, time: 'Week 2', val: '$105,420.00' },
+      { x: 500, y: 90, time: 'Week 3', val: '$109,800.00' },
+      { x: 780, y: 38, time: 'Week 4', val: '$114,200.50' },
+    ]
   },
   '3m': {
     total: '$98,450.80',
     changeText: '↑ +$29,570.00 (+30.04%)',
     changePeriod: 'past 3 months',
     isPositive: true,
-    points: '10,180 C120,165 220,145 320,120 C420,95 520,70 620,55 C700,45 750,38 780,32',
-    area: '10,180 C120,165 220,145 320,120 C420,95 520,70 620,55 C700,45 750,38 780,32 L780,195 L10,195Z',
+    points: 'M10,180 C120,165 220,145 320,120 C420,95 520,70 620,55 C700,45 750,38 780,32',
+    area: 'M10,180 C120,165 220,145 320,120 C420,95 520,70 620,55 C700,45 750,38 780,32 L780,195 L10,195Z',
     labels: ['Jul 2026', 'Aug 2026', 'Sep 2026'],
     currentBadge: '$98.5k',
-    endpoint: { cx: 780, cy: 32 }
+    endpoint: { cx: 780, cy: 32 },
+    hoverPoints: [
+      { x: 10, y: 180, time: 'July', val: '$68,880.00' },
+      { x: 320, y: 120, time: 'August', val: '$81,400.00' },
+      { x: 780, y: 32, time: 'September', val: '$98,450.80' },
+    ]
   },
   '1y': {
     total: '$76,120.00',
     changeText: '↑ +$51,900.84 (+68.18%)',
     changePeriod: 'past year',
     isPositive: true,
-    points: '10,185 C140,175 240,150 360,125 C480,100 580,75 680,48 C720,38 760,30 780,25',
-    area: '10,185 C140,175 240,150 360,125 C480,100 580,75 680,48 C720,38 760,30 780,25 L780,195 L10,195Z',
+    points: 'M10,185 C140,175 240,150 360,125 C480,100 580,75 680,48 C720,38 760,30 780,25',
+    area: 'M10,185 C140,175 240,150 360,125 C480,100 580,75 680,48 C720,38 760,30 780,25 L780,195 L10,195Z',
     labels: ['Q4 25', 'Q1 26', 'Q2 26', 'Q3 26'],
     currentBadge: '$76.1k',
-    endpoint: { cx: 780, cy: 25 }
+    endpoint: { cx: 780, cy: 25 },
+    hoverPoints: [
+      { x: 10, y: 185, time: 'Q4 2025', val: '$24,220.00' },
+      { x: 240, y: 150, time: 'Q1 2026', val: '$41,500.00' },
+      { x: 480, y: 100, time: 'Q2 2026', val: '$58,700.00' },
+      { x: 780, y: 25, time: 'Q3 2026', val: '$76,120.00' },
+    ]
   }
 };
 
@@ -84,6 +120,9 @@ export function initDashboard() {
   if (document.body.dataset.page !== 'dashboard') return;
 
   setupChartRangeButtons();
+  setupChartTypeSwitcher();
+  setupPortfolioGraphHover();
+  setupDonutInteractions();
   setupQuickActionForms();
   setupMarketRowClicks();
   setupTransactionDetailModals();
@@ -138,25 +177,146 @@ function setupChartRangeButtons() {
         badgeEl.textContent = data.currentBadge;
       }
 
+      // Helper to guarantee valid SVG path syntax with initial MoveTo command
+      const ensureM = (str) => {
+        if (!str) return '';
+        const trimmed = str.trim();
+        return (trimmed.startsWith('M') || trimmed.startsWith('m')) ? trimmed : `M${trimmed}`;
+      };
+
       // Update SVG path
-      if (chartPath) chartPath.setAttribute('d', data.points);
-      if (chartFill) chartFill.setAttribute('d', data.area);
+      if (chartPath) {
+        chartPath.setAttribute('d', ensureM(data.points));
+        if (state.activeChartType === 'line') {
+          chartPath.style.display = '';
+          chartPath.style.opacity = '1';
+        }
+      }
+      if (chartFill) {
+        chartFill.setAttribute('d', ensureM(data.area));
+        if (state.activeChartType === 'line') {
+          chartFill.style.display = '';
+          chartFill.style.opacity = '1';
+        }
+      }
 
       if (chartPing) {
         chartPing.setAttribute('cx', data.endpoint.cx);
         chartPing.setAttribute('cy', data.endpoint.cy);
+        if (state.activeChartType === 'line') chartPing.style.display = '';
       }
       if (chartDot) {
         chartDot.setAttribute('cx', data.endpoint.cx);
         chartDot.setAttribute('cy', data.endpoint.cy);
+        if (state.activeChartType === 'line') chartDot.style.display = '';
       }
 
       // Update bottom time labels
       if (labelsContainer && data.labels) {
         labelsContainer.innerHTML = data.labels.map(lbl => `<span>${lbl}</span>`).join('');
       }
+
+      // Re-render bars if bar mode is active or to keep in sync
+      renderBarsForRange(data);
     });
   });
+}
+
+/**
+ * Renders SVG bars for the current range data
+ */
+function renderBarsForRange(data) {
+  const barsGroup = document.getElementById('chartBarsGroup');
+  if (!barsGroup || !data.hoverPoints) return;
+
+  const pts = data.hoverPoints;
+  const barWidth = Math.max(14, Math.min(36, 680 / (pts.length * 2.2)));
+
+  barsGroup.innerHTML = pts.map((pt, i) => {
+    const x = Math.max(8, pt.x - barWidth / 2);
+    const height = Math.max(12, 195 - pt.y);
+    const y = pt.y;
+    return `
+      <g class="chart-bar-col cursor-pointer" data-idx="${i}">
+        <!-- Subtle back glow bar -->
+        <rect x="${x}" y="${y}" width="${barWidth}" height="${height}" rx="4" fill="url(#cS)" opacity="0.85" class="transition-all duration-200 hover:opacity-100 hover:brightness-125"/>
+        <!-- Soft top cap highlight -->
+        <rect x="${x}" y="${y}" width="${barWidth}" height="3" rx="1.5" fill="#FFFFFF" opacity="0.4"/>
+      </g>
+    `;
+  }).join('');
+}
+
+/**
+ * 1.b Chart View Type Switcher (Line vs Bar)
+ */
+function setupChartTypeSwitcher() {
+  const btnLine = document.getElementById('btnChartTypeLine');
+  const btnBar = document.getElementById('btnChartTypeBar');
+  const chartPath = document.getElementById('chartLinePath');
+  const chartFill = document.getElementById('chartFillPath');
+  const chartPing = document.getElementById('chartPingCircle');
+  const chartDot = document.getElementById('chartDotCircle');
+  const barsGroup = document.getElementById('chartBarsGroup');
+
+  if (!btnLine || !btnBar) return;
+
+  function setChartType(type) {
+    state.activeChartType = type;
+
+    if (type === 'line') {
+      btnLine.classList.add('active');
+      btnBar.classList.remove('active');
+
+      if (chartPath) {
+        chartPath.style.display = '';
+        chartPath.style.opacity = '1';
+        chartPath.style.visibility = 'visible';
+      }
+      if (chartFill) {
+        chartFill.style.display = '';
+        chartFill.style.opacity = '1';
+        chartFill.style.visibility = 'visible';
+      }
+      if (chartPing) {
+        chartPing.style.display = '';
+        chartPing.style.opacity = '';
+      }
+      if (chartDot) {
+        chartDot.style.display = '';
+        chartDot.style.opacity = '';
+      }
+
+      if (barsGroup) {
+        barsGroup.style.opacity = '0';
+        barsGroup.classList.add('pointer-events-none');
+      }
+    } else {
+      btnBar.classList.add('active');
+      btnLine.classList.remove('active');
+
+      if (chartPath) chartPath.style.display = 'none';
+      if (chartFill) chartFill.style.display = 'none';
+      if (chartPing) chartPing.style.display = 'none';
+      if (chartDot) chartDot.style.display = 'none';
+
+      // Ensure bars are populated for active range
+      const data = chartRanges[state.activeRange] || chartRanges['1d'];
+      renderBarsForRange(data);
+
+      if (barsGroup) {
+        barsGroup.style.opacity = '1';
+        barsGroup.classList.remove('pointer-events-none');
+      }
+    }
+  }
+
+  btnLine.addEventListener('click', () => setChartType('line'));
+  btnBar.addEventListener('click', () => setChartType('bar'));
+
+  // Initial bar population
+  const initialData = chartRanges[state.activeRange] || chartRanges['1d'];
+  renderBarsForRange(initialData);
 }
 
 /**
@@ -542,5 +702,183 @@ function setupNotificationRead() {
       item.style.opacity = '0.6';
     });
     showToast('All notifications marked as read', 'info');
+  });
+}
+
+/**
+ * 9. Interactive Portfolio Graph Hover & Tooltip
+ */
+function setupPortfolioGraphHover() {
+  const hitArea = document.getElementById('chartHitArea');
+  const cursorLine = document.getElementById('chartCursorLine');
+  const hoverCircle = document.getElementById('chartHoverCircle');
+  const tooltip = document.getElementById('chartInteractiveTooltip');
+  const tooltipTime = document.getElementById('chartTooltipTime');
+  const tooltipVal = document.getElementById('chartTooltipValue');
+  const container = document.getElementById('portfolioChartContainer');
+  const badgeEl = document.getElementById('chartValueBadge');
+
+  if (!hitArea || !container) return;
+
+  hitArea.addEventListener('mousemove', (e) => {
+    const rangeData = chartRanges[state.activeRange] || chartRanges['1d'];
+    const pts = rangeData.hoverPoints;
+    if (!pts || pts.length === 0) return;
+
+    const rect = hitArea.getBoundingClientRect();
+    const mouseXRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const svgX = mouseXRatio * 800;
+
+    // Find closest hover point
+    let closest = pts[0];
+    let minDiff = Math.abs(pts[0].x - svgX);
+    for (let i = 1; i < pts.length; i++) {
+      const diff = Math.abs(pts[i].x - svgX);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = pts[i];
+      }
+    }
+
+    // Position cursor line & hover circle in SVG coordinates
+    if (cursorLine) {
+      cursorLine.setAttribute('x1', closest.x);
+      cursorLine.setAttribute('x2', closest.x);
+      cursorLine.style.opacity = '0.8';
+    }
+    if (hoverCircle) {
+      hoverCircle.setAttribute('cx', closest.x);
+      hoverCircle.setAttribute('cy', closest.y);
+      hoverCircle.style.opacity = '1';
+    }
+
+    // Update floating HTML tooltip
+    if (tooltip && tooltipTime && tooltipVal) {
+      tooltipTime.textContent = closest.time;
+      tooltipVal.textContent = closest.val;
+
+      // Position tooltip in container pixel coordinates
+      const pixelX = (closest.x / 800) * container.clientWidth;
+      const pixelY = (closest.y / 200) * container.clientHeight;
+
+      tooltip.style.left = `${pixelX}px`;
+      tooltip.style.top = `${pixelY}px`;
+      tooltip.style.opacity = '1';
+    }
+
+    if (badgeEl) {
+      badgeEl.textContent = closest.val.replace(',00', '').replace('.00', '');
+    }
+  });
+
+  hitArea.addEventListener('mouseleave', () => {
+    if (cursorLine) cursorLine.style.opacity = '0';
+    if (hoverCircle) hoverCircle.style.opacity = '0';
+    if (tooltip) tooltip.style.opacity = '0';
+
+    const rangeData = chartRanges[state.activeRange] || chartRanges['1d'];
+    if (badgeEl) badgeEl.textContent = rangeData.currentBadge;
+  });
+}
+
+/**
+ * 10. Portfolio Allocation Donut & Legend Bidirectional Interactivity
+ */
+function setupDonutInteractions() {
+  const donutSvg = document.getElementById('donutSvg');
+  const legend = document.getElementById('donutLegend');
+  const centerTitle = document.getElementById('donutCenterTitle');
+  const centerVal = document.getElementById('donutCenterValue');
+  const centerSub = document.getElementById('donutCenterSub');
+
+  if (!donutSvg || !legend) return;
+
+  const categoryDetails = {
+    crypto: { name: 'Crypto', percent: '40%', val: '$49,832.16', color: '#FF5524' },
+    stocks: { name: 'Stocks', percent: '30%', val: '$37,374.12', color: '#8C1D38' },
+    forex:  { name: 'Forex',  percent: '15%', val: '$18,687.06', color: '#4C101F' },
+    cash:   { name: 'Cash',   percent: '15%', val: '$18,687.08', color: '#94A3B8' }
+  };
+
+  const defaultTotal = { title: 'Total', val: '$124.6k' };
+
+  function highlightCategory(cat) {
+    const detail = categoryDetails[cat];
+    if (!detail) return;
+
+    // Highlight donut segment
+    donutSvg.querySelectorAll('.donut-segment').forEach(seg => {
+      if (seg.dataset.category === cat) {
+        seg.style.strokeWidth = '16';
+        seg.style.opacity = '1';
+        seg.style.filter = 'drop-shadow(0 0 8px ' + detail.color + ')';
+      } else {
+        seg.style.strokeWidth = '10';
+        seg.style.opacity = '0.35';
+        seg.style.filter = 'none';
+      }
+    });
+
+    // Highlight legend item
+    legend.querySelectorAll('.legend-item').forEach(item => {
+      if (item.dataset.category === cat) {
+        item.style.backgroundColor = 'rgba(255,85,36,0.12)';
+        item.style.transform = 'translateX(4px)';
+      } else {
+        item.style.backgroundColor = 'transparent';
+        item.style.transform = 'none';
+        item.style.opacity = '0.45';
+      }
+    });
+
+    // Update center donut display
+    if (centerTitle) {
+      centerTitle.textContent = detail.name;
+      centerTitle.style.color = detail.color;
+    }
+    if (centerVal) {
+      centerVal.textContent = detail.val;
+    }
+    if (centerSub) {
+      centerSub.textContent = detail.percent + ' of portfolio';
+      centerSub.classList.remove('hidden');
+    }
+  }
+
+  function resetCategory() {
+    donutSvg.querySelectorAll('.donut-segment').forEach(seg => {
+      seg.style.strokeWidth = '12';
+      seg.style.opacity = '1';
+      seg.style.filter = 'none';
+    });
+
+    legend.querySelectorAll('.legend-item').forEach(item => {
+      item.style.backgroundColor = 'transparent';
+      item.style.transform = 'none';
+      item.style.opacity = '1';
+    });
+
+    if (centerTitle) {
+      centerTitle.textContent = defaultTotal.title;
+      centerTitle.style.color = 'var(--text-faint)';
+    }
+    if (centerVal) {
+      centerVal.textContent = defaultTotal.val;
+    }
+    if (centerSub) {
+      centerSub.classList.add('hidden');
+    }
+  }
+
+  // Hover on Donut segments
+  donutSvg.querySelectorAll('.donut-segment').forEach(seg => {
+    seg.addEventListener('mouseenter', () => highlightCategory(seg.dataset.category));
+    seg.addEventListener('mouseleave', resetCategory);
+  });
+
+  // Hover on Legend items
+  legend.querySelectorAll('.legend-item').forEach(item => {
+    item.addEventListener('mouseenter', () => highlightCategory(item.dataset.category));
+    item.addEventListener('mouseleave', resetCategory);
   });
 }

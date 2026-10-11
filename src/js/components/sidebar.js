@@ -50,7 +50,7 @@ export function initSidebar(activePage = 'dashboard') {
           <a href="/index.html" class="text-[17px] font-bold tracking-tight flex items-center gap-0.5" style="color: var(--text-primary); text-decoration: none;">
             Synx<span class="text-lava">Ex</span>
           </a>
-          <span class="text-[9px] uppercase tracking-[0.18em] font-semibold" style="color: var(--text-faint);">Terminal OS</span>
+          <span class="text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-muted);">Terminal OS</span>
         </div>
       </div>
 

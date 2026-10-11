@@ -98,10 +98,10 @@
   --border-hover:    rgba(255,255,255,0.12);
   --border-focus:    rgba(255,85,36,0.55);
 
-  --text-primary:    #F1F5F9;
-  --text-secondary:  #CBD5E1;
-  --text-muted:      #64748B;
-  --text-faint:      #4A5568;
+  --text-primary:    #FFFFFF;
+  --text-secondary:  #E2E8F0;
+  --text-muted:      #94A3B8;
+  --text-faint:      #64748B;
   --text-inverse:    #FFFFFF;
   --text-on-lava:    #FFFFFF;
 
@@ -162,8 +162,8 @@ body {
   background-color: var(--bg-page);
   color: var(--text-primary);
   overflow-x: hidden;
-  transition: background-color 0.4s cubic-bezier(0.4,0,0.2,1),
-              color 0.4s cubic-bezier(0.4,0,0.2,1);
+  transition: background-color 0.15s ease,
+              color 0.15s ease;
   line-height: 1.6;
   margin: 0;
 }
@@ -264,16 +264,20 @@ body {
 
 /* Quick action ghost button */
 .qa-ghost {
-  transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+  transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
   cursor: pointer;
 }
 .qa-ghost:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-hover);
+  background: rgba(255,85,36,0.12) !important;
+  border-color: rgba(255,85,36,0.4) !important;
+  color: var(--text-primary) !important;
   transform: translateY(-1px);
 }
+.qa-ghost:hover svg {
+  color: #FF5524 !important;
+}
 .qa-ghost:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0) scale(0.97);
 }
 
 /* Ledger row */
@@ -437,10 +441,10 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 
 /* Theme transition helper */
 .theme-transition {
-  transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
-              border-color 0.4s cubic-bezier(0.4,0,0.2,1),
-              box-shadow 0.4s cubic-bezier(0.4,0,0.2,1),
-              color 0.4s cubic-bezier(0.4,0,0.2,1);
+  transition: background 0.15s ease,
+              border-color 0.15s ease,
+              box-shadow 0.15s ease,
+              color 0.15s ease;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -606,6 +610,22 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   box-shadow: 0 0 0 3px rgba(255,85,36,0.1);
 }
 
+select.input, select {
+  width: auto;
+  background-color: var(--bg-modal);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+select.input option, select option {
+  background-color: #12151E;
+  color: #FFFFFF;
+  padding: 8px 12px;
+}
+.dark select.input option, .dark select option {
+  background-color: #12151E;
+  color: #FFFFFF;
+}
+
 .input-label {
   display: block;
   font-size: 12px;
@@ -651,10 +671,61 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   background: var(--bg-card);
   border: 1px solid var(--border-card);
   color: var(--text-secondary);
+  transition: all 0.2s cubic-bezier(0.22,1,0.36,1);
 }
 .btn-ghost:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-hover);
+  background: rgba(255,85,36,0.12);
+  border-color: rgba(255,85,36,0.4);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+.btn-ghost:active {
+  background: rgba(255,85,36,0.22);
+  transform: translateY(0) scale(0.97);
+}
+
+/* Market Trade Action Buttons */
+.trade-btn {
+  background: rgba(255,85,36,0.08);
+  border: 1px solid rgba(255,85,36,0.25);
+  color: #FF7A42;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.22,1,0.36,1);
+}
+.trade-btn:hover {
+  background: #FF5524 !important;
+  border-color: #FF5524 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 10px rgba(255,85,36,0.35);
+  transform: translateY(-1px);
+}
+.trade-btn:active {
+  transform: scale(0.96);
+}
+
+/* AI Agent Activate Buttons */
+.activate-btn {
+  background: rgba(255,85,36,0.08);
+  border: 1px solid rgba(255,85,36,0.25);
+  color: #FF7A42;
+  font-weight: 600;
+  transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
+}
+.activate-btn:hover {
+  background: #FF5524 !important;
+  border-color: #FF5524 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 16px rgba(255,85,36,0.35);
+  transform: translateY(-1px);
+}
+.activate-btn:active {
+  transform: scale(0.97);
+}
+.activate-btn.active {
+  background: #10B981 !important;
+  border-color: #10B981 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 10px rgba(16,185,129,0.3);
 }
 
 /* ══════════════════════════════════════════════════════════

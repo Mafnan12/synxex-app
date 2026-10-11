@@ -54,15 +54,17 @@ export function initHeader() {
           <span>Markets open</span>
         </div>
 
-        <span class="text-[11px] font-mono hidden xl:block num-tabular" style="color: var(--text-faint);" id="liveDateTime"></span>
+        <span class="text-xs font-mono font-medium hidden xl:block num-tabular" style="color: var(--text-secondary);" id="liveDateTime"></span>
 
         <div class="h-3.5 w-px hidden md:block" style="background: var(--border-subtle);"></div>
 
         <!-- Notifications -->
         <div class="relative">
-          <button aria-label="Notifications" class="relative p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/[0.04] transition btn-press" id="notifBtn" style="color: var(--text-muted);">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg>
-            <span class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-lava text-white text-[8px] font-bold rounded-full flex items-center justify-center" style="border: 2px solid var(--bg-page);">3</span>
+          <button aria-label="Notifications" class="relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 btn-press group hover:scale-105 active:scale-95 shadow-sm" id="notifBtn" style="color: #FF5524; background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+            <svg class="w-4 h-4 text-lava transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+            </svg>
+            <span class="absolute -top-1 -right-1 min-w-[17px] h-[17px] px-1 bg-[#FF5524] text-white text-[9px] font-extrabold rounded-full flex items-center justify-center border-2 border-white dark:border-[#080A12] shadow-[0_2px_8px_rgba(255,85,36,0.5)] pointer-events-none transition-transform duration-200 group-hover:scale-110">3</span>
           </button>
           <!-- Notification Dropdown -->
           <div class="dropdown" id="notifDropdown" hidden>
@@ -107,15 +109,15 @@ export function initHeader() {
 
         <!-- User Menu -->
         <div class="relative">
-          <div class="flex items-center gap-2 pl-1 cursor-pointer group btn-press" id="userMenuBtn">
-            <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-lava to-burgundy flex items-center justify-center text-white text-[11px] font-bold border border-white/15 shadow-lg shadow-lava/10">A</div>
+          <div class="flex items-center gap-2 pl-1 cursor-pointer group btn-press py-1 px-1.5 rounded-xl hover:bg-lava/10 transition" id="userMenuBtn">
+            <div class="w-8 h-8 rounded-full bg-[#FF5524] flex items-center justify-center text-white text-xs font-bold shadow-md shadow-lava/30 border border-white/20 group-hover:scale-105 transition-transform">A</div>
             <span class="text-xs font-semibold group-hover:text-lava transition hidden sm:inline" style="color: var(--text-secondary);">Afnan</span>
-            <svg class="w-3 h-3 group-hover:text-lava transition" fill="none" stroke="currentColor" style="color: var(--text-faint);" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            <svg class="w-3.5 h-3.5 group-hover:text-lava transition" fill="none" stroke="currentColor" style="color: var(--text-faint);" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           </div>
           <!-- User Dropdown -->
           <div class="dropdown" id="userDropdown" hidden>
             <div class="p-4 flex items-center gap-3" style="border-bottom: 1px solid var(--border-subtle);">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-lava to-burgundy flex items-center justify-center text-white text-sm font-bold border border-white/15">A</div>
+              <div class="w-10 h-10 rounded-full bg-[#FF5524] flex items-center justify-center text-white text-sm font-bold shadow-md shadow-lava/30 border border-white/20">A</div>
               <div>
                 <p class="text-sm font-semibold" style="color: var(--text-primary);">Afnan</p>
                 <p class="text-[11px]" style="color: var(--text-faint);">afnan@synxex.com</p>
