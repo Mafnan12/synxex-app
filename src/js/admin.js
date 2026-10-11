@@ -518,3 +518,4 @@ function initAdminSettings() {
     }, 1500);
   });
 }
+

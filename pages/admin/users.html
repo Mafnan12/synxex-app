@@ -14,44 +14,71 @@
   <!-- Main -->
   <div class="flex-1 flex flex-col min-w-0 relative">
     <header id="header"></header>
-    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+    <main class="px-6 py-5 space-y-6 max-w-[1560px] w-full mx-auto relative z-10 fade-in ambient-glow-wrapper">
       
       <!-- Page Header -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Governance</span>
-            <span class="text-xs font-mono" style="color: var(--text-faint);">Total Accounts: 284,520</span>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-500/15 text-blue-400 border border-blue-500/25 shadow-[0_0_12px_rgba(59,130,246,0.2)]">User Governance</span>
+            <span class="text-xs font-mono font-medium" style="color: var(--text-faint);">Total Accounts: 284,520</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary);">User &amp; Account Governance</h1>
-          <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary);">Audit portfolios, verify KYC certifications, enforce account restrictions, and monitor AML risk levels</p>
+          <p class="text-xs sm:text-sm mt-0.5 font-medium" style="color: var(--text-secondary);">Audit portfolios, verify KYC certifications, enforce account restrictions, and monitor AML risk levels</p>
         </div>
 
         <div class="flex items-center gap-3">
-          <button class="btn btn-ghost text-xs px-3 py-2 flex items-center gap-2">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          <button class="btn btn-ghost text-xs px-3 py-2 flex items-center gap-2 hover:border-lava/30">
+            <svg class="w-3.5 h-3.5 text-lava" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
             <span>Export CSV</span>
           </button>
         </div>
       </div>
 
-      <!-- Quick Metrics Bar -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
-          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Total Registered</p>
-          <p class="text-xl font-bold num-tabular mt-0.5" style="color: var(--text-primary);">284,520</p>
+      <!-- Quick Metrics Bar (Distinct Visual Anchors) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="glass card-lift rounded-2xl p-4.5 card-accent-blue" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-8 h-8 rounded-lg icon-badge-blue flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-blue-400">Total</span>
+          </div>
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Registered Traders</p>
+          <p class="text-2xl font-extrabold num-tabular mt-0.5 text-white">284,520</p>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+
+        <div class="glass card-lift rounded-2xl p-4.5 card-accent-lava" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-8 h-8 rounded-lg icon-badge-lava flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-lava">Tier 3</span>
+          </div>
           <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Institutional / VIP</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-lava">14,890</p>
+          <p class="text-2xl font-extrabold num-tabular mt-0.5 text-lava">14,890</p>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
-          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">KYC Verification Queue</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-amber-400">342 Pending</p>
+
+        <div class="glass card-lift rounded-2xl p-4.5 card-accent-amber" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-8 h-8 rounded-lg icon-badge-amber flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-amber-400">Queue</span>
+          </div>
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">KYC Pending Review</p>
+          <p class="text-2xl font-extrabold num-tabular mt-0.5 text-amber-400">342 Pending</p>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
-          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Frozen / Restricted</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-rose-500">18 Accounts</p>
+
+        <div class="glass card-lift rounded-2xl p-4.5 card-accent-rose" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-8 h-8 rounded-lg icon-badge-rose flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-rose-400">Restricted</span>
+          </div>
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Frozen Accounts</p>
+          <p class="text-2xl font-extrabold num-tabular mt-0.5 text-rose-400">18 Accounts</p>
         </div>
       </div>
 
@@ -361,3 +388,4 @@
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
+

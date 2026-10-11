@@ -14,17 +14,17 @@
   <!-- Main -->
   <div class="flex-1 flex flex-col min-w-0 relative">
     <header id="header"></header>
-    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+    <main class="px-6 py-5 space-y-6 max-w-[1560px] w-full mx-auto relative z-10 fade-in ambient-glow-wrapper">
       
       <!-- Page Header -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Fleet Orchestration</span>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/25 shadow-[0_0_12px_rgba(139,92,246,0.2)]">Fleet Orchestration</span>
             <span class="text-xs font-mono text-emerald-400 font-bold">6 of 6 Models Healthy</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary);">AI Trading Fleet Management</h1>
-          <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary);">Direct neural trading algorithms, configure hard liquidation floors, and allocate platform liquidity</p>
+          <p class="text-xs sm:text-sm mt-0.5 font-medium" style="color: var(--text-secondary);">Direct neural trading algorithms, configure hard liquidation floors, and allocate platform liquidity</p>
         </div>
 
         <div class="flex items-center gap-2.5">
@@ -35,34 +35,61 @@
         </div>
       </div>
 
-      <!-- Fleet Metrics Summary -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+      <!-- Fleet Metrics Summary (Distinct Visual Anchors) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="glass card-lift rounded-2xl p-4.5 card-accent-lava" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-8 h-8 rounded-lg icon-badge-lava flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-lava">Capital</span>
+          </div>
           <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Total Bot Allocated AUM</p>
-          <p class="text-xl font-bold num-tabular mt-0.5" style="color: var(--text-primary);">$34,250,000</p>
+          <p class="text-2xl font-extrabold num-tabular mt-0.5 text-white">$34,250,000</p>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+
+        <div class="glass card-lift rounded-2xl p-4.5 card-accent-emerald" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-8 h-8 rounded-lg icon-badge-emerald flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-400">Alpha</span>
+          </div>
           <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Fleet 30d Alpha Generation</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-emerald-400">+24.8% Net</p>
+          <p class="text-2xl font-extrabold num-tabular mt-0.5 text-emerald-400">+24.8% Net</p>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+
+        <div class="glass card-lift rounded-2xl p-4.5 card-accent-blue" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-8 h-8 rounded-lg icon-badge-blue flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-blue-400">Win Rate</span>
+          </div>
           <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Aggregate Win Ratio</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-lava">76.6% Avg</p>
+          <p class="text-2xl font-extrabold num-tabular mt-0.5 text-blue-300">76.6% Avg</p>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+
+        <div class="glass card-lift rounded-2xl p-4.5 card-accent-purple" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <div class="w-8 h-8 rounded-lg icon-badge-purple flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider text-purple-400">Earnings</span>
+          </div>
           <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Platform Performance Fee</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-purple-400">$171,250 / mo</p>
+          <p class="text-2xl font-extrabold num-tabular mt-0.5 text-purple-400">$171,250 / mo</p>
         </div>
       </div>
 
       <!-- Agent Cards Grid (3 Columns) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Agent 1: Alpha Trader -->
-        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="Alpha Trader">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Agent 1: Alpha Trader (Lava Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between card-accent-lava" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="Alpha Trader">
           <div>
             <div class="flex justify-between items-start mb-3">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-orange-500/15 text-orange-500 flex items-center justify-center font-bold">
+                <div class="w-10 h-10 rounded-xl icon-badge-lava flex items-center justify-center font-bold">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
                 </div>
                 <div>
@@ -107,12 +134,12 @@
           <button class="btn btn-lava w-full text-xs py-2" data-agent-running="true" data-agent-toggle>Pause Bot</button>
         </div>
 
-        <!-- Agent 2: MacroFlow -->
-        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="MacroFlow">
+        <!-- Agent 2: MacroFlow (Blue Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between card-accent-blue" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="MacroFlow">
           <div>
             <div class="flex justify-between items-start mb-3">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center font-bold">
+                <div class="w-10 h-10 rounded-xl icon-badge-blue flex items-center justify-center font-bold">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
                 </div>
                 <div>
@@ -156,12 +183,12 @@
           <button class="btn btn-lava w-full text-xs py-2" data-agent-running="true" data-agent-toggle>Pause Bot</button>
         </div>
 
-        <!-- Agent 3: QuantEdge -->
-        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="QuantEdge">
+        <!-- Agent 3: QuantEdge (Purple Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between card-accent-purple" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="QuantEdge">
           <div>
             <div class="flex justify-between items-start mb-3">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center font-bold">
+                <div class="w-10 h-10 rounded-xl icon-badge-purple flex items-center justify-center font-bold">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
                 </div>
                 <div>
@@ -205,12 +232,12 @@
           <button class="btn btn-lava w-full text-xs py-2" data-agent-running="true" data-agent-toggle>Pause Bot</button>
         </div>
 
-        <!-- Agent 4: DeFi Scout -->
-        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="DeFi Scout">
+        <!-- Agent 4: DeFi Scout (Emerald Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between card-accent-emerald" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="DeFi Scout">
           <div>
             <div class="flex justify-between items-start mb-3">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold">
+                <div class="w-10 h-10 rounded-xl icon-badge-emerald flex items-center justify-center font-bold">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
                 </div>
                 <div>
@@ -254,12 +281,12 @@
           <button class="btn btn-lava w-full text-xs py-2" data-agent-running="true" data-agent-toggle>Pause Bot</button>
         </div>
 
-        <!-- Agent 5: Arbitrage Bot -->
-        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="Arbitrage Bot">
+        <!-- Agent 5: Arbitrage Bot (Amber Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between card-accent-amber" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="Arbitrage Bot">
           <div>
             <div class="flex justify-between items-start mb-3">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center font-bold">
+                <div class="w-10 h-10 rounded-xl icon-badge-amber flex items-center justify-center font-bold">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
                 </div>
                 <div>
@@ -303,12 +330,12 @@
           <button class="btn btn-lava w-full text-xs py-2" data-agent-running="true" data-agent-toggle>Pause Bot</button>
         </div>
 
-        <!-- Agent 6: Sentiment AI -->
-        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="Sentiment AI">
+        <!-- Agent 6: Sentiment AI (Rose Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 flex flex-col justify-between card-accent-rose" style="border: 1px solid var(--border-subtle);" data-agent-card data-agent-name="Sentiment AI">
           <div>
             <div class="flex justify-between items-start mb-3">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-pink-500/15 text-pink-400 flex items-center justify-center font-bold">
+                <div class="w-10 h-10 rounded-xl icon-badge-rose flex items-center justify-center font-bold">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
                 </div>
                 <div>
@@ -359,3 +386,4 @@
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
+

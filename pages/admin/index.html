@@ -14,102 +14,109 @@
   <!-- Main -->
   <div class="flex-1 flex flex-col min-w-0 relative">
     <header id="header"></header>
-    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+    <main class="px-6 py-5 space-y-6 max-w-[1560px] w-full mx-auto relative z-10 fade-in ambient-glow-wrapper">
       
       <!-- Admin Header Banner -->
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Root Console</span>
-            <span class="text-xs font-mono" style="color: var(--text-faint);">Node ID: srx-cluster-09a</span>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-lava/20 text-lava border border-lava/30 shadow-[0_0_12px_rgba(255,85,36,0.25)] flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-lava animate-pulse"></span>
+              Platform Command Core
+            </span>
+            <span class="text-xs font-mono font-medium" style="color: var(--text-faint);">Node: cluster-09a · Tier 4 HSM</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight flex items-center gap-3" style="color: var(--text-primary);">
             Admin Command Center
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.7)]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.9)]"></span>
           </h1>
-          <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary);">Real-time platform surveillance, liquidity allocation, and risk governance</p>
+          <p class="text-xs sm:text-sm mt-0.5 font-medium" style="color: var(--text-secondary);">Real-time platform surveillance, liquidity allocation, and algorithmic risk governance</p>
         </div>
         
         <!-- Quick Action Bar -->
         <div class="flex flex-wrap items-center gap-2.5">
-          <button class="btn btn-ghost text-xs px-3 py-2 flex items-center gap-2" id="flushCacheBtn">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          <button class="btn btn-ghost text-xs px-3 py-2 flex items-center gap-2 hover:border-lava/30" id="flushCacheBtn">
+            <svg class="w-3.5 h-3.5 text-lava" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
             <span>Purge Edge Cache</span>
           </button>
-          <button class="btn btn-lava text-xs px-3.5 py-2 flex items-center gap-2 shadow-lg shadow-lava/20" id="emergencyHaltBtn">
+          <button class="btn btn-lava text-xs px-3.5 py-2 flex items-center gap-2 shadow-lg shadow-lava/25" id="emergencyHaltBtn">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
             <span>Circuit Breakers</span>
           </button>
         </div>
       </div>
 
-      <!-- KPI Metrics Grid (4 Cards) -->
+      <!-- KPI Metrics Grid (4 Distinctive Anchor Cards) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Card 1: Platform AUM -->
-        <div class="glass card-lift rounded-2xl p-4.5 relative overflow-hidden" style="border: 1px solid var(--border-subtle);">
-          <div class="flex justify-between items-start">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Platform Total AUM</p>
-              <h3 class="text-2xl font-bold tracking-tight mt-1 num-tabular" style="color: var(--text-primary);">$148,620,410</h3>
-            </div>
-            <div class="w-9 h-9 rounded-xl bg-lava/10 text-lava flex items-center justify-center">
+        <!-- Card 1: Platform AUM (Lava Orange Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 relative overflow-hidden card-accent-lava">
+          <div class="flex justify-between items-start mb-3">
+            <div class="w-10 h-10 rounded-xl icon-badge-lava flex items-center justify-center shrink-0">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
             </div>
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Treasury</span>
           </div>
-          <div class="mt-3 flex items-center gap-2 text-xs">
-            <span class="text-emerald-400 font-semibold flex items-center">↑ +8.4%</span>
-            <span style="color: var(--text-faint);">vs previous 30 days</span>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Platform Total AUM</p>
+            <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1 num-tabular text-white">$148,620,410</h3>
+          </div>
+          <div class="mt-3.5 pt-3 flex items-center justify-between text-xs" style="border-top: 1px solid var(--border-subtle);">
+            <span class="text-emerald-400 font-bold flex items-center gap-1">↑ +8.4%</span>
+            <span class="font-medium" style="color: var(--text-faint);">vs previous 30 days</span>
           </div>
         </div>
 
-        <!-- Card 2: 24h Volume -->
-        <div class="glass card-lift rounded-2xl p-4.5 relative overflow-hidden" style="border: 1px solid var(--border-subtle);">
-          <div class="flex justify-between items-start">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">24h Trading Volume</p>
-              <h3 class="text-2xl font-bold tracking-tight mt-1 num-tabular" style="color: var(--text-primary);">$42,852,190</h3>
-            </div>
-            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+        <!-- Card 2: 24h Volume (Emerald Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 relative overflow-hidden card-accent-emerald">
+          <div class="flex justify-between items-start mb-3">
+            <div class="w-10 h-10 rounded-xl icon-badge-emerald flex items-center justify-center shrink-0">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
             </div>
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Execution</span>
           </div>
-          <div class="mt-3 flex items-center gap-2 text-xs">
-            <span class="text-emerald-400 font-semibold flex items-center">↑ +14.2%</span>
-            <span style="color: var(--text-faint);">48,120 executions</span>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">24h Trading Volume</p>
+            <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1 num-tabular text-white">$42,852,190</h3>
+          </div>
+          <div class="mt-3.5 pt-3 flex items-center justify-between text-xs" style="border-top: 1px solid var(--border-subtle);">
+            <span class="text-emerald-400 font-bold flex items-center gap-1">↑ +14.2%</span>
+            <span class="font-medium" style="color: var(--text-faint);">48,120 executions</span>
           </div>
         </div>
 
-        <!-- Card 3: Registered Traders -->
-        <div class="glass card-lift rounded-2xl p-4.5 relative overflow-hidden" style="border: 1px solid var(--border-subtle);">
-          <div class="flex justify-between items-start">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Active / Total Users</p>
-              <h3 class="text-2xl font-bold tracking-tight mt-1 num-tabular" style="color: var(--text-primary);">24.9K <span class="text-sm font-normal" style="color: var(--text-faint);">/ 284.5K</span></h3>
-            </div>
-            <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+        <!-- Card 3: Registered Traders (Sapphire Blue Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 relative overflow-hidden card-accent-blue">
+          <div class="flex justify-between items-start mb-3">
+            <div class="w-10 h-10 rounded-xl icon-badge-blue flex items-center justify-center shrink-0">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
             </div>
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-400 border border-blue-500/25">Accounts</span>
           </div>
-          <div class="mt-3 flex items-center gap-2 text-xs">
-            <span class="text-emerald-400 font-semibold">1,240 new</span>
-            <span style="color: var(--text-faint);">onboarded this week</span>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Active / Total Users</p>
+            <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1 num-tabular text-white">24.9K <span class="text-base font-normal text-slate-400">/ 284.5K</span></h3>
+          </div>
+          <div class="mt-3.5 pt-3 flex items-center justify-between text-xs" style="border-top: 1px solid var(--border-subtle);">
+            <span class="text-blue-400 font-bold flex items-center gap-1">1,240 new</span>
+            <span class="font-medium" style="color: var(--text-faint);">onboarded this week</span>
           </div>
         </div>
 
-        <!-- Card 4: Platform Net Revenue -->
-        <div class="glass card-lift rounded-2xl p-4.5 relative overflow-hidden" style="border: 1px solid var(--border-subtle);">
-          <div class="flex justify-between items-start">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Net Fee Revenue (30d)</p>
-              <h3 class="text-2xl font-bold tracking-tight mt-1 num-tabular" style="color: var(--text-primary);">$384,150</h3>
-            </div>
-            <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+        <!-- Card 4: Platform Net Revenue (Violet Purple Accent) -->
+        <div class="glass card-lift rounded-2xl p-5 relative overflow-hidden card-accent-purple">
+          <div class="flex justify-between items-start mb-3">
+            <div class="w-10 h-10 rounded-xl icon-badge-purple flex items-center justify-center shrink-0">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
             </div>
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/25">Net PnL</span>
           </div>
-          <div class="mt-3 flex items-center gap-2 text-xs">
-            <span class="text-emerald-400 font-semibold">↑ +19.1%</span>
-            <span style="color: var(--text-faint);">bot splits + spreads</span>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Net Fee Revenue (30d)</p>
+            <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1 num-tabular text-purple-300">$384,150</h3>
+          </div>
+          <div class="mt-3.5 pt-3 flex items-center justify-between text-xs" style="border-top: 1px solid var(--border-subtle);">
+            <span class="text-purple-400 font-bold flex items-center gap-1">↑ +19.1%</span>
+            <span class="font-medium" style="color: var(--text-faint);">bot splits + spreads</span>
           </div>
         </div>
       </div>
@@ -117,7 +124,7 @@
       <!-- Main Section: Chart + Operations Radar -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <!-- Left: Analytics Chart Card (8 cols) -->
-        <div class="lg:col-span-8 glass rounded-2xl p-5 relative" style="border: 1px solid var(--border-subtle);">
+        <div class="lg:col-span-8 glass rounded-2xl p-6 relative card-accent-lava" style="background: radial-gradient(circle at 50% 0%, rgba(255, 85, 36, 0.08) 0%, transparent 70%), var(--bg-card);">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
             <div>
               <h3 class="text-base font-bold tracking-tight" style="color: var(--text-primary);">Volume &amp; Revenue Analytics</h3>
@@ -167,9 +174,12 @@
 
         <!-- Right: Liquidity & Engine Radar (4 cols) -->
         <div class="lg:col-span-4 space-y-4">
-          <!-- Liquidity Pool Distribution Card -->
-          <div class="glass rounded-2xl p-5" style="border: 1px solid var(--border-subtle);">
-            <h3 class="text-sm font-bold tracking-tight mb-3" style="color: var(--text-primary);">Treasury Reserve Allocation</h3>
+          <!-- Liquidity Pool Distribution Card (Amber Accent) -->
+          <div class="glass rounded-2xl p-5 card-accent-amber" style="border: 1px solid var(--border-subtle);">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-bold tracking-tight" style="color: var(--text-primary);">Treasury Reserve Allocation</h3>
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            </div>
             
             <div class="space-y-3">
               <div>
@@ -209,11 +219,11 @@
             </div>
           </div>
 
-          <!-- Service Health Matrix -->
-          <div class="glass rounded-2xl p-5" style="border: 1px solid var(--border-subtle);">
+          <!-- Service Health Matrix (Emerald Accent) -->
+          <div class="glass rounded-2xl p-5 card-accent-emerald" style="border: 1px solid var(--border-subtle);">
             <div class="flex justify-between items-center mb-3">
               <h3 class="text-sm font-bold tracking-tight" style="color: var(--text-primary);">Core Engine Telemetry</h3>
-              <span class="text-[10px] font-mono text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">All Healthy</span>
+              <span class="text-[10px] font-mono text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25">All Healthy</span>
             </div>
 
             <div class="space-y-2 text-xs">
@@ -246,19 +256,22 @@
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                   Autonomous AI Agents Fleet
                 </span>
-                <span class="font-mono font-medium text-lava">6/6 Online</span>
+                <span class="font-mono font-medium text-lava font-bold">6/6 Online</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Real-Time Audit & Surveillance Stream Table -->
-      <div class="glass card-lift rounded-2xl overflow-hidden" style="border: 1px solid var(--border-subtle);">
+      <!-- Real-Time Audit & Surveillance Stream Table (Rose Alert Accent) -->
+      <div class="glass card-lift rounded-2xl overflow-hidden card-accent-rose" style="border: 1px solid var(--border-subtle);">
         <div class="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3" style="border-bottom: 1px solid var(--border-subtle);">
-          <div>
-            <h3 class="text-base font-bold tracking-tight" style="color: var(--text-primary);">Live Platform Security &amp; Audit Log</h3>
-            <p class="text-xs" style="color: var(--text-secondary);">Real-time stream of high-value operations, risk flags, and system events</p>
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+            <div>
+              <h3 class="text-base font-bold tracking-tight" style="color: var(--text-primary);">Live Platform Security &amp; Audit Log</h3>
+              <p class="text-xs" style="color: var(--text-secondary);">Real-time stream of high-value operations, risk flags, and system events</p>
+            </div>
           </div>
           <a href="/pages/admin/transactions.html" class="text-xs font-semibold text-lava hover:underline flex items-center gap-1">
             <span>View Full Ledger</span>
@@ -338,3 +351,4 @@
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
+

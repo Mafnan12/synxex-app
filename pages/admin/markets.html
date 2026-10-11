@@ -14,7 +14,7 @@
   <!-- Main -->
   <div class="flex-1 flex flex-col min-w-0 relative">
     <header id="header"></header>
-    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in ambient-glow-wrapper">
       
       <!-- Page Header -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -37,21 +37,45 @@
 
       <!-- Quick Metrics -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
-          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Active Pairs</p>
-          <p class="text-xl font-bold num-tabular mt-0.5" style="color: var(--text-primary);">38 Pairs</p>
+        <div class="glass card-lift rounded-xl p-4 card-accent-blue" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Active Pairs</p>
+            <div class="w-7 h-7 rounded-lg icon-badge-blue flex items-center justify-center font-bold text-xs">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <p class="text-xl font-bold num-tabular" style="color: var(--text-primary);">38 Pairs</p>
+          <span class="text-[10px] text-blue-400 mt-1 block font-mono">100% Matching SLA</span>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
-          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Aggregated Depth</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-emerald-400">$125.1M Total</p>
+        <div class="glass card-lift rounded-xl p-4 card-accent-emerald" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Aggregated Depth</p>
+            <div class="w-7 h-7 rounded-lg icon-badge-emerald flex items-center justify-center font-bold text-xs">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <p class="text-xl font-bold num-tabular text-emerald-400">$125.1M Total</p>
+          <span class="text-[10px] text-emerald-400 mt-1 block font-mono">+8.4% 24h Depth</span>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
-          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Average Bid-Ask Spread</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-lava">0.74 bps</p>
+        <div class="glass card-lift rounded-xl p-4 card-accent-lava" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Average Bid-Ask Spread</p>
+            <div class="w-7 h-7 rounded-lg icon-badge-lava flex items-center justify-center font-bold text-xs">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <p class="text-xl font-bold num-tabular text-lava">0.74 bps</p>
+          <span class="text-[10px] text-lava mt-1 block font-mono">Ultra-Tight Clustered</span>
         </div>
-        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
-          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">External Bridge Feeds</p>
-          <p class="text-xl font-bold num-tabular mt-0.5 text-blue-400">3/3 Syncing</p>
+        <div class="glass card-lift rounded-xl p-4 card-accent-purple" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">External Bridge Feeds</p>
+            <div class="w-7 h-7 rounded-lg icon-badge-purple flex items-center justify-center font-bold text-xs">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <p class="text-xl font-bold num-tabular text-purple-400">3/3 Syncing</p>
+          <span class="text-[10px] text-purple-400 mt-1 block font-mono">Chainlink • Pyth • CME</span>
         </div>
       </div>
 
@@ -210,3 +234,4 @@
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
+
