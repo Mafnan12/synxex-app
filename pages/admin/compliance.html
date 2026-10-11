@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — KYC &amp; Compliance Queue</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="admin-compliance">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <!-- Page Header -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Compliance Workbench</span>
+            <span class="text-xs font-mono text-amber-400 font-bold" id="pendingKycCount">4 New</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary);">KYC &amp; Sanctions Verification Queue</h1>
+          <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary);">Verify government credentials, cross-reference PEP databases, and certify institutional onboarding</p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button class="btn btn-ghost text-xs px-3 py-2 flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            <span>Regulatory Audit PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">In-Review Queue</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-amber-400">4 Submissions</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Median Review SLA</p>
+          <p class="text-xl font-bold num-tabular mt-0.5" style="color: var(--text-primary);">4.2 Minutes</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Automated Match Accuracy</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-emerald-400">98.9%</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">PEP / Sanctions Match Rate</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-blue-400">0.08%</p>
+        </div>
+      </div>
+
+      <!-- Queue Table -->
+      <div class="glass card-lift rounded-2xl overflow-hidden" style="border: 1px solid var(--border-subtle);">
+        <div class="p-4 flex justify-between items-center" style="border-bottom: 1px solid var(--border-subtle);">
+          <div>
+            <h3 class="text-base font-bold tracking-tight" style="color: var(--text-primary);">Pending Identity Verification Documents</h3>
+            <p class="text-xs" style="color: var(--text-secondary);">Automated optical character recognition (OCR) and facial similarity pre-checked</p>
+          </div>
+          <span class="text-xs font-mono text-emerald-400 font-bold">Biometric OCR Service Online</span>
+        </div>
+
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left text-xs whitespace-nowrap">
+            <thead style="background: var(--bg-hover); border-bottom: 1px solid var(--border-subtle);">
+              <tr>
+                <th class="px-4 py-3.5 font-semibold" style="color: var(--text-secondary);">Applicant Name</th>
+                <th class="px-4 py-3.5 font-semibold" style="color: var(--text-secondary);">Document Type</th>
+                <th class="px-4 py-3.5 font-semibold" style="color: var(--text-secondary);">Jurisdiction</th>
+                <th class="px-4 py-3.5 font-semibold text-center" style="color: var(--text-secondary);">Biometric Score</th>
+                <th class="px-4 py-3.5 font-semibold text-center" style="color: var(--text-secondary);">Watchlist Screening</th>
+                <th class="px-4 py-3.5 font-semibold text-center" style="color: var(--text-secondary);">Requested Tier</th>
+                <th class="px-4 py-3.5 font-semibold text-right" style="color: var(--text-secondary);">Inspection</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--text-primary);">
+              <!-- Item 1 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);"
+                  data-kyc-row
+                  data-applicant-name="Sarah Jenkins"
+                  data-applicant-doc="International Passport (Biometric)"
+                  data-applicant-country="United Kingdom">
+                <td class="px-4 py-3.5">
+                  <p class="font-bold text-xs" style="color: var(--text-primary);">Sarah Jenkins</p>
+                  <p class="text-[10px]" style="color: var(--text-faint);">s.jenkins@londonforex.co.uk • Submitted 5m ago</p>
+                </td>
+                <td class="px-4 py-3.5 font-medium">Passport (UK)</td>
+                <td class="px-4 py-3.5">United Kingdom 🇬🇧</td>
+                <td class="px-4 py-3.5 text-center font-mono font-bold text-emerald-400">98.4% Match</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Clear (0 Hits)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-lava/15 text-lava border border-lava/25">Tier 2 Verified</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-lava px-3 py-1 text-[11px]" data-review-kyc>Review</button>
+                </td>
+              </tr>
+
+              <!-- Item 2 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);"
+                  data-kyc-row
+                  data-applicant-name="Tariq Al-Mansoor"
+                  data-applicant-doc="Emirates National ID"
+                  data-applicant-country="United Arab Emirates">
+                <td class="px-4 py-3.5">
+                  <p class="font-bold text-xs" style="color: var(--text-primary);">Tariq Al-Mansoor</p>
+                  <p class="text-[10px]" style="color: var(--text-faint);">tariq.m@gulfcapital.ae • Submitted 12m ago</p>
+                </td>
+                <td class="px-4 py-3.5 font-medium">Emirates ID</td>
+                <td class="px-4 py-3.5">United Arab Emirates 🇦🇪</td>
+                <td class="px-4 py-3.5 text-center font-mono font-bold text-emerald-400">94.1% Match</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/25">PEP Advisory</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-lava/15 text-lava border border-lava/25">Tier 2 Verified</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-lava px-3 py-1 text-[11px]" data-review-kyc>Review</button>
+                </td>
+              </tr>
+
+              <!-- Item 3 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);"
+                  data-kyc-row
+                  data-applicant-name="Liam O'Connor"
+                  data-applicant-doc="Irish Driver's License"
+                  data-applicant-country="Ireland">
+                <td class="px-4 py-3.5">
+                  <p class="font-bold text-xs" style="color: var(--text-primary);">Liam O'Connor</p>
+                  <p class="text-[10px]" style="color: var(--text-faint);">liam.oc@dublinfin.ie • Submitted 22m ago</p>
+                </td>
+                <td class="px-4 py-3.5 font-medium">Driver's License</td>
+                <td class="px-4 py-3.5">Ireland 🇮🇪</td>
+                <td class="px-4 py-3.5 text-center font-mono font-bold text-emerald-400">99.2% Match</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Clear (0 Hits)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/15 text-blue-400 border border-blue-500/25">Tier 1 Basic</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-lava px-3 py-1 text-[11px]" data-review-kyc>Review</button>
+                </td>
+              </tr>
+
+              <!-- Item 4 -->
+              <tr class="hover:bg-white/[0.02] transition"
+                  data-kyc-row
+                  data-applicant-name="Chen Wei"
+                  data-applicant-doc="Singapore Passport"
+                  data-applicant-country="Singapore">
+                <td class="px-4 py-3.5">
+                  <p class="font-bold text-xs" style="color: var(--text-primary);">Chen Wei</p>
+                  <p class="text-[10px]" style="color: var(--text-faint);">wei.chen@sg-holdings.sg • Submitted 34m ago</p>
+                </td>
+                <td class="px-4 py-3.5 font-medium">Passport</td>
+                <td class="px-4 py-3.5">Singapore 🇸🇬</td>
+                <td class="px-4 py-3.5 text-center font-mono font-bold text-emerald-400">97.8% Match</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Clear (0 Hits)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/15 text-purple-400 border border-purple-500/25">Tier 3 VIP</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-lava px-3 py-1 text-[11px]" data-review-kyc>Review</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- KYC Inspection Modal -->
+  <div class="modal-overlay" id="kycInspectModal" hidden>
+    <div class="modal-content max-w-lg p-6">
+      <div class="flex justify-between items-start pb-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <div>
+          <span class="text-[10px] font-mono text-lava uppercase font-bold tracking-wider">Credential Verification</span>
+          <h3 class="text-lg font-bold" id="kycApplicantName" style="color: var(--text-primary);">Applicant Verification</h3>
+          <p class="text-xs" id="kycApplicantCountry" style="color: var(--text-faint);">United Kingdom</p>
+        </div>
+        <button class="text-muted hover:text-white transition p-1" onclick="document.getElementById('kycInspectModal').hidden = true;">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+        </button>
+      </div>
+
+      <div class="py-4 space-y-3 text-xs">
+        <div class="p-3 rounded-xl flex items-center justify-between" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+          <div>
+            <p class="font-semibold" style="color: var(--text-faint);">Document Type</p>
+            <p class="text-sm font-bold mt-0.5" id="kycApplicantDoc" style="color: var(--text-primary);">Biometric Passport</p>
+          </div>
+          <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Passed OCR Scan</span>
+        </div>
+
+        <!-- Document Preview Canvas Mockup -->
+        <div class="h-36 rounded-xl flex flex-col items-center justify-center p-4 border border-dashed border-lava/30" style="background: var(--bg-card-inner);">
+          <div class="w-12 h-12 rounded-full bg-lava/10 text-lava flex items-center justify-center mb-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          </div>
+          <p class="font-bold text-xs" style="color: var(--text-primary);">High-Resolution Document &amp; Biometric Hologram Verified</p>
+          <p class="text-[11px]" style="color: var(--text-faint);">Microprint, MRZ checksum, and UV watermarks validated</p>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="pt-4 flex flex-wrap gap-2 justify-end" style="border-top: 1px solid var(--border-subtle);">
+        <button class="btn btn-ghost text-xs px-3 py-2 text-rose-400 hover:bg-rose-500/10" id="rejectKycDocBtn">Reject Document</button>
+        <button class="btn btn-lava text-xs px-4 py-2" id="approveKycDocBtn">Approve &amp; Upgrade KYC</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

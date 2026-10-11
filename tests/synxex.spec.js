@@ -218,5 +218,70 @@ test.describe('SynxEx Dashboard & UI/UX Validation', () => {
     
     await page.screenshot({ path: 'test-results/11-chart-bar-mode.png' });
   });
+
+  test('12. Admin Command Center loads with platform KPIs and chart controls', async ({ page }) => {
+    await page.goto('http://localhost:3000/pages/admin/index.html');
+    await expect(page).toHaveTitle(/Admin Command Center/);
+
+    // Verify Admin Sidebar brand
+    await expect(page.locator('text=Control Plane')).toBeVisible();
+
+    // Verify KPI Cards
+    await expect(page.locator('text=$148,620,410')).toBeVisible();
+    await expect(page.locator('#adminChartSvg')).toBeVisible();
+
+    // Toggle Bar chart
+    await page.click('#chartModeBar');
+    await page.waitForTimeout(200);
+    await expect(page.locator('#chartModeBar')).toHaveClass(/bg-lava/);
+
+    // Switch to 7D
+    await page.click('[data-admin-range="7D"]');
+    await page.waitForTimeout(200);
+    await expect(page.locator('#adminVolumeStat')).toHaveText('$284,190,450');
+
+    await page.screenshot({ path: 'test-results/12-admin-command-center.png' });
+  });
+
+  test('13. Admin User Governance filters table and inspects account modal', async ({ page }) => {
+    await page.goto('http://localhost:3000/pages/admin/users.html');
+    await expect(page).toHaveTitle(/User Governance/);
+
+    // Search filter test
+    const searchInput = page.locator('#userSearchInput');
+    await searchInput.fill('Satoshi');
+    await page.waitForTimeout(100);
+
+    const satoshiRow = page.locator('[data-user-row][data-user-name="Satoshi Nakamoto"]');
+    await expect(satoshiRow).toBeVisible();
+
+    // Inspect Modal test
+    await satoshiRow.locator('[data-inspect-user]').click();
+    const modal = page.locator('#userModal');
+    await expect(modal).toBeVisible();
+    await expect(page.locator('#inspectUserName')).toHaveText('Satoshi Nakamoto');
+
+    await page.screenshot({ path: 'test-results/13-admin-user-governance.png' });
+  });
+
+  test('14. Admin Surveillance Ledger and AML Forensic Inspection', async ({ page }) => {
+    await page.goto('http://localhost:3000/pages/admin/transactions.html');
+    await expect(page).toHaveTitle(/Surveillance Ledger/);
+
+    // High Alert filter
+    await page.click('[data-tx-filter="high"]');
+    await page.waitForTimeout(100);
+
+    const highAlertRow = page.locator('[data-tx-row][data-tx-risk="high"]').first();
+    await expect(highAlertRow).toBeVisible();
+
+    // Inspect Forensic modal
+    await highAlertRow.locator('[data-inspect-tx]').click();
+    const txModal = page.locator('#txInspectModal');
+    await expect(txModal).toBeVisible();
+
+    await page.screenshot({ path: 'test-results/14-admin-aml-surveillance.png' });
+  });
 });
+
 

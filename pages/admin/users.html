@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — User Governance &amp; Accounts</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="admin-users">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <!-- Page Header -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Governance</span>
+            <span class="text-xs font-mono" style="color: var(--text-faint);">Total Accounts: 284,520</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary);">User &amp; Account Governance</h1>
+          <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary);">Audit portfolios, verify KYC certifications, enforce account restrictions, and monitor AML risk levels</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button class="btn btn-ghost text-xs px-3 py-2 flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            <span>Export CSV</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Total Registered</p>
+          <p class="text-xl font-bold num-tabular mt-0.5" style="color: var(--text-primary);">284,520</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Institutional / VIP</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-lava">14,890</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">KYC Verification Queue</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-amber-400">342 Pending</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Frozen / Restricted</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-rose-500">18 Accounts</p>
+        </div>
+      </div>
+
+      <!-- Search & Filter Ribbon -->
+      <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
+        <!-- Search Input -->
+        <div class="relative flex-1 max-w-md">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" style="color: var(--text-faint);">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          </div>
+          <input class="input w-full pl-9 text-xs" id="userSearchInput" placeholder="Filter by name, email, wallet address, or UID..." type="text" />
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+          <button class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-lava text-white transition whitespace-nowrap active" data-user-filter="all">All Users</button>
+          <button class="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/5 transition whitespace-nowrap" style="color: var(--text-secondary);" data-user-filter="vip">VIP Tier 3</button>
+          <button class="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/5 transition whitespace-nowrap" style="color: var(--text-secondary);" data-user-filter="pending">Pending KYC</button>
+          <button class="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/5 transition whitespace-nowrap" style="color: var(--text-secondary);" data-user-filter="flagged">Flagged</button>
+          <button class="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/5 transition whitespace-nowrap" style="color: var(--text-secondary);" data-user-filter="frozen">Frozen</button>
+        </div>
+      </div>
+
+      <!-- Users Table Card -->
+      <div class="glass card-lift rounded-2xl overflow-hidden" style="border: 1px solid var(--border-subtle);">
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left text-xs whitespace-nowrap">
+            <thead style="background: var(--bg-hover); border-bottom: 1px solid var(--border-subtle);">
+              <tr>
+                <th class="px-4 py-3.5 font-semibold" style="color: var(--text-secondary);">User Profile</th>
+                <th class="px-4 py-3.5 font-semibold" style="color: var(--text-secondary);">KYC Level</th>
+                <th class="px-4 py-3.5 font-semibold text-right" style="color: var(--text-secondary);">Portfolio Balance</th>
+                <th class="px-4 py-3.5 font-semibold text-right" style="color: var(--text-secondary);">30d Volume</th>
+                <th class="px-4 py-3.5 font-semibold text-center" style="color: var(--text-secondary);">AML Risk Score</th>
+                <th class="px-4 py-3.5 font-semibold text-center" style="color: var(--text-secondary);">Status</th>
+                <th class="px-4 py-3.5 font-semibold text-right" style="color: var(--text-secondary);">Action</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--text-primary);">
+              <!-- User 1 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);"
+                  data-user-row
+                  data-user-name="Afnan"
+                  data-user-email="afnan@synxex.com"
+                  data-user-role="vip"
+                  data-user-status="active"
+                  data-user-balance="$142,850.20"
+                  data-user-tier="Tier 3 (Institutional VIP)">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-[#FF5524] text-white flex items-center justify-center font-bold text-xs shadow-md shadow-lava/30">A</div>
+                    <div>
+                      <p class="font-bold text-xs" style="color: var(--text-primary);">Afnan</p>
+                      <p class="text-[11px]" style="color: var(--text-faint);">afnan@synxex.com • <span class="font-mono">#SNX-0019</span></p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-lava/15 text-lava border border-lava/25">Tier 3 VIP</span>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold num-tabular">$142,850.20</td>
+                <td class="px-4 py-3.5 text-right font-mono" style="color: var(--text-secondary);">$1,420,000</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="font-mono text-emerald-400 font-bold">12 (Low)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Active</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px]" data-inspect-user>Inspect</button>
+                </td>
+              </tr>
+
+              <!-- User 2 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);"
+                  data-user-row
+                  data-user-name="Satoshi Nakamoto"
+                  data-user-email="snakamoto@bitcoin.org"
+                  data-user-role="vip"
+                  data-user-status="active"
+                  data-user-balance="$4,850,000.00"
+                  data-user-tier="Tier 3 (Institutional VIP)">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-xs">S</div>
+                    <div>
+                      <p class="font-bold text-xs" style="color: var(--text-primary);">Satoshi Nakamoto</p>
+                      <p class="text-[11px]" style="color: var(--text-faint);">snakamoto@bitcoin.org • <span class="font-mono">#SNX-0001</span></p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-lava/15 text-lava border border-lava/25">Tier 3 VIP</span>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold num-tabular">$4,850,000.00</td>
+                <td class="px-4 py-3.5 text-right font-mono" style="color: var(--text-secondary);">$12,840,000</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="font-mono text-emerald-400 font-bold">08 (Low)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Active</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px]" data-inspect-user>Inspect</button>
+                </td>
+              </tr>
+
+              <!-- User 3 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);"
+                  data-user-row
+                  data-user-name="Elena Rostova"
+                  data-user-email="elena.r@fintech-ventures.ch"
+                  data-user-role="standard"
+                  data-user-status="active"
+                  data-user-balance="$285,120.00"
+                  data-user-tier="Tier 2 (Full Verified)">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-xs">E</div>
+                    <div>
+                      <p class="font-bold text-xs" style="color: var(--text-primary);">Elena Rostova</p>
+                      <p class="text-[11px]" style="color: var(--text-faint);">elena.r@fintech-ventures.ch • <span class="font-mono">#SNX-1092</span></p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/15 text-blue-400 border border-blue-500/25">Tier 2 Verified</span>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold num-tabular">$285,120.00</td>
+                <td class="px-4 py-3.5 text-right font-mono" style="color: var(--text-secondary);">$840,000</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="font-mono text-emerald-400 font-bold">24 (Low)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Active</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px]" data-inspect-user>Inspect</button>
+                </td>
+              </tr>
+
+              <!-- User 4 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);"
+                  data-user-row
+                  data-user-name="Tariq Al-Mansoor"
+                  data-user-email="tariq.m@gulfcapital.ae"
+                  data-user-role="standard"
+                  data-user-status="flagged"
+                  data-user-balance="$45,000.00"
+                  data-user-tier="Tier 1 (Basic)">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs">T</div>
+                    <div>
+                      <p class="font-bold text-xs" style="color: var(--text-primary);">Tariq Al-Mansoor</p>
+                      <p class="text-[11px]" style="color: var(--text-faint);">tariq.m@gulfcapital.ae • <span class="font-mono">#SNX-4421</span></p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/25">Tier 1 Basic</span>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold num-tabular">$45,000.00</td>
+                <td class="px-4 py-3.5 text-right font-mono" style="color: var(--text-secondary);">$120,000</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="font-mono text-rose-400 font-bold">78 (High Alert)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-400 border border-rose-500/25">Flagged</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px]" data-inspect-user>Inspect</button>
+                </td>
+              </tr>
+
+              <!-- User 5 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);"
+                  data-user-row
+                  data-user-name="Sarah Jenkins"
+                  data-user-email="s.jenkins@londonforex.co.uk"
+                  data-user-role="standard"
+                  data-user-status="pending"
+                  data-user-balance="$8,200.00"
+                  data-user-tier="Tier 0 (Unverified)">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-xs">S</div>
+                    <div>
+                      <p class="font-bold text-xs" style="color: var(--text-primary);">Sarah Jenkins</p>
+                      <p class="text-[11px]" style="color: var(--text-faint);">s.jenkins@londonforex.co.uk • <span class="font-mono">#SNX-9982</span></p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-zinc-500/15 text-zinc-400 border border-zinc-500/25">Tier 0 Submitted</span>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold num-tabular">$8,200.00</td>
+                <td class="px-4 py-3.5 text-right font-mono" style="color: var(--text-secondary);">$0</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="font-mono text-amber-400 font-bold">42 (Med)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/25">Review Queue</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px]" data-inspect-user>Inspect</button>
+                </td>
+              </tr>
+
+              <!-- User 6 -->
+              <tr class="hover:bg-white/[0.02] transition"
+                  data-user-row
+                  data-user-name="Tor Whalepool"
+                  data-user-email="bot-operator@tor-relay.net"
+                  data-user-role="standard"
+                  data-user-status="frozen"
+                  data-user-balance="$620,000.00"
+                  data-user-tier="Tier 1 (Basic)">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-xs">!</div>
+                    <div>
+                      <p class="font-bold text-xs text-rose-400">Tor Whalepool (Restricted)</p>
+                      <p class="text-[11px]" style="color: var(--text-faint);">bot-operator@tor-relay.net • <span class="font-mono">#SNX-6660</span></p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/15 text-red-400 border border-red-500/25">Suspended</span>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold num-tabular text-rose-400">$620,000.00</td>
+                <td class="px-4 py-3.5 text-right font-mono" style="color: var(--text-secondary);">$3,200,000</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="font-mono text-red-500 font-extrabold">94 (Critical)</span>
+                </td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/25 text-red-400 border border-red-500/35">Frozen</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px]" data-inspect-user>Inspect</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- User Inspection Modal -->
+  <div class="modal-overlay" id="userModal" hidden>
+    <div class="modal-content max-w-lg p-6">
+      <div class="flex justify-between items-start pb-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <div>
+          <span class="text-[10px] font-mono text-lava uppercase font-bold tracking-wider">Account Telemetry</span>
+          <h3 class="text-lg font-bold" id="inspectUserName" style="color: var(--text-primary);">User Profile</h3>
+          <p class="text-xs" id="inspectUserEmail" style="color: var(--text-faint);">user@synxex.com</p>
+        </div>
+        <button class="text-muted hover:text-white transition p-1" onclick="document.getElementById('userModal').hidden = true;">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+        </button>
+      </div>
+
+      <div class="py-4 space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3 p-3 rounded-xl" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+          <div>
+            <p class="font-semibold" style="color: var(--text-faint);">Custodial Balance</p>
+            <p class="text-base font-bold num-tabular mt-0.5" id="inspectUserBalance" style="color: var(--text-primary);">$0.00</p>
+          </div>
+          <div>
+            <p class="font-semibold" style="color: var(--text-faint);">Verification Certification</p>
+            <p class="text-sm font-bold mt-0.5 text-lava" id="inspectUserTier">Tier 1</p>
+          </div>
+          <div>
+            <p class="font-semibold" style="color: var(--text-faint);">Current Policy State</p>
+            <p class="text-sm font-bold mt-0.5 text-emerald-400" id="inspectUserStatus">Active</p>
+          </div>
+          <div>
+            <p class="font-semibold" style="color: var(--text-faint);">2FA Security Model</p>
+            <p class="text-sm font-mono mt-0.5" style="color: var(--text-primary);">FIDO2 / Hardware Token</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl space-y-1.5" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+          <p class="font-bold text-[11px]" style="color: var(--text-primary);">Recent Login Fingerprints</p>
+          <div class="flex justify-between text-[11px]" style="color: var(--text-secondary);">
+            <span>IP: 194.26.29.112 (Zurich, Switzerland)</span>
+            <span class="font-mono text-emerald-400">Trusted ASN</span>
+          </div>
+          <div class="flex justify-between text-[11px]" style="color: var(--text-secondary);">
+            <span>Client: SynxEx Desktop Terminal / Chrome 134</span>
+            <span class="font-mono" style="color: var(--text-faint);">20m ago</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="pt-4 flex flex-wrap gap-2 justify-end" style="border-top: 1px solid var(--border-subtle);">
+        <button class="btn btn-ghost text-xs px-3 py-2 text-rose-400 hover:bg-rose-500/10" id="freezeUserBtn">Freeze Account</button>
+        <button class="btn btn-ghost text-xs px-3 py-2" id="reset2faBtn">Reset 2FA</button>
+        <button class="btn btn-lava text-xs px-3.5 py-2" id="verifyUserBtn">Upgrade Tier 3 VIP</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

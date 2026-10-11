@@ -13,6 +13,7 @@ import { initSidebar } from './components/sidebar.js';
 import { initHeader } from './components/header.js';
 import { initDashboard } from './dashboard.js';
 import { initRemittance } from './remittance.js';
+import { initAdmin } from './admin.js';
 
 // Initialize theme first (prevents flash)
 initTheme();
@@ -34,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initDashboard();
   } else if (activePage === 'remittance') {
     initRemittance();
+  } else if (activePage.startsWith('admin-')) {
+    initAdmin(activePage);
   }
 
   // Scroll animations (delayed to let layout settle)

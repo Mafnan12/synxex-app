@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Platform Security &amp; Settings</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="admin-settings">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <!-- Page Header -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Platform Core</span>
+            <span class="text-xs font-mono text-emerald-400 font-bold">HSM Hardware Protected</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary);">Platform Parameters &amp; Security</h1>
+          <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary);">Manage global liquidity thresholds, anti-fraud velocity limits, fee schedules, and cryptographic key governance</p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button class="btn btn-ghost text-xs px-3.5 py-2 flex items-center gap-2" id="exportAuditLogsBtn">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            <span>Export Encrypted Audit Log</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Settings Grid (2 Columns) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <!-- Panel 1: Anti-Fraud & Risk Policy -->
+        <div class="glass card-lift rounded-2xl p-5" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-lava/15 text-lava flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold tracking-tight" style="color: var(--text-primary);">Anti-Fraud &amp; Velocity Limits</h3>
+              <p class="text-xs" style="color: var(--text-secondary);">Controls automated STP payout thresholds vs manual review</p>
+            </div>
+          </div>
+
+          <form class="space-y-4 text-xs">
+            <div>
+              <label class="block font-semibold mb-1" style="color: var(--text-secondary);">Max Single Withdrawal Without Multi-Sig Review ($)</label>
+              <input class="input w-full text-xs" type="text" value="50,000.00" />
+              <p class="text-[10px] mt-1" style="color: var(--text-faint);">Amounts above this limit will require dual-officer signing.</p>
+            </div>
+
+            <div>
+              <label class="block font-semibold mb-1" style="color: var(--text-secondary);">24h User Velocity Cap ($)</label>
+              <input class="input w-full text-xs" type="text" value="250,000.00" />
+            </div>
+
+            <div>
+              <label class="block font-semibold mb-1" style="color: var(--text-secondary);">Automated Sanctions Risk Threshold</label>
+              <select class="input w-full text-xs">
+                <option selected>Conservative (Flag Risk Score &gt; 65)</option>
+                <option>Moderate (Flag Risk Score &gt; 75)</option>
+                <option>Strict (Flag Risk Score &gt; 50)</option>
+              </select>
+            </div>
+
+            <div class="pt-2">
+              <button class="btn btn-lava text-xs px-4 py-2" id="adminSaveSecurityBtn">Save Security Policies</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Panel 2: Fee Schedule & Profit Splits -->
+        <div class="glass card-lift rounded-2xl p-5" style="border: 1px solid var(--border-subtle);">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold tracking-tight" style="color: var(--text-primary);">Global Fee Schedules &amp; Revenue Splits</h3>
+              <p class="text-xs" style="color: var(--text-secondary);">Base taker/maker fees and AI performance profit sharing</p>
+            </div>
+          </div>
+
+          <form class="space-y-4 text-xs">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold mb-1" style="color: var(--text-secondary);">Default Maker Fee (%)</label>
+                <input class="input w-full text-xs" type="text" value="0.02" />
+              </div>
+              <div>
+                <label class="block font-semibold mb-1" style="color: var(--text-secondary);">Default Taker Fee (%)</label>
+                <input class="input w-full text-xs" type="text" value="0.05" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-semibold mb-1" style="color: var(--text-secondary);">Cross-Border Remittance Markup (%)</label>
+              <input class="input w-full text-xs" type="text" value="0.35" />
+            </div>
+
+            <div>
+              <label class="block font-semibold mb-1" style="color: var(--text-secondary);">AI Bot Performance Profit Share (%)</label>
+              <input class="input w-full text-xs" type="text" value="15.00" />
+              <p class="text-[10px] mt-1" style="color: var(--text-faint);">Deducted automatically on high-water mark settlements.</p>
+            </div>
+
+            <div class="pt-2">
+              <button class="btn btn-lava text-xs px-4 py-2" id="adminSaveFeesBtn">Deploy Fee Schedule</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Treasury & Vault Policy -->
+      <div class="glass card-lift rounded-2xl p-5" style="border: 1px solid var(--border-subtle);">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold tracking-tight" style="color: var(--text-primary);">Hot &amp; Cold Vault Multi-Sig Rebalance Policy</h3>
+            <p class="text-xs" style="color: var(--text-secondary);">Automated liquidity replenishment from air-gapped HSM vaults</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs mb-4">
+          <div class="p-3 rounded-xl" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+            <p class="font-semibold" style="color: var(--text-faint);">Hot Wallet Minimum Watermark</p>
+            <p class="text-base font-bold num-tabular mt-0.5" style="color: var(--text-primary);">$10,000,000.00</p>
+          </div>
+          <div class="p-3 rounded-xl" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+            <p class="font-semibold" style="color: var(--text-faint);">Automated Sweep Cadence</p>
+            <p class="text-base font-bold num-tabular mt-0.5 text-lava">Every 4 Hours</p>
+          </div>
+          <div class="p-3 rounded-xl" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+            <p class="font-semibold" style="color: var(--text-faint);">Hardware Enclave Status</p>
+            <p class="text-base font-bold num-tabular mt-0.5 text-emerald-400">Ledger HSM Online</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Market Engine &amp; Liquidity</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="admin-markets">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <!-- Page Header -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Market Operations</span>
+            <span class="text-xs font-mono text-emerald-400 font-bold">38 Pairs Matching Online</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text-primary);">Market Engine &amp; Liquidity Control</h1>
+          <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary);">Manage asset pairs, trigger individual circuit breakers, calibrate maker/taker spreads, and inspect order book depth</p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button class="btn btn-lava text-xs px-3.5 py-2 flex items-center gap-2" id="saveMarketFeesBtn">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            <span>Deploy Fee Policy</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Active Pairs</p>
+          <p class="text-xl font-bold num-tabular mt-0.5" style="color: var(--text-primary);">38 Pairs</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Aggregated Depth</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-emerald-400">$125.1M Total</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Average Bid-Ask Spread</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-lava">0.74 bps</p>
+        </div>
+        <div class="glass rounded-xl p-3.5" style="border: 1px solid var(--border-subtle);">
+          <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">External Bridge Feeds</p>
+          <p class="text-xl font-bold num-tabular mt-0.5 text-blue-400">3/3 Syncing</p>
+        </div>
+      </div>
+
+      <!-- Market Pairs Table -->
+      <div class="glass card-lift rounded-2xl overflow-hidden" style="border: 1px solid var(--border-subtle);">
+        <div class="p-4 flex justify-between items-center" style="border-bottom: 1px solid var(--border-subtle);">
+          <div>
+            <h3 class="text-base font-bold tracking-tight" style="color: var(--text-primary);">Asset Pair Controls &amp; Circuit Breakers</h3>
+            <p class="text-xs" style="color: var(--text-secondary);">Independent kill-switches and fee schedule overrides</p>
+          </div>
+          <span class="text-xs font-mono" style="color: var(--text-faint);">Matching Engine: 0.8ms Avg Tick</span>
+        </div>
+
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left text-xs whitespace-nowrap">
+            <thead style="background: var(--bg-hover); border-bottom: 1px solid var(--border-subtle);">
+              <tr>
+                <th class="px-4 py-3.5 font-semibold" style="color: var(--text-secondary);">Trading Pair</th>
+                <th class="px-4 py-3.5 font-semibold text-right" style="color: var(--text-secondary);">Index Price</th>
+                <th class="px-4 py-3.5 font-semibold text-right" style="color: var(--text-secondary);">Spread (bps)</th>
+                <th class="px-4 py-3.5 font-semibold text-right" style="color: var(--text-secondary);">Order Book Depth (±2%)</th>
+                <th class="px-4 py-3.5 font-semibold text-center" style="color: var(--text-secondary);">Maker Fee</th>
+                <th class="px-4 py-3.5 font-semibold text-center" style="color: var(--text-secondary);">Taker Fee</th>
+                <th class="px-4 py-3.5 font-semibold text-center" style="color: var(--text-secondary);">Status</th>
+                <th class="px-4 py-3.5 font-semibold text-right" style="color: var(--text-secondary);">Circuit Breaker</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--text-primary);">
+              <!-- Pair 1 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-orange-500/15 text-orange-500 flex items-center justify-center font-bold text-xs">₿</span>
+                    <div>
+                      <p class="font-bold text-xs">BTC/USDT</p>
+                      <p class="text-[10px]" style="color: var(--text-faint);">Crypto Spot</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold font-mono">$64,230.50</td>
+                <td class="px-4 py-3.5 text-right font-mono text-emerald-400 font-bold">0.4 bps</td>
+                <td class="px-4 py-3.5 text-right font-mono">$18,450,000</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.02%</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.05%</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Trading Active</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px] text-rose-400 border border-rose-500/30 hover:bg-rose-500/10" data-halt-pair="BTC/USDT" data-is-halted="false">Halt Trading</button>
+                </td>
+              </tr>
+
+              <!-- Pair 2 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center font-bold text-xs">Ξ</span>
+                    <div>
+                      <p class="font-bold text-xs">ETH/USDT</p>
+                      <p class="text-[10px]" style="color: var(--text-faint);">Crypto Spot</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold font-mono">$3,542.10</td>
+                <td class="px-4 py-3.5 text-right font-mono text-emerald-400 font-bold">0.6 bps</td>
+                <td class="px-4 py-3.5 text-right font-mono">$12,100,000</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.02%</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.05%</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Trading Active</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px] text-rose-400 border border-rose-500/30 hover:bg-rose-500/10" data-halt-pair="ETH/USDT" data-is-halted="false">Halt Trading</button>
+                </td>
+              </tr>
+
+              <!-- Pair 3 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold text-xs">€</span>
+                    <div>
+                      <p class="font-bold text-xs">EUR/USD</p>
+                      <p class="text-[10px]" style="color: var(--text-faint);">Forex Institutional</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold font-mono">1.08420</td>
+                <td class="px-4 py-3.5 text-right font-mono text-emerald-400 font-bold">0.2 bps</td>
+                <td class="px-4 py-3.5 text-right font-mono">$45,200,000</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.01%</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.02%</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Trading Active</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px] text-rose-400 border border-rose-500/30 hover:bg-rose-500/10" data-halt-pair="EUR/USD" data-is-halted="false">Halt Trading</button>
+                </td>
+              </tr>
+
+              <!-- Pair 4 -->
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center font-bold text-xs">Au</span>
+                    <div>
+                      <p class="font-bold text-xs">XAU/USD</p>
+                      <p class="text-[10px]" style="color: var(--text-faint);">Spot Gold</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold font-mono">$2,648.20</td>
+                <td class="px-4 py-3.5 text-right font-mono text-emerald-400 font-bold">0.5 bps</td>
+                <td class="px-4 py-3.5 text-right font-mono">$14,200,000</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.02%</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.04%</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Trading Active</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px] text-rose-400 border border-rose-500/30 hover:bg-rose-500/10" data-halt-pair="XAU/USD" data-is-halted="false">Halt Trading</button>
+                </td>
+              </tr>
+
+              <!-- Pair 5 -->
+              <tr class="hover:bg-white/[0.02] transition">
+                <td class="px-4 py-3.5">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-7 h-7 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center font-bold text-xs">AAPL</span>
+                    <div>
+                      <p class="font-bold text-xs">AAPL/USD</p>
+                      <p class="text-[10px]" style="color: var(--text-faint);">US Equity Tokenized</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3.5 text-right font-bold font-mono">$224.50</td>
+                <td class="px-4 py-3.5 text-right font-mono text-emerald-400 font-bold">1.1 bps</td>
+                <td class="px-4 py-3.5 text-right font-mono">$8,400,000</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.03%</td>
+                <td class="px-4 py-3.5 text-center font-mono">0.06%</td>
+                <td class="px-4 py-3.5 text-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Trading Active</span>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <button class="btn btn-ghost px-2.5 py-1 text-[11px] text-rose-400 border border-rose-500/30 hover:bg-rose-500/10" data-halt-pair="AAPL/USD" data-is-halted="false">Halt Trading</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

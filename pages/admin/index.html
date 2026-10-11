@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SynxEx — Admin Command Center</title>
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+</head>
+<body class="min-h-screen antialiased flex noise-overlay" data-page="admin-dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+  <aside class="w-[240px] shrink-0 sidebar-desktop sidebar-glass flex flex-col justify-between h-screen sticky top-0 z-30 select-none theme-transition" id="sidebar" style="border-right: 1px solid var(--border-subtle);"></aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0 relative">
+    <header id="header"></header>
+    <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
+      
+      <!-- Admin Header Banner -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-lava/15 text-lava border border-lava/25">Root Console</span>
+            <span class="text-xs font-mono" style="color: var(--text-faint);">Node ID: srx-cluster-09a</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight flex items-center gap-3" style="color: var(--text-primary);">
+            Admin Command Center
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.7)]"></span>
+          </h1>
+          <p class="text-xs sm:text-sm mt-0.5" style="color: var(--text-secondary);">Real-time platform surveillance, liquidity allocation, and risk governance</p>
+        </div>
+        
+        <!-- Quick Action Bar -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button class="btn btn-ghost text-xs px-3 py-2 flex items-center gap-2" id="flushCacheBtn">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            <span>Purge Edge Cache</span>
+          </button>
+          <button class="btn btn-lava text-xs px-3.5 py-2 flex items-center gap-2 shadow-lg shadow-lava/20" id="emergencyHaltBtn">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            <span>Circuit Breakers</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Metrics Grid (4 Cards) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Card 1: Platform AUM -->
+        <div class="glass card-lift rounded-2xl p-4.5 relative overflow-hidden" style="border: 1px solid var(--border-subtle);">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Platform Total AUM</p>
+              <h3 class="text-2xl font-bold tracking-tight mt-1 num-tabular" style="color: var(--text-primary);">$148,620,410</h3>
+            </div>
+            <div class="w-9 h-9 rounded-xl bg-lava/10 text-lava flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2 text-xs">
+            <span class="text-emerald-400 font-semibold flex items-center">↑ +8.4%</span>
+            <span style="color: var(--text-faint);">vs previous 30 days</span>
+          </div>
+        </div>
+
+        <!-- Card 2: 24h Volume -->
+        <div class="glass card-lift rounded-2xl p-4.5 relative overflow-hidden" style="border: 1px solid var(--border-subtle);">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">24h Trading Volume</p>
+              <h3 class="text-2xl font-bold tracking-tight mt-1 num-tabular" style="color: var(--text-primary);">$42,852,190</h3>
+            </div>
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2 text-xs">
+            <span class="text-emerald-400 font-semibold flex items-center">↑ +14.2%</span>
+            <span style="color: var(--text-faint);">48,120 executions</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Registered Traders -->
+        <div class="glass card-lift rounded-2xl p-4.5 relative overflow-hidden" style="border: 1px solid var(--border-subtle);">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Active / Total Users</p>
+              <h3 class="text-2xl font-bold tracking-tight mt-1 num-tabular" style="color: var(--text-primary);">24.9K <span class="text-sm font-normal" style="color: var(--text-faint);">/ 284.5K</span></h3>
+            </div>
+            <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2 text-xs">
+            <span class="text-emerald-400 font-semibold">1,240 new</span>
+            <span style="color: var(--text-faint);">onboarded this week</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Platform Net Revenue -->
+        <div class="glass card-lift rounded-2xl p-4.5 relative overflow-hidden" style="border: 1px solid var(--border-subtle);">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Net Fee Revenue (30d)</p>
+              <h3 class="text-2xl font-bold tracking-tight mt-1 num-tabular" style="color: var(--text-primary);">$384,150</h3>
+            </div>
+            <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center gap-2 text-xs">
+            <span class="text-emerald-400 font-semibold">↑ +19.1%</span>
+            <span style="color: var(--text-faint);">bot splits + spreads</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Section: Chart + Operations Radar -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Left: Analytics Chart Card (8 cols) -->
+        <div class="lg:col-span-8 glass rounded-2xl p-5 relative" style="border: 1px solid var(--border-subtle);">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+            <div>
+              <h3 class="text-base font-bold tracking-tight" style="color: var(--text-primary);">Volume &amp; Revenue Analytics</h3>
+              <p class="text-xs" style="color: var(--text-secondary);">Cross-asset spot, remittance, and AI agent execution throughput</p>
+            </div>
+            
+            <!-- Chart Controls -->
+            <div class="flex items-center gap-2">
+              <!-- Line / Bar Switcher -->
+              <div class="flex p-0.5 rounded-lg" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+                <button class="px-2 py-1 rounded-md text-xs font-semibold bg-lava text-white transition" id="chartModeLine">Line</button>
+                <button class="px-2 py-1 rounded-md text-xs font-semibold text-muted hover:text-white transition" id="chartModeBar">Bar</button>
+              </div>
+
+              <!-- Timeframe Filters -->
+              <div class="flex p-0.5 rounded-lg" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+                <button class="px-2 py-1 rounded-md text-xs font-semibold bg-lava text-white transition" data-admin-range="24H">24H</button>
+                <button class="px-2 py-1 rounded-md text-xs font-semibold text-muted hover:text-white transition" data-admin-range="7D">7D</button>
+                <button class="px-2 py-1 rounded-md text-xs font-semibold text-muted hover:text-white transition" data-admin-range="30D">30D</button>
+                <button class="px-2 py-1 rounded-md text-xs font-semibold text-muted hover:text-white transition" data-admin-range="90D">90D</button>
+                <button class="px-2 py-1 rounded-md text-xs font-semibold text-muted hover:text-white transition" data-admin-range="1Y">1Y</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Stat Summary Row -->
+          <div class="grid grid-cols-3 gap-3 p-3 rounded-xl mb-4" style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle);">
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Selected Period Volume</p>
+              <p class="text-base font-bold num-tabular mt-0.5" style="color: var(--text-primary);" id="adminVolumeStat">$42,852,190</p>
+            </div>
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Trades Executed</p>
+              <p class="text-base font-bold num-tabular mt-0.5" style="color: var(--text-primary);" id="adminTradesStat">48,120</p>
+            </div>
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-faint);">Fee Generation</p>
+              <p class="text-base font-bold num-tabular mt-0.5 text-lava" id="adminRevenueStat">$64,280</p>
+            </div>
+          </div>
+
+          <!-- SVG Chart Area -->
+          <div class="w-full h-60 relative">
+            <svg class="w-full h-full" id="adminChartSvg" preserveAspectRatio="none" viewBox="0 0 800 240"></svg>
+          </div>
+        </div>
+
+        <!-- Right: Liquidity & Engine Radar (4 cols) -->
+        <div class="lg:col-span-4 space-y-4">
+          <!-- Liquidity Pool Distribution Card -->
+          <div class="glass rounded-2xl p-5" style="border: 1px solid var(--border-subtle);">
+            <h3 class="text-sm font-bold tracking-tight mb-3" style="color: var(--text-primary);">Treasury Reserve Allocation</h3>
+            
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs font-medium mb-1">
+                  <span style="color: var(--text-secondary);">Crypto Hot/Cold Vaults</span>
+                  <span class="font-bold num-tabular" style="color: var(--text-primary);">$92.14M (62%)</span>
+                </div>
+                <div class="w-full h-2 rounded-full overflow-hidden" style="background: var(--bg-hover);">
+                  <div class="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full" style="width: 62%;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-medium mb-1">
+                  <span style="color: var(--text-secondary);">Fiat Clearing Accounts (FedNow / SEPA)</span>
+                  <span class="font-bold num-tabular" style="color: var(--text-primary);">$35.67M (24%)</span>
+                </div>
+                <div class="w-full h-2 rounded-full overflow-hidden" style="background: var(--bg-hover);">
+                  <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full" style="width: 24%;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-medium mb-1">
+                  <span style="color: var(--text-secondary);">DeFi Staking &amp; Agent Collateral</span>
+                  <span class="font-bold num-tabular" style="color: var(--text-primary);">$20.81M (14%)</span>
+                </div>
+                <div class="w-full h-2 rounded-full overflow-hidden" style="background: var(--bg-hover);">
+                  <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" style="width: 14%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 flex items-center justify-between text-xs" style="border-top: 1px solid var(--border-subtle);">
+              <span style="color: var(--text-faint);">Multi-Sig Threshold:</span>
+              <span class="font-mono text-emerald-400 font-bold">4 of 7 Keys Armed</span>
+            </div>
+          </div>
+
+          <!-- Service Health Matrix -->
+          <div class="glass rounded-2xl p-5" style="border: 1px solid var(--border-subtle);">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="text-sm font-bold tracking-tight" style="color: var(--text-primary);">Core Engine Telemetry</h3>
+              <span class="text-[10px] font-mono text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">All Healthy</span>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between items-center py-1.5" style="border-bottom: 1px solid var(--border-subtle);">
+                <span class="flex items-center gap-2" style="color: var(--text-secondary);">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  L3 Matching Engine
+                </span>
+                <span class="font-mono font-medium" style="color: var(--text-primary);">0.8ms</span>
+              </div>
+
+              <div class="flex justify-between items-center py-1.5" style="border-bottom: 1px solid var(--border-subtle);">
+                <span class="flex items-center gap-2" style="color: var(--text-secondary);">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Multi-Chain RPC Gateway
+                </span>
+                <span class="font-mono font-medium" style="color: var(--text-primary);">11.4ms</span>
+              </div>
+
+              <div class="flex justify-between items-center py-1.5" style="border-bottom: 1px solid var(--border-subtle);">
+                <span class="flex items-center gap-2" style="color: var(--text-secondary);">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  ISO 20022 Banking Gateway
+                </span>
+                <span class="font-mono font-medium text-emerald-400">Active</span>
+              </div>
+
+              <div class="flex justify-between items-center py-1.5">
+                <span class="flex items-center gap-2" style="color: var(--text-secondary);">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Autonomous AI Agents Fleet
+                </span>
+                <span class="font-mono font-medium text-lava">6/6 Online</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Audit & Surveillance Stream Table -->
+      <div class="glass card-lift rounded-2xl overflow-hidden" style="border: 1px solid var(--border-subtle);">
+        <div class="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3" style="border-bottom: 1px solid var(--border-subtle);">
+          <div>
+            <h3 class="text-base font-bold tracking-tight" style="color: var(--text-primary);">Live Platform Security &amp; Audit Log</h3>
+            <p class="text-xs" style="color: var(--text-secondary);">Real-time stream of high-value operations, risk flags, and system events</p>
+          </div>
+          <a href="/pages/admin/transactions.html" class="text-xs font-semibold text-lava hover:underline flex items-center gap-1">
+            <span>View Full Ledger</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          </a>
+        </div>
+
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left text-xs whitespace-nowrap">
+            <thead style="background: var(--bg-hover); border-bottom: 1px solid var(--border-subtle);">
+              <tr>
+                <th class="px-4 py-3 font-semibold" style="color: var(--text-secondary);">Timestamp</th>
+                <th class="px-4 py-3 font-semibold" style="color: var(--text-secondary);">Severity</th>
+                <th class="px-4 py-3 font-semibold" style="color: var(--text-secondary);">Event Type</th>
+                <th class="px-4 py-3 font-semibold" style="color: var(--text-secondary);">Origin / User</th>
+                <th class="px-4 py-3 font-semibold" style="color: var(--text-secondary);">Details</th>
+                <th class="px-4 py-3 font-semibold text-right" style="color: var(--text-secondary);">Status</th>
+              </tr>
+            </thead>
+            <tbody style="color: var(--text-primary);">
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-3 font-mono" style="color: var(--text-faint);">10:14:22 UTC</td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-0.5 rounded font-bold uppercase text-[9px] bg-red-500/15 text-red-400 border border-red-500/25">High Alert</span>
+                </td>
+                <td class="px-4 py-3 font-semibold">Whale Withdrawal Hold</td>
+                <td class="px-4 py-3 font-mono">0x742d...44e</td>
+                <td class="px-4 py-3">125.00 BTC ($8.02M) flagged by AML threshold trigger</td>
+                <td class="px-4 py-3 text-right">
+                  <span class="text-amber-400 font-medium">Pending Multi-Sig</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-3 font-mono" style="color: var(--text-faint);">10:11:05 UTC</td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-0.5 rounded font-bold uppercase text-[9px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">Resolved</span>
+                </td>
+                <td class="px-4 py-3 font-semibold">Hot Wallet Rebalance</td>
+                <td class="px-4 py-3 font-mono">Vault Controller 02</td>
+                <td class="px-4 py-3">$2,500,000 USDT transferred from cold storage to hot pool</td>
+                <td class="px-4 py-3 text-right">
+                  <span class="text-emerald-400 font-medium">Confirmed (Block #21894102)</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-white/[0.02] transition" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-4 py-3 font-mono" style="color: var(--text-faint);">10:08:49 UTC</td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-0.5 rounded font-bold uppercase text-[9px] bg-amber-500/15 text-amber-400 border border-amber-500/25">Warning</span>
+                </td>
+                <td class="px-4 py-3 font-semibold">Rate Limit Spike</td>
+                <td class="px-4 py-3 font-mono">IP 185.220.101.44</td>
+                <td class="px-4 py-3">4,800 req/min on /api/v1/orderbook - Edge challenge active</td>
+                <td class="px-4 py-3 text-right">
+                  <span class="text-blue-400 font-medium">WAF Challenged</span>
+                </td>
+              </tr>
+              <tr class="hover:bg-white/[0.02] transition">
+                <td class="px-4 py-3 font-mono" style="color: var(--text-faint);">09:59:12 UTC</td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-0.5 rounded font-bold uppercase text-[9px] bg-blue-500/15 text-blue-400 border border-blue-500/25">Routine</span>
+                </td>
+                <td class="px-4 py-3 font-semibold">AI Bot Settlement</td>
+                <td class="px-4 py-3 font-mono">Agent: Alpha Trader</td>
+                <td class="px-4 py-3">Closed Long ETH position at $3,542 (Net PnL +$14,200)</td>
+                <td class="px-4 py-3 text-right">
+                  <span class="text-emerald-400 font-medium">Profit Distributed</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
