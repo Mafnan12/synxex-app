@@ -107,21 +107,61 @@
           </div>
         </div>
 
-        <!-- Right: Card Display -->
+        <!-- Right: Card Display & Controls -->
         <div class="space-y-6">
           <!-- The Virtual Card -->
-          <div class="card-foil rounded-2xl p-6 text-white relative overflow-hidden shadow-2xl h-56 flex flex-col justify-between" style="background: linear-gradient(135deg, #7A1D2B 0%, #4A0E17 100%);">
+          <div id="virtualCardFoil" class="card-foil rounded-2xl p-6 text-white relative overflow-hidden shadow-2xl h-56 flex flex-col justify-between transition-all duration-300" style="background: linear-gradient(135deg, #7A1D2B 0%, #4A0E17 100%);">
             <div class="absolute top-0 left-0 w-full h-full bg-black/10 mix-blend-overlay"></div>
+            
+            <!-- Frozen Banner (hidden by default) -->
+            <div id="cardFrozenBadge" hidden class="absolute top-3 right-3 bg-rose-600/90 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-lg z-20">
+              Frozen
+            </div>
+
             <div class="relative z-10 flex justify-between items-start">
-              <div class="font-bold text-xl tracking-widest">SynxEx</div>
+              <div>
+                <div class="font-bold text-xl tracking-widest">SynxEx</div>
+                <div class="text-[10px] tracking-wider uppercase text-white/70 mt-0.5">Virtual Debit • Multi-Currency</div>
+              </div>
               <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><circle cx="10" cy="10" r="10" fill="rgba(255,255,255,0.5)"/><circle cx="22" cy="10" r="10" fill="rgba(255,255,255,0.5)"/></svg>
             </div>
+            
             <div class="relative z-10 space-y-4">
-              <div class="text-2xl font-mono tracking-widest">**** **** **** 4921</div>
+              <div id="cardPanDisplay" class="text-2xl font-mono tracking-widest select-all cursor-pointer" title="Click to copy">•••• •••• •••• 4921</div>
               <div class="flex justify-between text-sm uppercase tracking-wider font-medium">
-                <span>Jane Doe</span>
-                <span>12/28</span>
+                <span id="cardholderName">AFNAN</span>
+                <div class="flex gap-4">
+                  <span>EXP <strong class="font-mono">12/28</strong></span>
+                  <span>CVV <strong id="cardCvvDisplay" class="font-mono">•••</strong></span>
+                </div>
               </div>
+            </div>
+          </div>
+
+          <!-- Card Action Controls -->
+          <div class="grid grid-cols-2 gap-3">
+            <button id="freezeCardBtn" type="button" class="btn btn-ghost py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2" style="border: 1px solid var(--border-subtle);">
+              <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+              <span>Freeze Card</span>
+            </button>
+            <button id="revealDetailsBtn" type="button" class="btn btn-ghost py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2" style="border: 1px solid var(--border-subtle);">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              <span>Show Details</span>
+            </button>
+          </div>
+
+          <!-- Monthly Velocity & Spending Limit (Ramp Pattern) -->
+          <div class="glass rounded-xl p-5" style="border: 1px solid var(--border-subtle);">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Monthly Spending Limit</span>
+              <span class="text-xs font-mono font-bold" id="cardSpendText" style="color: var(--text-primary);">$657.59 of $5,000.00</span>
+            </div>
+            <div class="w-full bg-white/10 rounded-full h-2 mb-3 overflow-hidden">
+              <div id="cardSpendBar" class="bg-gradient-to-r from-emerald-500 to-amber-500 h-2 rounded-full transition-all duration-500" style="width: 13%;"></div>
+            </div>
+            <div class="flex gap-2">
+              <input id="cardLimitInput" type="text" class="input flex-1 text-xs py-1.5 px-3" value="$5,000.00" placeholder="Set Limit">
+              <button id="saveLimitBtn" type="button" class="btn btn-lava text-xs px-3 py-1.5 rounded-lg font-semibold">Update Limit</button>
             </div>
           </div>
 

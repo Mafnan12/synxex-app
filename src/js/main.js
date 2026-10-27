@@ -14,6 +14,7 @@ import { initHeader } from './components/header.js';
 import { initDashboard } from './dashboard.js';
 import { initRemittance } from './remittance.js';
 import { initAdmin } from './admin.js';
+import { initBankingCards } from './cards.js';
 
 // Initialize theme first (prevents flash)
 initTheme();
@@ -33,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize page-specific logic
   if (activePage === 'dashboard') {
     initDashboard();
+  } else if (activePage === 'banking') {
+    initBankingCards();
   } else if (activePage === 'remittance') {
     initRemittance();
   } else if (activePage.startsWith('admin-')) {

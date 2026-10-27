@@ -29,8 +29,15 @@
     <!-- ─── ROW 1: Greeting + Quick Actions (Above the Fold) ─── -->
     <section class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 fade-in">
       <div>
-        <h1 class="text-2xl font-extrabold tracking-editorial" style="color: var(--text-primary);">Good morning, Afnan</h1>
-        <p class="text-[13px] mt-0.5" style="color: var(--text-muted);">Your complete financial ecosystem at a glance.</p>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            Interactive Demo
+          </span>
+          <span class="text-[11px] font-mono text-zinc-400">Synced to Global Venue</span>
+        </div>
+        <h1 class="text-2xl font-extrabold tracking-editorial" id="dashboardGreeting" style="color: var(--text-primary);">Welcome back</h1>
+        <p class="text-[13px] mt-0.5" style="color: var(--text-muted);">Your complete financial ecosystem across crypto, fiat, and cards.</p>
       </div>
       <div class="flex items-center gap-2.5 flex-wrap qa-row">
         <button class="deposit-glow btn btn-lava text-[13px] group" onclick="document.getElementById('depositModal').hidden=false; document.body.style.overflow='hidden';">
@@ -58,7 +65,13 @@
       <article class="xl:col-span-2 rounded-2xl glass-hero border-gradient card-lift p-5 relative overflow-hidden theme-transition">
         <div class="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <span class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Total portfolio value</span>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">Total portfolio value</span>
+              <!-- Privacy Eye Toggle -->
+              <button id="toggleBalancePrivacyBtn" type="button" class="text-zinc-400 hover:text-white transition-colors" title="Toggle balance visibility">
+                <svg id="balancePrivacyIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              </button>
+            </div>
             <div class="flex items-baseline gap-3 mt-1 flex-wrap">
               <span class="heading-xxl text-4xl sm:text-[42px] num-tabular" id="portfolioTotalValue" style="color: var(--text-primary);">$124,580<span class="text-2xl sm:text-3xl font-bold" style="color: var(--text-faint);">.42</span></span>
               <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-500 px-2 py-0.5 rounded-md num-tabular" id="portfolioChangeBadge" style="background: var(--emerald-bg); border: 1px solid var(--emerald-border);">

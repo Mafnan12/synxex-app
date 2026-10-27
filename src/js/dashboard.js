@@ -11,6 +11,7 @@
 
 import { showToast } from './toast.js';
 import { openModal, closeModal } from './modal.js';
+import { authService } from './auth.js';
 
 // Global state simulation for User Dashboard
 const state = {
@@ -119,6 +120,8 @@ const chartRanges = {
 export function initDashboard() {
   if (document.body.dataset.page !== 'dashboard') return;
 
+  setupPersonalizedGreeting();
+  setupBalancePrivacyToggle();
   setupChartRangeButtons();
   setupChartTypeSwitcher();
   setupPortfolioGraphHover();
@@ -129,6 +132,70 @@ export function initDashboard() {
   setupCommandPaletteSearch();
   setupNotificationRead();
   updateBalanceUI();
+}
+
+/**
+ * 0. Personalized Greeting from Auth Session & Time of Day
+ */
+function setupPersonalizedGreeting() {
+  const greetingEl = document.getElementById('dashboardGreeting');
+  if (!greetingEl) return;
+
+  const now = new Date();
+  const hour = now.getHours();
+  let timeGreeting = 'Good morning';
+  if (hour >= 12 && hour < 17) {
+    timeGreeting = 'Good afternoon';
+  } else if (hour >= 17) {
+    timeGreeting = 'Good evening';
+  }
+
+  authService.init().then(() => {
+    const user = authService.getUser();
+    if (user) {
+      const name = user.name || (user.email ? user.email.split('@')[0] : '');
+      greetingEl.textContent = name ? `${timeGreeting}, ${name}` : `${timeGreeting}, Member`;
+    } else {
+      greetingEl.textContent = `${timeGreeting}`;
+    }
+  });
+}
+
+/**
+ * 0b. Privacy Balance Masking Toggle (Revolut / Wise pattern)
+ */
+let isBalanceHidden = localStorage.getItem('synxex_hide_balance') === 'true';
+
+function setupBalancePrivacyToggle() {
+  const toggleBtn = document.getElementById('toggleBalancePrivacyBtn');
+  const totalValEl = document.getElementById('portfolioTotalValue');
+  const icon = document.getElementById('balancePrivacyIcon');
+  if (!toggleBtn || !totalValEl) return;
+
+  function renderBalancePrivacy() {
+    if (isBalanceHidden) {
+      totalValEl.innerHTML = '<span class="tracking-widest">••••••••</span>';
+      if (icon) {
+        icon.innerHTML = '<path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>';
+      }
+    } else {
+      updateBalanceUI();
+      if (icon) {
+        icon.innerHTML = '<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+      }
+    }
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    isBalanceHidden = !isBalanceHidden;
+    localStorage.setItem('synxex_hide_balance', isBalanceHidden);
+    renderBalancePrivacy();
+    showToast(isBalanceHidden ? 'Balances masked' : 'Balances visible', 'info');
+  });
+
+  if (isBalanceHidden) {
+    renderBalancePrivacy();
+  }
 }
 
 /**
