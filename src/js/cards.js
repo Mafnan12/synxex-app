@@ -142,6 +142,81 @@ export function initBankingCards() {
     }
   });
 
+  // Add Funds Modal Controls
+  const addFundsBtn = document.getElementById('addFundsBtn');
+  const addFundsModal = document.getElementById('addFundsModal');
+  const closeAddFundsModalBtn = document.getElementById('closeAddFundsModalBtn');
+  const confirmDepositBtn = document.getElementById('confirmDepositBtn');
+  const fundDepositAmount = document.getElementById('fundDepositAmount');
+  const fundTargetCurrency = document.getElementById('fundTargetCurrency');
+
+  if (addFundsBtn && addFundsModal) {
+    addFundsBtn.addEventListener('click', () => {
+      addFundsModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  if (closeAddFundsModalBtn && addFundsModal) {
+    closeAddFundsModalBtn.addEventListener('click', () => {
+      addFundsModal.hidden = true;
+      document.body.style.overflow = '';
+    });
+  }
+  if (confirmDepositBtn && addFundsModal) {
+    confirmDepositBtn.addEventListener('click', () => {
+      const amt = fundDepositAmount ? fundDepositAmount.value : '1,000';
+      const curr = fundTargetCurrency ? fundTargetCurrency.value : 'USD';
+      confirmDepositBtn.disabled = true;
+      confirmDepositBtn.textContent = 'Processing ACH...';
+      setTimeout(() => {
+        confirmDepositBtn.disabled = false;
+        confirmDepositBtn.textContent = 'Confirm & Deposit';
+        addFundsModal.hidden = true;
+        document.body.style.overflow = '';
+        showToast(`Successfully initiated $${amt} deposit into ${curr} account`, 'success');
+      }, 700);
+    });
+  }
+
+  // Order Physical Card Modal Controls
+  const orderCardBtn = document.getElementById('orderPhysicalCardBtn');
+  const orderCardModal = document.getElementById('orderPhysicalCardModal');
+  const closeOrderCardModalBtn = document.getElementById('closeOrderCardModalBtn');
+  const confirmOrderCardBtn = document.getElementById('confirmOrderCardBtn');
+  const manageStandingOrdersBtn = document.getElementById('manageStandingOrdersBtn');
+
+  if (orderCardBtn && orderCardModal) {
+    orderCardBtn.addEventListener('click', () => {
+      orderCardModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  if (closeOrderCardModalBtn && orderCardModal) {
+    closeOrderCardModalBtn.addEventListener('click', () => {
+      orderCardModal.hidden = true;
+      document.body.style.overflow = '';
+    });
+  }
+  if (confirmOrderCardBtn && orderCardModal) {
+    confirmOrderCardBtn.addEventListener('click', () => {
+      confirmOrderCardBtn.disabled = true;
+      confirmOrderCardBtn.textContent = 'Submitting order...';
+      setTimeout(() => {
+        confirmOrderCardBtn.disabled = false;
+        confirmOrderCardBtn.textContent = 'Place Physical Card Order';
+        orderCardModal.hidden = true;
+        document.body.style.overflow = '';
+        showToast('Metal Card ordered successfully! Tracking number sent via email.', 'success');
+      }, 700);
+    });
+  }
+
+  if (manageStandingOrdersBtn) {
+    manageStandingOrdersBtn.addEventListener('click', () => {
+      showToast('Standing orders recurring mandate list up to date.', 'info');
+    });
+  }
+
   updateCardUi();
 }
 

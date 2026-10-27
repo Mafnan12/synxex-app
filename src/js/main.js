@@ -16,6 +16,7 @@ import { initRemittance } from './remittance.js';
 import { initAdmin } from './admin.js';
 import { initBankingCards } from './cards.js';
 import { initMarkets } from './markets.js';
+import { initAgents } from './agents.js';
 
 // Initialize theme first (prevents flash)
 initTheme();
@@ -39,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initBankingCards();
   } else if (activePage === 'markets') {
     initMarkets();
+  } else if (activePage === 'agents') {
+    initAgents();
   } else if (activePage === 'remittance') {
     initRemittance();
   } else if (activePage.startsWith('admin-')) {

@@ -27,7 +27,10 @@
           <h1 class="text-3xl font-bold tracking-tight" style="color: var(--text-primary);">AI Trading Agents</h1>
           <p class="text-sm mt-1" style="color: var(--text-secondary);">Simulated quantitative models with automated signals. Real capital deployment requires explicit user policy confirmation.</p>
         </div>
-        <button class="btn btn-lava px-5 py-2">Deploy Strategy Model</button>
+        <button id="deployModelBtn" class="btn btn-lava px-5 py-2 font-semibold shadow-sm flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Deploy Strategy Model</span>
+        </button>
       </div>
 
       <!-- Stats -->
@@ -183,6 +186,45 @@
 
     </main>
   </div>
+  <!-- Deploy Strategy Modal -->
+  <div class="modal-overlay" id="deployAgentModal" hidden>
+    <div class="modal-content p-6 max-w-md w-full">
+      <div class="flex items-center justify-between pb-4 mb-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <h3 class="font-bold text-base" style="color: var(--text-primary);">Deploy Quantitative Strategy Agent</h3>
+        <button id="closeDeployModalBtn" class="text-zinc-400 hover:text-white p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2"/></svg>
+        </button>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1">Strategy Name</label>
+          <input id="newAgentName" type="text" class="input w-full text-xs" placeholder="e.g. BTC Volatility Harvester" value="Synx Alpha Momentum" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1">Core Algorithm</label>
+          <select id="newAgentStrategy" class="input w-full text-xs">
+            <option value="Momentum Breakout">Momentum Breakout (Bollinger Bands + RSI)</option>
+            <option value="Statistical Arbitrage">Statistical Arbitrage (Cross-Exchange Spread)</option>
+            <option value="Mean Reversion">Mean Reversion (Ornstein-Uhlenbeck)</option>
+            <option value="Sentiment Filter">LLM Sentiment + News Catalyst Trigger</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1">Risk Gating Profile</label>
+          <select id="newAgentRisk" class="input w-full text-xs">
+            <option value="Low">Low (Max 1% capital per trade, trailing stop-loss)</option>
+            <option value="Medium" selected>Medium (Max 3% capital, ATR-based dynamic stops)</option>
+            <option value="High">High (High-frequency leverage with aggressive sizing)</option>
+          </select>
+        </div>
+        <div class="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-300">
+          <strong>Sandbox Isolation:</strong> Deployed models execute in paper trading for 48 hours to establish a verifiable Sharpe ratio before real capital allocation is unlocked.
+        </div>
+        <button id="confirmDeployAgentBtn" class="btn btn-lava w-full py-2.5 rounded-xl font-bold text-sm">Deploy Strategy to Sandbox</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Command Palette Modal -->
   <div class="modal-overlay" id="commandPalette" hidden>
     <div class="modal-content command-palette p-0">
