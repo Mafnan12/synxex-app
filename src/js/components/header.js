@@ -26,8 +26,8 @@ export function initHeader() {
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" style="color: var(--text-faint);">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           </div>
-          <input class="w-full rounded-lg pl-8 pr-12 py-1.5 text-xs focus:outline-none transition theme-transition cursor-pointer" placeholder="Search markets, assets, agents..." type="text" readonly id="searchTrigger"
-            style="background: var(--bg-input); border: 1px solid var(--border-subtle); color: var(--text-primary);" />
+          <input class="w-full rounded-lg pl-9 pr-12 py-1.5 text-xs focus:outline-none transition theme-transition cursor-pointer" placeholder="Search markets, assets, agents..." type="text" readonly id="searchTrigger"
+            style="padding-left: 2.25rem !important; background: var(--bg-input); border: 1px solid var(--border-subtle); color: var(--text-primary);" />
           <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
             <kbd class="text-[10px] font-medium px-1.5 py-0.5 rounded" style="color: var(--text-faint); background: var(--bg-pill); border: 1px solid var(--border-subtle);">⌘K</kbd>
           </div>

@@ -7,19 +7,12 @@ const STORAGE_KEY = 'synxex-theme';
 
 export function initTheme() {
   const saved = localStorage.getItem(STORAGE_KEY);
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+  // Default to dark theme across the entire application to match marketing aesthetic
   if (saved === 'light') {
     document.documentElement.classList.remove('dark');
-  } else if (saved === 'dark') {
-    document.documentElement.classList.add('dark');
   } else {
-    // Follow system preference
-    if (prefersDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.add('dark');
   }
 }
 

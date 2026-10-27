@@ -22,10 +22,19 @@
           <div class="glass card-lift rounded-2xl p-6 md:p-8" style="border: 1px solid var(--border-subtle);">
             <div class="text-sm font-medium mb-2" style="color: var(--text-secondary);">Total Wallet Balance</div>
             <div class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--text-primary);">$142,504.20</div>
-            <div class="flex gap-4">
-              <button class="btn btn-lava px-6 py-2 flex-1 md:flex-none">Send</button>
-              <button class="btn btn-ghost px-6 py-2 flex-1 md:flex-none" style="border: 1px solid var(--border-subtle);">Receive</button>
-              <button class="btn btn-ghost px-6 py-2 flex-1 md:flex-none" style="border: 1px solid var(--border-subtle);">Swap</button>
+            <div class="flex gap-3 sm:gap-4 flex-wrap">
+              <button id="walletSendBtn" class="btn btn-lava px-6 py-2.5 flex-1 md:flex-none font-semibold flex items-center justify-center gap-1.5 shadow-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 10l7-7m0 0l7 7m-7-7v18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Send</span>
+              </button>
+              <button id="walletReceiveBtn" class="btn btn-ghost px-6 py-2.5 flex-1 md:flex-none font-semibold flex items-center justify-center gap-1.5" style="border: 1px solid var(--border-subtle);">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Receive</span>
+              </button>
+              <button id="walletSwapBtn" class="btn btn-ghost px-6 py-2.5 flex-1 md:flex-none font-semibold flex items-center justify-center gap-1.5" style="border: 1px solid var(--border-subtle);">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Swap</span>
+              </button>
             </div>
           </div>
 
@@ -196,6 +205,167 @@
 
     </main>
   </div>
+  <!-- Send Crypto Modal -->
+  <div class="modal-overlay" id="walletSendModal" hidden>
+    <div class="modal-content p-6 max-w-md w-full">
+      <div class="flex items-center justify-between pb-4 mb-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <h3 class="font-bold text-base" style="color: var(--text-primary);">Send Crypto Assets</h3>
+        <button id="closeWalletSendModalBtn" class="text-zinc-400 hover:text-white p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2"/></svg>
+        </button>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1">Select Asset</label>
+          <select id="walletSendAsset" class="input w-full text-xs">
+            <option value="BTC" selected>Bitcoin (1.45 BTC available)</option>
+            <option value="ETH">Ethereum (12.5 ETH available)</option>
+            <option value="SOL">Solana (32.0 SOL available)</option>
+            <option value="USDT">Tether (1,250 USDT available)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1">Recipient Public Address or ENS</label>
+          <input id="walletSendAddress" type="text" class="input w-full font-mono text-xs" placeholder="0x... or vitalik.eth" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1">Amount</label>
+          <div class="relative">
+            <input id="walletSendAmount" type="number" step="any" class="input w-full font-mono text-xs pr-16" placeholder="0.00" value="0.05" />
+            <button type="button" id="walletSendMaxBtn" class="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded text-[10px] font-bold bg-lava/10 text-lava hover:bg-lava hover:text-white transition">MAX</button>
+          </div>
+        </div>
+        <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5 space-y-1.5 text-xs text-zinc-400">
+          <div class="flex justify-between">
+            <span>Network Estimated Gas:</span>
+            <span class="font-mono text-emerald-400">~$1.20 (Fast, 12 Gwei)</span>
+          </div>
+        </div>
+        <button id="confirmWalletSendBtn" class="btn btn-lava w-full py-2.5 rounded-xl font-bold text-sm">Review & Sign Transaction</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Receive Crypto Modal -->
+  <div class="modal-overlay" id="walletReceiveModal" hidden>
+    <div class="modal-content p-6 max-w-md w-full text-center">
+      <div class="flex items-center justify-between pb-4 mb-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <h3 class="font-bold text-base" style="color: var(--text-primary);">Receive Assets</h3>
+        <button id="closeWalletReceiveModalBtn" class="text-zinc-400 hover:text-white p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2"/></svg>
+        </button>
+      </div>
+      <div class="space-y-4">
+        <p class="text-xs text-zinc-400">Scan QR or copy address to deposit into your multi-chain self-custody vault.</p>
+        
+        <!-- Simulated QR Code -->
+        <div class="w-48 h-48 mx-auto rounded-2xl bg-white p-3 flex items-center justify-center shadow-lg">
+          <svg viewBox="0 0 100 100" class="w-full h-full text-black">
+            <!-- QR code graphic pattern -->
+            <rect width="100" height="100" fill="white"/>
+            <rect x="10" y="10" width="25" height="25" fill="black"/>
+            <rect x="15" y="15" width="15" height="15" fill="white"/>
+            <rect x="18" y="18" width="9" height="9" fill="black"/>
+            <rect x="65" y="10" width="25" height="25" fill="black"/>
+            <rect x="70" y="15" width="15" height="15" fill="white"/>
+            <rect x="73" y="18" width="9" height="9" fill="black"/>
+            <rect x="10" y="65" width="25" height="25" fill="black"/>
+            <rect x="15" y="70" width="15" height="15" fill="white"/>
+            <rect x="18" y="73" width="9" height="9" fill="black"/>
+            <rect x="45" y="20" width="10" height="10" fill="black"/>
+            <rect x="45" y="45" width="15" height="15" fill="#FF5524"/>
+            <rect x="70" y="55" width="15" height="10" fill="black"/>
+            <rect x="40" y="70" width="10" height="15" fill="black"/>
+            <rect x="60" y="75" width="20" height="10" fill="black"/>
+          </svg>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1 text-left">Your Deposit Address (EVM / Solana Multi-Chain)</label>
+          <div class="flex gap-2">
+            <input id="receiveAddressInput" type="text" readonly class="input font-mono text-xs select-all text-center" value="0x71C...B49219A9f24E1" />
+            <button id="copyReceiveAddressBtn" type="button" class="btn btn-ghost px-3 text-xs font-semibold shrink-0" style="border: 1px solid var(--border-subtle);">Copy</button>
+          </div>
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400">
+          Compatible with Ethereum, Arbitrum, Polygon, Optimism & Solana.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swap Modal -->
+  <div class="modal-overlay" id="walletSwapModal" hidden>
+    <div class="modal-content p-6 max-w-md w-full">
+      <div class="flex items-center justify-between pb-4 mb-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <h3 class="font-bold text-base" style="color: var(--text-primary);">Instant DEX Swap</h3>
+        <button id="closeWalletSwapModalBtn" class="text-zinc-400 hover:text-white p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2"/></svg>
+        </button>
+      </div>
+      <div class="space-y-3">
+        <!-- From -->
+        <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
+          <div class="flex justify-between text-xs text-zinc-400 mb-1">
+            <span>You pay</span>
+            <span>Balance: 12.5 ETH</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input id="swapPayAmount" type="number" step="any" class="bg-transparent border-0 outline-none text-2xl font-bold font-mono flex-1 text-white" value="1.0" />
+            <select id="swapPayToken" class="input w-28 text-xs font-bold py-1.5 px-2">
+              <option value="ETH" selected>ETH ⟠</option>
+              <option value="BTC">BTC ₿</option>
+              <option value="SOL">SOL ◎</option>
+              <option value="USDT">USDT ₮</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Swap Icon -->
+        <div class="flex justify-center -my-1 relative z-10">
+          <button id="invertSwapTokensBtn" type="button" class="w-8 h-8 rounded-full bg-zinc-800 border border-white/20 flex items-center justify-center text-lava hover:scale-110 active:scale-95 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <!-- To -->
+        <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
+          <div class="flex justify-between text-xs text-zinc-400 mb-1">
+            <span>You receive</span>
+            <span>Balance: 1,250 USDT</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input id="swapReceiveAmount" type="text" readonly class="bg-transparent border-0 outline-none text-2xl font-bold font-mono flex-1 text-white" value="3,420.10" />
+            <select id="swapReceiveToken" class="input w-28 text-xs font-bold py-1.5 px-2">
+              <option value="USDT" selected>USDT ₮</option>
+              <option value="USDC">USDC Ⓒ</option>
+              <option value="ETH">ETH ⟠</option>
+              <option value="SOL">SOL ◎</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5 space-y-1 text-xs text-zinc-400">
+          <div class="flex justify-between">
+            <span>Guaranteed Rate:</span>
+            <span class="font-mono text-zinc-200">1 ETH = 3,420.10 USDT</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Routing Liquidity:</span>
+            <span class="font-mono text-emerald-400">Uniswap v3 + Curve (Best price)</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Slippage Tolerance:</span>
+            <span class="font-mono">0.1%</span>
+          </div>
+        </div>
+
+        <button id="confirmSwapBtn" class="btn btn-lava w-full py-2.5 rounded-xl font-bold text-sm">Execute Optimal Swap</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Command Palette Modal -->
   <div class="modal-overlay" id="commandPalette" hidden>
     <div class="modal-content command-palette p-0">
