@@ -15,223 +15,400 @@
     <header id="header"></header>
     <main class="px-6 py-5 space-y-5 max-w-[1560px] w-full mx-auto relative z-10 fade-in">
       
+      <!-- Top banner & stats -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
         <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-              Live Quotes (Tracking)
+          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Quotes
             </span>
-            <span class="text-[11px] font-mono text-zinc-400">Global Aggregated Liquidity</span>
+            <span class="text-[11px] font-mono text-zinc-400 flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 2v20m10-10H2" stroke-width="1.5"/></svg>
+              Global Liquidity Feed
+            </span>
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-800/80 text-zinc-300 border border-white/5">Latency: 24ms</span>
           </div>
-          <h1 class="text-3xl font-bold tracking-tight" style="color: var(--text-primary);">Multi-Asset Markets</h1>
-          <p class="text-xs text-zinc-400 mt-0.5">Real-time quotes across digital assets, currency pairs, and equities. Connect an active trading account to place live orders.</p>
+          <h1 class="text-3xl font-extrabold tracking-tight" style="color: var(--text-primary);">Multi-Asset Markets</h1>
+          <p class="text-xs text-zinc-400 mt-1 max-w-2xl">Streaming tier-1 institutional pricing across crypto, forex currencies, public equities, and global commodities.</p>
         </div>
-        <div class="relative w-full sm:w-64">
-          <input type="text" class="input w-full" placeholder="Search markets..." />
+        <div class="relative w-full sm:w-72">
+          <svg class="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </svg>
+          <input id="marketSearchInput" type="text" class="input w-full pl-9 pr-3 text-xs" placeholder="Search by asset, pair or symbol..." />
         </div>
       </div>
       
-      <div class="tab-group flex space-x-2" data-tab-group="markets">
-        <button class="tab-item px-4 py-2 rounded-lg bg-black/10 dark:bg-white/10 font-medium" data-tab="all" style="color: var(--text-primary);">All</button>
-        <button class="tab-item px-4 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-medium" data-tab="crypto" style="color: var(--text-secondary);">Crypto</button>
-        <button class="tab-item px-4 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-medium" data-tab="forex" style="color: var(--text-secondary);">Forex</button>
-        <button class="tab-item px-4 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-medium" data-tab="stocks" style="color: var(--text-secondary);">Stocks</button>
-        <button class="tab-item px-4 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-medium" data-tab="commodities" style="color: var(--text-secondary);">Commodities</button>
+      <!-- Market Tabs -->
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="tab-group p-1 rounded-xl bg-black/10 dark:bg-white/[0.04] border border-white/10" data-tab-group="markets">
+          <button class="tab-item active px-4 py-1.5 rounded-lg text-xs font-semibold" data-tab="all">All Markets</button>
+          <button class="tab-item px-4 py-1.5 rounded-lg text-xs font-semibold" data-tab="crypto">Crypto</button>
+          <button class="tab-item px-4 py-1.5 rounded-lg text-xs font-semibold" data-tab="forex">Forex</button>
+          <button class="tab-item px-4 py-1.5 rounded-lg text-xs font-semibold" data-tab="stocks">Stocks</button>
+          <button class="tab-item px-4 py-1.5 rounded-lg text-xs font-semibold" data-tab="commodities">Commodities</button>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-zinc-400 font-mono">
+          <span>Sort: <strong class="text-zinc-200">Volume (24h)</strong></span>
+        </div>
       </div>
 
-      <div class="glass card-lift theme-transition overflow-hidden rounded-xl" style="border: 1px solid var(--border-subtle);">
+      <!-- Markets Data Table -->
+      <div class="glass card-lift theme-transition overflow-hidden rounded-xl shadow-xl" style="border: 1px solid var(--border-subtle);">
         <div class="overflow-x-auto w-full">
           <table class="w-full text-left text-sm whitespace-nowrap">
             <thead style="background: var(--bg-hover); border-bottom: 1px solid var(--border-subtle);">
               <tr>
-                <th class="px-4 py-3 font-medium" style="color: var(--text-secondary);">Asset</th>
-                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">Price</th>
-                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">24h Change</th>
-                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">7d Change</th>
-                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">Market Cap</th>
-                <th class="px-4 py-3 font-medium text-right" style="color: var(--text-secondary);">Volume</th>
-                <th class="px-4 py-3 font-medium text-center" style="color: var(--text-secondary);">Trend</th>
-                <th class="px-4 py-3 font-medium text-center" style="color: var(--text-secondary);">Action</th>
+                <th class="px-5 py-3.5 font-semibold text-xs tracking-wider uppercase" style="color: var(--text-secondary);">Asset & Market</th>
+                <th class="px-5 py-3.5 font-semibold text-xs tracking-wider uppercase text-right" style="color: var(--text-secondary);">Price</th>
+                <th class="px-5 py-3.5 font-semibold text-xs tracking-wider uppercase text-right" style="color: var(--text-secondary);">24h Change</th>
+                <th class="px-5 py-3.5 font-semibold text-xs tracking-wider uppercase text-right" style="color: var(--text-secondary);">7d Change</th>
+                <th class="px-5 py-3.5 font-semibold text-xs tracking-wider uppercase text-right" style="color: var(--text-secondary);">Market Cap / Depth</th>
+                <th class="px-5 py-3.5 font-semibold text-xs tracking-wider uppercase text-right" style="color: var(--text-secondary);">24h Volume</th>
+                <th class="px-5 py-3.5 font-semibold text-xs tracking-wider uppercase text-center" style="color: var(--text-secondary);">Trend (7D)</th>
+                <th class="px-5 py-3.5 font-semibold text-xs tracking-wider uppercase text-center" style="color: var(--text-secondary);">Action</th>
               </tr>
             </thead>
-            <tbody style="color: var(--text-primary);">
-              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
-                <td class="px-4 py-4">
+            <tbody id="markets" style="color: var(--text-primary);">
+              
+              <!-- 1. Bitcoin (Crypto) -->
+              <tr data-category="crypto" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-orange-500/20 text-orange-500 font-bold">₿</div>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-orange-500/15 text-orange-400 font-extrabold text-base ring-1 ring-orange-500/30">₿</div>
                     <div>
-                      <div class="font-medium">Bitcoin</div>
-                      <div class="text-xs" style="color: var(--text-secondary);">BTC</div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>Bitcoin</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/20 uppercase">Crypto</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">BTC / USD</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 text-right font-medium">$64,230.50</td>
-                <td class="px-4 py-4 text-right text-green-500">+2.4%</td>
-                <td class="px-4 py-4 text-right text-green-500">+8.1%</td>
-                <td class="px-4 py-4 text-right">$1.2T</td>
-                <td class="px-4 py-4 text-right">$32B</td>
-                <td class="px-4 py-4 text-center">
-                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 15 Q 10 10 20 12 T 40 5 T 60 2"></path></svg>
+                <td class="px-5 py-4 text-right font-mono font-bold">$64,230.50</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+2.42%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+8.15%</td>
+                <td class="px-5 py-4 text-right font-mono">$1.26T</td>
+                <td class="px-5 py-4 text-right font-mono">$32.4B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 15 Q 10 10 20 12 T 40 5 T 60 2"></path></svg>
                 </td>
-                <td class="px-4 py-4 text-center">
-                  <button class="btn trade-btn text-xs py-1.5 px-3.5 rounded-lg">Trade</button>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="BTC" data-price="64,230.50">Trade</button>
                 </td>
               </tr>
-              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
-                <td class="px-4 py-4">
+
+              <!-- 2. Ethereum (Crypto) -->
+              <tr data-category="crypto" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-blue-500/20 text-blue-500 font-bold">Ξ</div>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-blue-500/15 text-blue-400 font-extrabold text-base ring-1 ring-blue-500/30">Ξ</div>
                     <div>
-                      <div class="font-medium">Ethereum</div>
-                      <div class="text-xs" style="color: var(--text-secondary);">ETH</div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>Ethereum</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase">Crypto</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">ETH / USD</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 text-right font-medium">$3,420.10</td>
-                <td class="px-4 py-4 text-right text-red-500">-1.2%</td>
-                <td class="px-4 py-4 text-right text-green-500">+4.5%</td>
-                <td class="px-4 py-4 text-right">$410B</td>
-                <td class="px-4 py-4 text-right">$15B</td>
-                <td class="px-4 py-4 text-center">
-                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-red-500 fill-none" stroke-width="1.5"><path d="M0 5 Q 10 8 20 5 T 40 10 T 60 15"></path></svg>
+                <td class="px-5 py-4 text-right font-mono font-bold">$3,420.10</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-rose-400">-1.18%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+4.50%</td>
+                <td class="px-5 py-4 text-right font-mono">$410.8B</td>
+                <td class="px-5 py-4 text-right font-mono">$15.2B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-rose-400 fill-none" stroke-width="1.8"><path d="M0 5 Q 10 8 20 5 T 40 10 T 60 15"></path></svg>
                 </td>
-                <td class="px-4 py-4 text-center">
-                  <button class="btn trade-btn text-xs py-1.5 px-3.5 rounded-lg">Trade</button>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="ETH" data-price="3,420.10">Trade</button>
                 </td>
               </tr>
-              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
-                <td class="px-4 py-4">
+
+              <!-- 3. Solana (Crypto) -->
+              <tr data-category="crypto" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-purple-500/20 text-purple-500 font-bold">S</div>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-purple-500/15 text-purple-400 font-extrabold text-base ring-1 ring-purple-500/30">◎</div>
                     <div>
-                      <div class="font-medium">Solana</div>
-                      <div class="text-xs" style="color: var(--text-secondary);">SOL</div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>Solana</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20 uppercase">Crypto</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">SOL / USD</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 text-right font-medium">$145.80</td>
-                <td class="px-4 py-4 text-right text-green-500">+5.6%</td>
-                <td class="px-4 py-4 text-right text-green-500">+12.3%</td>
-                <td class="px-4 py-4 text-right">$65B</td>
-                <td class="px-4 py-4 text-right">$4B</td>
-                <td class="px-4 py-4 text-center">
-                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 18 Q 15 15 30 10 T 50 5 T 60 1"></path></svg>
+                <td class="px-5 py-4 text-right font-mono font-bold">$145.80</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+5.62%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+12.30%</td>
+                <td class="px-5 py-4 text-right font-mono">$65.4B</td>
+                <td class="px-5 py-4 text-right font-mono">$4.1B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 18 Q 15 15 30 10 T 50 5 T 60 1"></path></svg>
                 </td>
-                <td class="px-4 py-4 text-center">
-                  <button class="btn trade-btn text-xs py-1.5 px-3.5 rounded-lg">Trade</button>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="SOL" data-price="145.80">Trade</button>
                 </td>
               </tr>
-              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
-                <td class="px-4 py-4">
+
+              <!-- 4. XRP (Crypto) -->
+              <tr data-category="crypto" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-500/20 text-gray-400 font-bold">X</div>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-zinc-500/15 text-zinc-300 font-extrabold text-base ring-1 ring-zinc-500/30">✕</div>
                     <div>
-                      <div class="font-medium">XRP</div>
-                      <div class="text-xs" style="color: var(--text-secondary);">XRP</div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>Ripple</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-500/10 text-zinc-300 border border-zinc-500/20 uppercase">Crypto</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">XRP / USD</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 text-right font-medium">$0.58</td>
-                <td class="px-4 py-4 text-right text-green-500">+0.4%</td>
-                <td class="px-4 py-4 text-right text-red-500">-2.1%</td>
-                <td class="px-4 py-4 text-right">$32B</td>
-                <td class="px-4 py-4 text-right">$1.2B</td>
-                <td class="px-4 py-4 text-center">
-                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-gray-400 fill-none" stroke-width="1.5"><path d="M0 10 Q 15 15 30 10 T 50 12 T 60 10"></path></svg>
+                <td class="px-5 py-4 text-right font-mono font-bold">$0.584</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+0.42%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-rose-400">-2.10%</td>
+                <td class="px-5 py-4 text-right font-mono">$32.1B</td>
+                <td class="px-5 py-4 text-right font-mono">$1.25B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-zinc-400 fill-none" stroke-width="1.8"><path d="M0 10 Q 15 15 30 10 T 50 12 T 60 10"></path></svg>
                 </td>
-                <td class="px-4 py-4 text-center">
-                  <button class="btn trade-btn text-xs py-1.5 px-3.5 rounded-lg">Trade</button>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="XRP" data-price="0.584">Trade</button>
                 </td>
               </tr>
-              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
-                <td class="px-4 py-4">
+
+              <!-- 5. EUR/USD (Forex) -->
+              <tr data-category="forex" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-blue-600/20 text-blue-500 font-bold">€</div>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-sky-500/15 text-sky-400 font-extrabold text-base ring-1 ring-sky-500/30">€</div>
                     <div>
-                      <div class="font-medium">EUR/USD</div>
-                      <div class="text-xs" style="color: var(--text-secondary);">Forex</div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>EUR / USD</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20 uppercase">Forex</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">Euro / US Dollar</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 text-right font-medium">1.0854</td>
-                <td class="px-4 py-4 text-right text-red-500">-0.1%</td>
-                <td class="px-4 py-4 text-right text-green-500">+0.3%</td>
-                <td class="px-4 py-4 text-right">-</td>
-                <td class="px-4 py-4 text-right">-</td>
-                <td class="px-4 py-4 text-center">
-                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 12 Q 20 8 30 10 T 60 6"></path></svg>
+                <td class="px-5 py-4 text-right font-mono font-bold">1.0854</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-rose-400">-0.12%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+0.34%</td>
+                <td class="px-5 py-4 text-right font-mono text-zinc-400">Deep Institutional</td>
+                <td class="px-5 py-4 text-right font-mono">$480B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 12 Q 20 8 30 10 T 60 6"></path></svg>
                 </td>
-                <td class="px-4 py-4 text-center">
-                  <button class="btn trade-btn text-xs py-1.5 px-3.5 rounded-lg">Trade</button>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="EUR/USD" data-price="1.0854">Trade</button>
                 </td>
               </tr>
-              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
-                <td class="px-4 py-4">
+
+              <!-- 6. GBP/USD (Forex) -->
+              <tr data-category="forex" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-blue-400/20 text-blue-400 font-bold">£</div>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-cyan-500/15 text-cyan-400 font-extrabold text-base ring-1 ring-cyan-500/30">£</div>
                     <div>
-                      <div class="font-medium">GBP/USD</div>
-                      <div class="text-xs" style="color: var(--text-secondary);">Forex</div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>GBP / USD</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 uppercase">Forex</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">British Pound / USD</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 text-right font-medium">1.2670</td>
-                <td class="px-4 py-4 text-right text-green-500">+0.2%</td>
-                <td class="px-4 py-4 text-right text-green-500">+0.5%</td>
-                <td class="px-4 py-4 text-right">-</td>
-                <td class="px-4 py-4 text-right">-</td>
-                <td class="px-4 py-4 text-center">
-                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 15 Q 15 10 30 8 T 60 5"></path></svg>
+                <td class="px-5 py-4 text-right font-mono font-bold">1.2670</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+0.22%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+0.51%</td>
+                <td class="px-5 py-4 text-right font-mono text-zinc-400">Deep Institutional</td>
+                <td class="px-5 py-4 text-right font-mono">$220B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 15 Q 15 10 30 8 T 60 5"></path></svg>
                 </td>
-                <td class="px-4 py-4 text-center">
-                  <button class="btn trade-btn text-xs py-1.5 px-3.5 rounded-lg">Trade</button>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="GBP/USD" data-price="1.2670">Trade</button>
                 </td>
               </tr>
-              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
-                <td class="px-4 py-4">
+
+              <!-- 7. USD/JPY (Forex) -->
+              <tr data-category="forex" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-400/20 text-gray-300 font-bold">A</div>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-teal-500/15 text-teal-400 font-extrabold text-base ring-1 ring-teal-500/30">¥</div>
                     <div>
-                      <div class="font-medium">Apple Inc.</div>
-                      <div class="text-xs" style="color: var(--text-secondary);">AAPL</div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>USD / JPY</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-teal-500/10 text-teal-400 border border-teal-500/20 uppercase">Forex</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">US Dollar / Japanese Yen</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 text-right font-medium">$192.25</td>
-                <td class="px-4 py-4 text-right text-green-500">+1.5%</td>
-                <td class="px-4 py-4 text-right text-green-500">+3.2%</td>
-                <td class="px-4 py-4 text-right">$2.9T</td>
-                <td class="px-4 py-4 text-right">$58M</td>
-                <td class="px-4 py-4 text-center">
-                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 15 Q 10 10 20 12 T 40 5 T 60 2"></path></svg>
+                <td class="px-5 py-4 text-right font-mono font-bold">154.62</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+0.38%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+1.12%</td>
+                <td class="px-5 py-4 text-right font-mono text-zinc-400">Deep Institutional</td>
+                <td class="px-5 py-4 text-right font-mono">$340B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 16 Q 20 12 35 7 T 60 3"></path></svg>
                 </td>
-                <td class="px-4 py-4 text-center">
-                  <button class="btn trade-btn text-xs py-1.5 px-3.5 rounded-lg">Trade</button>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="USD/JPY" data-price="154.62">Trade</button>
                 </td>
               </tr>
-              <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-                <td class="px-4 py-4">
+
+              <!-- 8. Apple Inc. (Stocks) -->
+              <tr data-category="stocks" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-yellow-500/20 text-yellow-500 font-bold">Au</div>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-indigo-500/15 text-indigo-400 font-extrabold text-base ring-1 ring-indigo-500/30"></div>
                     <div>
-                      <div class="font-medium">Gold</div>
-                      <div class="text-xs" style="color: var(--text-secondary);">XAU/USD</div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>Apple Inc.</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 uppercase">Stock</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">AAPL • NASDAQ</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 text-right font-medium">$2,345.80</td>
-                <td class="px-4 py-4 text-right text-red-500">-0.5%</td>
-                <td class="px-4 py-4 text-right text-green-500">+1.2%</td>
-                <td class="px-4 py-4 text-right">-</td>
-                <td class="px-4 py-4 text-right">-</td>
-                <td class="px-4 py-4 text-center">
-                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-green-500 fill-none" stroke-width="1.5"><path d="M0 8 Q 15 12 30 10 T 60 5"></path></svg>
+                <td class="px-5 py-4 text-right font-mono font-bold">$192.25</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+1.54%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+3.20%</td>
+                <td class="px-5 py-4 text-right font-mono">$2.94T</td>
+                <td class="px-5 py-4 text-right font-mono">$58.4M</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 15 Q 10 10 20 12 T 40 5 T 60 2"></path></svg>
                 </td>
-                <td class="px-4 py-4 text-center">
-                  <button class="btn trade-btn text-xs py-1.5 px-3.5 rounded-lg">Trade</button>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="AAPL" data-price="192.25">Trade</button>
                 </td>
               </tr>
+
+              <!-- 9. Tesla Inc. (Stocks) -->
+              <tr data-category="stocks" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-red-500/15 text-red-400 font-extrabold text-base ring-1 ring-red-500/30">T</div>
+                    <div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>Tesla, Inc.</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase">Stock</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">TSLA • NASDAQ</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-right font-mono font-bold">$218.89</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+3.85%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+9.14%</td>
+                <td class="px-5 py-4 text-right font-mono">$695.2B</td>
+                <td class="px-5 py-4 text-right font-mono">$82.6M</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 17 Q 15 12 30 6 T 60 1"></path></svg>
+                </td>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="TSLA" data-price="218.89">Trade</button>
+                </td>
+              </tr>
+
+              <!-- 10. Nvidia Corp. (Stocks) -->
+              <tr data-category="stocks" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-emerald-500/15 text-emerald-400 font-extrabold text-base ring-1 ring-emerald-500/30">N</div>
+                    <div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>NVIDIA Corp.</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase">Stock</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">NVDA • NASDAQ</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-right font-mono font-bold">$138.25</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+4.12%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+11.45%</td>
+                <td class="px-5 py-4 text-right font-mono">$3.41T</td>
+                <td class="px-5 py-4 text-right font-mono">$112.5M</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 16 Q 20 8 35 12 T 60 2"></path></svg>
+                </td>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="NVDA" data-price="138.25">Trade</button>
+                </td>
+              </tr>
+
+              <!-- 11. Gold (Commodities) -->
+              <tr data-category="commodities" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors" style="border-bottom: 1px solid var(--border-subtle);">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-amber-500/15 text-amber-400 font-extrabold text-base ring-1 ring-amber-500/30">Au</div>
+                    <div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>Gold Spot</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">Commodity</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">XAU / USD (troy oz)</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-right font-mono font-bold">$2,345.80</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-rose-400">-0.48%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+1.24%</td>
+                <td class="px-5 py-4 text-right font-mono text-zinc-400">Global Bullion</td>
+                <td class="px-5 py-4 text-right font-mono">$72.4B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-emerald-400 fill-none" stroke-width="1.8"><path d="M0 8 Q 15 12 30 10 T 60 5"></path></svg>
+                </td>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="XAU/USD" data-price="2,345.80">Trade</button>
+                </td>
+              </tr>
+
+              <!-- 12. Crude Oil (Commodities) -->
+              <tr data-category="commodities" class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <td class="px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-yellow-600/15 text-yellow-500 font-extrabold text-base ring-1 ring-yellow-600/30">🛢️</div>
+                    <div>
+                      <div class="font-bold flex items-center gap-2">
+                        <span>Crude Oil WTI</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-yellow-600/10 text-yellow-500 border border-yellow-600/20 uppercase">Commodity</span>
+                      </div>
+                      <div class="text-xs font-mono" style="color: var(--text-secondary);">WTI / USD (bbl)</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-4 text-right font-mono font-bold">$78.40</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-emerald-400">+1.15%</td>
+                <td class="px-5 py-4 text-right font-mono font-semibold text-rose-400">-1.80%</td>
+                <td class="px-5 py-4 text-right font-mono text-zinc-400">NYMEX Energy</td>
+                <td class="px-5 py-4 text-right font-mono">$38.2B</td>
+                <td class="px-5 py-4 text-center">
+                  <svg width="60" height="20" viewBox="0 0 60 20" class="inline-block stroke-rose-400 fill-none" stroke-width="1.8"><path d="M0 5 Q 20 8 35 15 T 60 12"></path></svg>
+                </td>
+                <td class="px-5 py-4 text-center">
+                  <button class="btn trade-btn text-xs py-1.5 px-4 rounded-lg" data-asset="WTI" data-price="78.40">Trade</button>
+                </td>
+              </tr>
+
+              <!-- Empty state row -->
+              <tr class="empty-filter-row text-center py-12" style="display: none;">
+                <td colspan="8" class="px-6 py-12 text-center">
+                  <div class="flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 mb-3">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2"/></svg>
+                    </div>
+                    <p class="font-semibold text-sm text-zinc-200">No matching market assets found</p>
+                    <p class="text-xs text-zinc-400 mt-1">Try clearing your search query or selecting a different asset category.</p>
+                  </div>
+                </td>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -239,6 +416,64 @@
 
     </main>
   </div>
+
+  <!-- Quick Trade Modal -->
+  <div class="modal-overlay" id="quickTradeModal" hidden>
+    <div class="modal-content p-6 max-w-md w-full">
+      <div class="flex items-center justify-between pb-4 mb-4" style="border-bottom: 1px solid var(--border-subtle);">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#FF5524]"></span>
+          <h3 class="font-bold text-base" style="color: var(--text-primary);">Order Execution: <span id="tradeAssetTitle" class="text-lava">BTC</span></h3>
+        </div>
+        <button id="closeTradeModalBtn" class="text-zinc-400 hover:text-white transition-colors p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2"/></svg>
+        </button>
+      </div>
+      
+      <div class="space-y-4">
+        <div class="flex rounded-lg p-1 bg-black/20 border border-white/10">
+          <button class="flex-1 py-1.5 rounded-md text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Buy</button>
+          <button class="flex-1 py-1.5 rounded-md text-xs font-bold text-zinc-400 hover:text-white">Sell</button>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-zinc-400 mb-1">Execution Price</label>
+          <div class="relative">
+            <input id="tradePriceInput" type="text" class="input w-full font-mono text-sm" readonly />
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-zinc-400">USD</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-zinc-400 mb-1">Order Amount</label>
+          <div class="relative">
+            <input id="tradeAmountInput" type="number" class="input w-full font-mono text-sm" placeholder="0.00" value="1000" />
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-zinc-400">USD</span>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-lg bg-white/[0.02] border border-white/5 space-y-1.5 text-xs">
+          <div class="flex justify-between text-zinc-400">
+            <span>Trading Fee (0.05%)</span>
+            <span class="font-mono">$0.50</span>
+          </div>
+          <div class="flex justify-between text-zinc-400">
+            <span>Estimated Slippage</span>
+            <span class="font-mono text-emerald-400">&lt; 0.01%</span>
+          </div>
+          <div class="flex justify-between font-bold pt-1 border-t border-white/5" style="color: var(--text-primary);">
+            <span>Estimated Total</span>
+            <span id="tradeTotalDisplay" class="font-mono">$1,000.50</span>
+          </div>
+        </div>
+
+        <button id="submitTradeOrderBtn" class="btn btn-lava w-full py-2.5 rounded-xl font-bold text-sm">
+          Place Market Order
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Command Palette Modal -->
   <div class="modal-overlay" id="commandPalette" hidden>
     <div class="modal-content command-palette p-0">
