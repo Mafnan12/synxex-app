@@ -7,6 +7,7 @@ import { toggleTheme } from '../theme.js';
 import { toggleDropdown } from '../dropdown.js';
 import { openModal } from '../modal.js';
 import { toggleMobileSidebar } from './sidebar.js';
+import { authService } from '../auth.js';
 
 export function initHeader() {
   const target = document.getElementById('header');
@@ -138,10 +139,10 @@ export function initHeader() {
               </a>
             </div>
             <div class="py-1" style="border-top: 1px solid var(--border-subtle);">
-              <a href="/pages/login.html" class="dropdown-item" style="color: #F43F5E;">
+              <button type="button" id="headerSignOutBtn" class="dropdown-item w-full text-left" style="color: #F43F5E; background: none; border: none; cursor: pointer;">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg>
                 <span>Sign out</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -154,6 +155,30 @@ export function initHeader() {
   document.getElementById('notifBtn')?.addEventListener('click', () => toggleDropdown(document.getElementById('notifDropdown')));
   document.getElementById('userMenuBtn')?.addEventListener('click', () => toggleDropdown(document.getElementById('userDropdown')));
   document.getElementById('hamburgerBtn')?.addEventListener('click', toggleMobileSidebar);
+  document.getElementById('headerSignOutBtn')?.addEventListener('click', async () => {
+    await authService.logout();
+  });
+
+  // Populate authenticated user info if available
+  authService.init().then(() => {
+    const user = authService.getUser();
+    if (user) {
+      const nameEl = document.querySelector('#userDropdown p.text-sm');
+      const emailEl = document.querySelector('#userDropdown p.text-\\[11px\\]');
+      const avatarLabel = document.querySelector('#userMenuBtn span');
+      const avatarIcons = document.querySelectorAll('#userMenuBtn .rounded-full, #userDropdown .rounded-full');
+      
+      const displayName = user.name || user.email?.split('@')[0] || 'User';
+      if (nameEl) nameEl.textContent = displayName;
+      if (emailEl && user.email) emailEl.textContent = user.email;
+      if (avatarLabel) avatarLabel.textContent = displayName;
+      
+      const initial = displayName.charAt(0).toUpperCase();
+      avatarIcons.forEach(icon => {
+        if (icon && icon.textContent) icon.textContent = initial;
+      });
+    }
+  });
 
   // Search trigger opens command palette
   document.getElementById('searchTrigger')?.addEventListener('click', () => {
