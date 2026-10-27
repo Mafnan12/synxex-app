@@ -235,10 +235,10 @@
             <button type="button" id="walletSendMaxBtn" class="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded text-[10px] font-bold bg-lava/10 text-lava hover:bg-lava hover:text-white transition">MAX</button>
           </div>
         </div>
-        <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5 space-y-1.5 text-xs text-zinc-400">
+        <div class="p-3 rounded-xl bg-zinc-100 dark:bg-white/[0.04] border border-zinc-200 dark:border-white/10 space-y-1.5 text-xs" style="color: var(--text-secondary);">
           <div class="flex justify-between">
             <span>Network Estimated Gas:</span>
-            <span class="font-mono text-emerald-400">~$1.20 (Fast, 12 Gwei)</span>
+            <span class="font-mono text-emerald-500 font-semibold">~$1.20 (Fast, 12 Gwei)</span>
           </div>
         </div>
         <button id="confirmWalletSendBtn" class="btn btn-lava w-full py-2.5 rounded-xl font-bold text-sm">Review & Sign Transaction</button>
@@ -306,13 +306,13 @@
       </div>
       <div class="space-y-3">
         <!-- From -->
-        <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
-          <div class="flex justify-between text-xs text-zinc-400 mb-1">
-            <span>You pay</span>
-            <span>Balance: 12.5 ETH</span>
+        <div class="p-3.5 rounded-xl bg-zinc-100 dark:bg-white/[0.04] border border-zinc-200 dark:border-white/10">
+          <div class="flex justify-between text-xs mb-1" style="color: var(--text-secondary);">
+            <span class="font-semibold">You pay</span>
+            <span class="font-mono">Balance: 12.5 ETH</span>
           </div>
           <div class="flex items-center gap-3">
-            <input id="swapPayAmount" type="number" step="any" class="bg-transparent border-0 outline-none text-2xl font-bold font-mono flex-1 text-white" value="1.0" />
+            <input id="swapPayAmount" type="number" step="any" class="bg-transparent border-0 outline-none text-2xl font-bold font-mono flex-1" style="color: var(--text-primary);" value="1.0" />
             <select id="swapPayToken" class="input w-28 text-xs font-bold py-1.5 px-2">
               <option value="ETH" selected>ETH ⟠</option>
               <option value="BTC">BTC ₿</option>
@@ -324,19 +324,19 @@
 
         <!-- Swap Icon -->
         <div class="flex justify-center -my-1 relative z-10">
-          <button id="invertSwapTokensBtn" type="button" class="w-8 h-8 rounded-full bg-zinc-800 border border-white/20 flex items-center justify-center text-lava hover:scale-110 active:scale-95 transition">
+          <button id="invertSwapTokensBtn" type="button" class="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-white/20 flex items-center justify-center text-lava hover:scale-110 active:scale-95 transition shadow-sm">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
 
         <!-- To -->
-        <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
-          <div class="flex justify-between text-xs text-zinc-400 mb-1">
-            <span>You receive</span>
-            <span>Balance: 1,250 USDT</span>
+        <div class="p-3.5 rounded-xl bg-zinc-100 dark:bg-white/[0.04] border border-zinc-200 dark:border-white/10">
+          <div class="flex justify-between text-xs mb-1" style="color: var(--text-secondary);">
+            <span class="font-semibold">You receive</span>
+            <span class="font-mono">Balance: 1,250 USDT</span>
           </div>
           <div class="flex items-center gap-3">
-            <input id="swapReceiveAmount" type="text" readonly class="bg-transparent border-0 outline-none text-2xl font-bold font-mono flex-1 text-white" value="3,420.10" />
+            <input id="swapReceiveAmount" type="text" readonly class="bg-transparent border-0 outline-none text-2xl font-bold font-mono flex-1" style="color: var(--text-primary);" value="3,420.10" />
             <select id="swapReceiveToken" class="input w-28 text-xs font-bold py-1.5 px-2">
               <option value="USDT" selected>USDT ₮</option>
               <option value="USDC">USDC Ⓒ</option>
@@ -346,14 +346,14 @@
           </div>
         </div>
 
-        <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5 space-y-1 text-xs text-zinc-400">
+        <div class="p-3 rounded-xl bg-zinc-100 dark:bg-white/[0.04] border border-zinc-200 dark:border-white/5 space-y-1 text-xs" style="color: var(--text-secondary);">
           <div class="flex justify-between">
             <span>Guaranteed Rate:</span>
-            <span class="font-mono text-zinc-200">1 ETH = 3,420.10 USDT</span>
+            <span class="font-mono font-medium" style="color: var(--text-primary);">1 ETH = 3,420.10 USDT</span>
           </div>
           <div class="flex justify-between">
             <span>Routing Liquidity:</span>
-            <span class="font-mono text-emerald-400">Uniswap v3 + Curve (Best price)</span>
+            <span class="font-mono text-emerald-500 font-medium">Uniswap v3 + Curve (Best price)</span>
           </div>
           <div class="flex justify-between">
             <span>Slippage Tolerance:</span>

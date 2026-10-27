@@ -155,6 +155,23 @@ export function initRemittance() {
     if (recipientNameInput) recipientNameInput.value = '';
   });
 
+  // Toggle View All Activity
+  const viewAllBtn = document.getElementById('viewAllRemitActivityBtn');
+  const extraHistory = document.getElementById('extraRemitHistory');
+  if (viewAllBtn && extraHistory) {
+    viewAllBtn.addEventListener('click', () => {
+      const isExpanded = extraHistory.style.display !== 'none';
+      if (isExpanded) {
+        extraHistory.style.display = 'none';
+        viewAllBtn.textContent = 'View All Activity';
+      } else {
+        extraHistory.style.display = 'block';
+        viewAllBtn.textContent = 'Show Less';
+        showToast('Loaded complete remittance transfer history', 'info');
+      }
+    });
+  }
+
   // Run initial calculation
   calculate();
 }

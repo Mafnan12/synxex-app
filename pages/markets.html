@@ -429,11 +429,11 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2"/></svg>
         </button>
       </div>
-      
+
       <div class="space-y-4">
-        <div class="flex rounded-lg p-1 bg-black/20 border border-white/10">
-          <button class="flex-1 py-1.5 rounded-md text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Buy</button>
-          <button class="flex-1 py-1.5 rounded-md text-xs font-bold text-zinc-400 hover:text-white">Sell</button>
+        <div class="flex rounded-xl p-1 bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-white/10" id="tradeSideGroup">
+          <button type="button" id="tradeSideBuy" class="flex-1 py-2 rounded-lg text-xs font-bold transition-all bg-emerald-500 text-white shadow-sm">Buy</button>
+          <button type="button" id="tradeSideSell" class="flex-1 py-2 rounded-lg text-xs font-bold transition-all text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">Sell</button>
         </div>
 
         <div>

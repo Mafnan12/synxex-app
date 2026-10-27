@@ -152,7 +152,27 @@ export function initHeader() {
 
   // Wire up event listeners
   document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
-  document.getElementById('notifBtn')?.addEventListener('click', () => toggleDropdown(document.getElementById('notifDropdown')));
+  
+  const notifBtn = document.getElementById('notifBtn');
+  const notifBadge = notifBtn?.querySelector('span');
+  if (localStorage.getItem('synxex_notif_read') === 'true' && notifBadge) {
+    notifBadge.style.display = 'none';
+  }
+
+  notifBtn?.addEventListener('click', () => {
+    toggleDropdown(document.getElementById('notifDropdown'));
+    if (notifBadge) {
+      notifBadge.style.display = 'none';
+      localStorage.setItem('synxex_notif_read', 'true');
+    }
+  });
+
+  document.getElementById('markAllReadBtn')?.addEventListener('click', () => {
+    if (notifBadge) notifBadge.style.display = 'none';
+    localStorage.setItem('synxex_notif_read', 'true');
+    toggleDropdown(document.getElementById('notifDropdown'));
+  });
+
   document.getElementById('userMenuBtn')?.addEventListener('click', () => toggleDropdown(document.getElementById('userDropdown')));
   document.getElementById('hamburgerBtn')?.addEventListener('click', toggleMobileSidebar);
   document.getElementById('headerSignOutBtn')?.addEventListener('click', async () => {
