@@ -13,7 +13,7 @@ const AUTH_CONFIG = {
   domain: import.meta.env.VITE_AUTH0_DOMAIN || '',
   clientId: import.meta.env.VITE_AUTH0_CLIENT_ID || '',
   redirectUri: window.location.origin + '/pages/callback.html',
-  logoutRedirectUri: import.meta.env.VITE_MARKETING_URL || 'https://synxex-chi.vercel.app',
+  logoutRedirectUri: import.meta.env.VITE_MARKETING_URL || 'https://synxex-marketing.vercel.app',
 };
 
 class AuthService {
